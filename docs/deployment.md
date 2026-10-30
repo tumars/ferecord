@@ -61,7 +61,8 @@
 - 修正目录后，生产部署 `dpo91o6x9qto` 成功。
 - `https://www.ferecord.com` 返回 HTTP 200，证书校验通过，页面标题为“ferecord · 产品与探索”，内容与仓库主站一致。
 - www 已开启强制 HTTPS，`http://www.ferecord.com` 返回 301，Location 为 `https://www.ferecord.com/`。
-- GoDaddy 已显示裸域名 Permanent (301) 规则，权威 A 记录已更新为 `15.197.142.173` 和 `3.33.152.147`（由 GoDaddy 管理，不应手动固定）。本机对裸域名的 HTTP/HTTPS 探测仍超时，尚未验证实际跳转；GoDaddy 提示 DNS 全球更新最多 48 小时，HTTPS 证书可能需要几小时。
+- GoDaddy 已显示裸域名 Permanent (301) 规则，权威 A 记录已更新为 `15.197.142.173` 和 `3.33.152.147`（由 GoDaddy 管理，不应手动固定）。指定新地址并保留 Host 的 HTTP GET 已返回 301，Location 为 `https://www.ferecord.com`；转发服务对 HEAD 请求返回 405，应使用 GET 检查。
+- 本机递归 DNS 仍缓存原服务器 A 地址，普通裸域名请求仍超时；指定新地址的裸域名 HTTPS 也未验证通过。GoDaddy 提示 DNS 全球更新最多 48 小时，HTTPS 证书可能需要几小时。待缓存及证书更新后，再验证 `https://ferecord.com` 的完整跳转链。
 - 上述验证仅针对部署与域名接入；正式产品内容和备案号仍待填写，页面继续保留 `noindex`。
 
 ### 本次问题与恢复依据
