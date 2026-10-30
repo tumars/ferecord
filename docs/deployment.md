@@ -11,7 +11,7 @@
 ## 先部署主站
 
 1. 在 Makers 创建项目，选择从 Git 仓库导入，关联 `ferecord`。
-2. 选择 `main` 分支，项目名可用 `ferecord-main`。
+2. 选择 `main` 分支，主站实际项目名为 `ferecord`。
 3. 框架选择 `Other`，根目录填 `sites/main`。
 4. 确认安装命令 `true`、构建命令 `true`、输出目录 `public`。这些设置已写入该目录的 `edgeone.json`。
 5. 选择适合大陆访问的加速区域并部署，检查构建日志与页面预览。
@@ -38,7 +38,41 @@
 - 站内素材正常加载，HTTPS 无证书报错。
 - 不存在指向 `example.com`、示例产品或无效联系方式的链接。
 
-本次仓库初始化不代表已完成 Makers 项目创建、GitHub 应用授权、域名绑定或 DNS 变更。不要仅因为启用 Makers 就删除原有服务器、解析记录或备案接入关系。
+主站已创建 Makers 项目并关联 GitHub，产品示例尚未部署。不要仅因为启用 Makers 就删除原有服务器或备案接入关系。
+
+## 主站实际配置（2026-10-31）
+
+- GitHub：`tumars/ferecord`（私有），生产分支 `main`，自动部署开启。
+- Makers 项目：`ferecord`，ID `makers-crfv87f7cyrj`，全球加速（含中国大陆）。
+- 根目录 `sites/main`，输出目录 `public`，安装与构建命令均为 `true`。
+- 默认预览域名：`ferecord-9xy1s4wr.edgeone.cool`，预览访问可能需要控制台生成的临时验证参数。
+- 正式入口：`https://www.ferecord.com`，绑定生产环境，使用 Makers 免费证书。
+- 权威 DNS：GoDaddy `ns05.domaincontrol.com`、`ns06.domaincontrol.com`。
+
+| 主机名 | 类型 | 目标 | TTL |
+| --- | --- | --- | --- |
+| `www` | CNAME | `www.ferecord.com.pages.dnsoe4.com` | 1 小时 |
+| `ftp` | A | `1.116.135.246` | 1 小时 |
+
+裸域名已配置 GoDaddy Domain Forwarding，以 Permanent (301) 转发到 `https://www.ferecord.com`。GoDaddy 管理转发所需的 A 记录及裸域名证书；证书签发与 DNS 缓存更新可能滞后。Makers 中原来的 `ferecord.com` 直连绑定已停用，后续无需为它添加 CNAME。
+
+### 验证状态
+
+- 修正目录后，生产部署 `dpo91o6x9qto` 成功。
+- `https://www.ferecord.com` 返回 HTTP 200，证书校验通过，页面标题为“ferecord · 产品与探索”，内容与仓库主站一致。
+- www 已开启强制 HTTPS，`http://www.ferecord.com` 返回 301，Location 为 `https://www.ferecord.com/`。
+- GoDaddy 已显示裸域名 Permanent (301) 规则，权威 A 记录已更新为 `15.197.142.173` 和 `3.33.152.147`（由 GoDaddy 管理，不应手动固定）。本机对裸域名的 HTTP/HTTPS 探测仍超时，尚未验证实际跳转；GoDaddy 提示 DNS 全球更新最多 48 小时，HTTPS 证书可能需要几小时。
+- 上述验证仅针对部署与域名接入；正式产品内容和备案号仍待填写，页面继续保留 `noindex`。
+
+### 本次问题与恢复依据
+
+原先 Makers 只绑定 `ferecord.com`，但 GoDaddy 将其 CNAME 目标配置在 `www` 上，裸域名仍是 A → `1.116.135.246`，因此 Makers 提示未添加 CNAME。新增 www 绑定后，必须使用它专属的 CNAME 目标，不能沿用裸域名的 `ferecord.com.pages.dnsoe5.com`。
+
+同时，Makers 原构建配置使用仓库根目录 `./` 且未配置输出目录；已修正为上面的主站目录，避免发布仓库文档而找不到首页。
+
+转发前，`ftp` 原为 CNAME → `ferecord.com`，已改为直接 A → `1.116.135.246`，保持原 FTP 解析地址。其他子域名及 MX 邮箱记录不变。
+
+如需恢复原服务器入口，先取消 GoDaddy 裸域名转发，再将 `@` A 记录恢复为 `1.116.135.246`（原 TTL 600 秒）。`ftp` 可继续保留直接 A 记录。原 `www` 的 CNAME 是误配值，不应作为修复方案恢复。
 
 ## 官方参考
 

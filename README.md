@@ -2,7 +2,7 @@
 
 产品介绍网站仓库：一个 Git 仓库管理多个站点，每个站点使用独立的 EdgeOne Makers 项目和域名。
 
-当前是初始化骨架，包含主站与一个产品示例。示例文案不代表真实产品，尚未绑定域名、配置 DNS 或发布到 Makers。
+当前包含主站与一个产品示例。主站已接入 EdgeOne Makers，正式入口为 `https://www.ferecord.com`；页面仍是占位内容，示例文案不代表真实产品。域名配置与验证状态见部署说明。
 
 ## 目录
 
@@ -37,17 +37,17 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory sites/main/public
 | --- | --- | --- |
 | Git 仓库 | 同一个 ferecord 仓库 | 同一个 ferecord 仓库 |
 | 生产分支 | `main` | `main` |
-| 项目名（建议） | `ferecord-main` | `ferecord-product-example` |
+| 项目名 | `ferecord`（已创建） | `ferecord-product-example`（建议，未创建） |
 | 框架预设 | `Other` | `Other` |
 | 根目录 | `sites/main` | `sites/product-example` |
 | 安装命令 | `true` | `true` |
 | 构建命令 | `true` | `true` |
 | 输出目录 | `public` | `public` |
-| 域名（示例） | `example.com` | `product.example.com` |
+| 域名 | `www.ferecord.com` | `product.ferecord.com`（示例，未配置） |
 
 `true` 是 Bash 的成功空操作：当前纯静态文件无需安装或构建。每个站点的 `edgeone.json` 已记录安装、构建和输出目录设置；项目根目录需要在 Makers 中选择。
 
-`example.com` 只是示例。用户已确认主域名名称为 ferecord，但尚未提供完整域名后缀。
+裸域名 `ferecord.com` 使用 GoDaddy 301 转发到 www，产品子站按需添加独立域名。
 
 完整操作见 [部署说明](docs/deployment.md)，架构约定见 [设计文档](docs/design.md)。
 

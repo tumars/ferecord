@@ -4,7 +4,7 @@
 
 主要面向中国大陆用户，使用已有腾讯云备案域名和 EdgeOne Makers，低成本展示多个产品。当前任务是初始化仓库与部署骨架，具体产品文案和视觉设计后续按真实需求制作。
 
-“多个二级站点”按独立子域名理解，例如 `product-a.example.com`、`product-b.example.com`，不采用主域名下的路径分站。完整主域名尚待提供，本文中的 `example.com` 不代表实际配置。
+“多个二级站点”按独立子域名理解，例如 `product-a.ferecord.com`、`product-b.ferecord.com`，不采用主域名下的路径分站。主域名为 `ferecord.com`，正式入口使用 `https://www.ferecord.com`，裸域名通过 GoDaddy 301 转发至该入口。
 
 ## 架构决策
 
@@ -12,7 +12,7 @@
 
 ```text
 GitHub: ferecord / main
-  ├─ sites/main            → Makers: ferecord-main            → 主域名
+  ├─ sites/main            → Makers: ferecord                 → www.ferecord.com
   └─ sites/product-example → Makers: ferecord-product-example → 产品子域名
 ```
 
@@ -34,10 +34,12 @@ GitHub: ferecord / main
 
 | 目录 | 用途 | 真实域名 | Makers 接入状态 |
 | --- | --- | --- | --- |
-| `sites/main` | ferecord 主站 | 待提供 | 未接入 |
+| `sites/main` | ferecord 主站 | `www.ferecord.com` | 已接入，实际配置与验证状态见部署说明 |
 | `sites/product-example` | 产品站点示例 | 待提供 | 未接入 |
 
 当前不建立虚假的产品跳转链接。真实产品上线后，再更新主站和本表。
+
+DNS 继续由 GoDaddy 托管。每个产品子域名使用对应 Makers 项目分配的 CNAME，不能复用主站的 CNAME 目标。主站与裸域名转发的具体记录、HTTPS 状态及回滚信息维护在 `docs/deployment.md`。
 
 ## 发布与维护
 
