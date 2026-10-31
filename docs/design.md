@@ -36,7 +36,7 @@ GitHub: ferecord / main
 | 目录 | 用途 | 真实域名 | Makers 接入状态 |
 | --- | --- | --- | --- |
 | `sites/main` | ferecord 主站 | `www.ferecord.com` | 已接入，实际配置与验证状态见部署说明 |
-| `sites/blog` | 中文博客 | `blog.ferecord.com` | 实现与接入中，状态见部署说明 |
+| `sites/blog` | 中文博客 | `blog.ferecord.com` | 已部署并绑定域名、HTTPS，验证状态见部署说明 |
 | `sites/product-example` | 产品站点示例 | 待提供 | 未接入 |
 
 当前不建立虚假的产品跳转链接。真实产品上线后，再更新主站和本表。
