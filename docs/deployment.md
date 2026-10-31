@@ -103,7 +103,7 @@ GoDaddy 已添加 `blog` CNAME → `blog.ferecord.com.pages.dnsoe4.com`，控制
 - 指定已解析边缘地址 `117.69.71.114`、保留域名 Host/SNI 的 HTTPS 检查：主页、关于、搜索、RSS、sitemap、Pagefind 脚本均返回 200，TLS 证书校验通过；页面站名和作者正确。
 - 同一边缘地址的 HTTP 请求返回 301，Location 为 `https://blog.ferecord.com/`。
 - 草稿 `/posts/first-post/` 和源码 `/src/content/posts/first-post.md` 均返回 404。
-- 本机系统解析器暂存此前的失败结果，普通 `curl` 仍报告无法解析，不能据以上定向检查宣称所有网络均已刷新。DNS 缓存传播后再确认本机普通访问；不应将测试用边缘 IP 固定到 DNS 或 hosts。
+- Chrome 已通过正式 HTTPS 地址正常打开首页；中文搜索“想法”返回关于页面，站名与作者正确，已保存上线截图。本机系统解析器仍缓存此前的失败结果，普通终端 `curl` 报告无法解析，浏览器与终端使用的解析路径暂不一致。不能宣称所有网络均已刷新，也不应将测试用边缘 IP 固定到 DNS 或 hosts。
 - 主站已增加博客导航入口。首篇文章与真实 ICP 备案号仍待补充。
 
 首次部署 `dp9opyrj3noz` 在切换 Node.js 24.22.2 时失败。已改用平台设置中实际提供的预装版本 24.18.0，并同步 `.nvmrc`，避免构建时下载不可用版本。
