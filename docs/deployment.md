@@ -75,6 +75,25 @@
 
 如需恢复原服务器入口，先取消 GoDaddy 裸域名转发，再将 `@` A 记录恢复为 `1.116.135.246`（原 TTL 600 秒）。`ftp` 可继续保留直接 A 记录。原 `www` 的 CNAME 是误配值，不应作为修复方案恢复。
 
+## 博客接入（2026-10-31）
+
+博客使用独立 Makers 项目 `ferecord-blog`，关联相同 GitHub 仓库 `tumars/ferecord` 的 `main` 分支。
+
+| 配置 | 博客 |
+| --- | --- |
+| 名称 / 作者 | FErecord · Blog / tumars |
+| 域名 | `blog.ferecord.com` |
+| 框架 | Astro（静态生成） |
+| 根目录 | `sites/blog` |
+| Node.js | 24.x，代码最低要求 `22.23.4`，本地验证 `24.22.2` |
+| 安装 | `npm ci --no-audit --no-fund` |
+| 构建 | `npm run build` |
+| 输出目录 | `dist` |
+
+本地构建和类型检查通过，已验证中文界面、中文搜索、草稿排除、内部资源与链接、RSS 和站点地图。当前没有正式文章，写作模板为草稿；生产首页显示等待首篇文章的状态。ICP 备案号待用户提供。
+
+线上项目、DNS 和 HTTPS 正在配置，实际项目 ID 与验证结果在配置完成后补充。`blog` 必须指向博客项目分配的 CNAME，不能复用主站的记录。
+
 ## 官方参考
 
 - [构建指南：根目录、输出目录与构建命令](https://pages.edgeone.ai/zh/document/build-guide)

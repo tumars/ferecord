@@ -8,6 +8,10 @@
 
 ```text
 sites/
+  blog/                  # FErecord · Blog，Astro + AstroPaper
+    src/content/posts/   # Markdown/MDX 文章
+    public/              # 图片、图标等公开静态资源
+    edgeone.json
   main/                  # ferecord 主站
     edgeone.json
     public/index.html
@@ -52,6 +56,8 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory sites/main/public
 完整操作见 [部署说明](docs/deployment.md)，架构约定见 [设计文档](docs/design.md)。
 
 ## 新增产品
+
+博客已选择 Astro + AstroPaper，名称为 **FErecord · Blog**，作者 **tumars**。写作、预览和发布流程见 [博客说明](sites/blog/README.md)。博客需要安装依赖并构建，不能使用主站的 `true` 命令直接发布。
 
 1. 复制 `sites/product-example` 为 `sites/<产品英文标识>`。
 2. 修改该目录下的页面标题、描述、正文及素材。
