@@ -39,7 +39,7 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [
         [remarkToc, { heading: "目录|Table of contents" }],
-        [remarkCollapse, { test: "目录|Table of contents" }],
+        [remarkCollapse, { test: "目录|Table of contents", summary: "展开目录" }],
       ],
       rehypePlugins: [rehypeCallouts],
     }),

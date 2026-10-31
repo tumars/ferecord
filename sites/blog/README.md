@@ -6,7 +6,7 @@ Astro + AstroPaper 静态博客，源码与文章放在本目录，Makers 仅发
 
 ## 本地写作
 
-使用 Node.js 24（本地验证版本 `24.22.2`，最低版本要求见 `package.json`）。在本目录运行：
+使用 Node.js 24（`.nvmrc` 与 Makers 预装版本统一为 `24.18.0`，最低版本要求见 `package.json`）。在本目录运行：
 
 ```sh
 npm ci

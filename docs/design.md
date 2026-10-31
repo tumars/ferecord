@@ -49,7 +49,7 @@ DNS 继续由 GoDaddy 托管。每个产品子域名使用对应 Makers 项目�
 
 用户选择 Astro + AstroPaper，优先保持简洁、低成本和易维护。文章以 Markdown/MDX 存在 GitHub 私有仓库中，推送生产分支后由独立 Makers 项目自动构建。
 
-博客名称为 `FErecord · Blog`，作者 `tumars`。当前采用 AstroPaper v7.0.0 源码，Astro 7.4.4，由 npm 锁文件固定解析版本，本地验证 Node.js 24.22.2。博客日期显示时区为 `Asia/Shanghai`。
+博客名称为 `FErecord · Blog`，作者 `tumars`。当前采用 AstroPaper v7.0.0 源码，Astro 7.4.4，由 npm 锁文件固定解析版本；Node.js 使用 Makers 预装的 24.18.0，`.nvmrc` 保持一致。博客日期显示时区为 `Asia/Shanghai`，日期与文章目录使用中文。主站导航提供博客入口。
 
 第一版包含中文导航、文章列表、标签、归档、文章目录、Pagefind 静态搜索、RSS、站点地图和关于页面。沿用 AstroPaper 的阅读布局，不加入评论系统、内容后台或运行时服务。系统字体与站内资源优先，避免访客依赖第三方字体和脚本服务。
 
