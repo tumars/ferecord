@@ -42,7 +42,7 @@
         line-height: 1.55;
       }
       a { color: var(--accent); text-underline-offset: 3px; }
-      a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+      a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
       img { max-width: 100%; height: auto; display: block; }
       .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
       .top {
@@ -133,6 +133,11 @@
       .float-stickers img:nth-child(2) { top: 28px; right: 22px; --tilt: 10deg; animation-delay: -.8s; width: 56px; height: 56px; }
       .float-stickers img:nth-child(3) { bottom: 24px; left: 28px; --tilt: 6deg; animation-delay: -1.6s; width: 52px; height: 52px; }
       .float-stickers img { transform: rotate(var(--tilt)); }
+      .hero-gl {
+        position: absolute; right: 8px; bottom: 8px; width: clamp(96px, 12vw, 136px);
+        aspect-ratio: 1; pointer-events: none;
+      }
+      .hero-gl canvas { display: block; width: 100%; height: 100%; }
       section { padding: clamp(40px, 8vh, 72px) 0; }
       .section-h { max-width: 40em; margin-bottom: 28px; }
       .section-h h2 {
@@ -158,6 +163,30 @@
       .shots {
         display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 14px;
       }
+      .shots-carousel { min-width: 0; }
+      .shots-viewport { overflow: hidden; border-radius: 16px; }
+      .shots-carousel.is-enhanced .shots-viewport { touch-action: pan-y; }
+      .shots-carousel.is-enhanced .shots {
+        display: flex; gap: 0; position: relative; width: 100%;
+        transition-property: transform; transition-timing-function: ease;
+      }
+      .shots-carousel.is-enhanced .shot { flex-shrink: 0; width: 76%; height: auto; }
+      .shots-controls { display: none; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
+      .is-enhanced .shots-controls { display: flex; }
+      .shots-pagination { display: flex; flex-wrap: wrap; }
+      .shots-pagination button {
+        display: grid; place-items: center; width: 44px; height: 44px;
+        padding: 0; border: 0; background: transparent; cursor: pointer; border-radius: 50%;
+      }
+      .shots-pagination button::after { content: ''; width: 6px; height: 6px; border-radius: 8px; background: var(--ink-3); transition: width .2s ease, background .2s ease; }
+      .shots-pagination .swiper-pagination-bullet-active::after { width: 24px; background: var(--accent); }
+      .shots-navigation { display: flex; gap: 8px; }
+      .shots-navigation button {
+        width: 44px; height: 44px; border: 1px solid var(--line-2); border-radius: 50%;
+        background: var(--surface); color: var(--ink); font: inherit; font-size: 20px; cursor: pointer;
+      }
+      .shots-navigation button:disabled { opacity: .35; cursor: default; }
+      .swiper-notification { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
       .shot {
         margin: 0;
         background: var(--surface); border-radius: 16px; overflow: hidden;
@@ -222,6 +251,8 @@
           transform: translateY(-3px);
           box-shadow: inset 0 0 0 1px var(--line-2), 0 8px 24px rgba(0,0,0,.05);
         }
+        .is-enhanced .shot:hover { transform: none; }
+        .shots-navigation button:hover:not(:disabled) { background: var(--accent-wash); color: var(--accent); }
         .sticker-row img:hover { transform: scale(1.06) rotate(-3deg); }
       }
       @keyframes enter {
@@ -272,6 +303,7 @@
         section { padding: 36px 0; }
         .section-h { margin-bottom: 22px; }
         .features, .privacy, .shots, .mascot-band { gap: 12px; }
+        .shots-carousel.is-enhanced .shot { width: 100%; }
         .mascot-copy { padding: 24px 20px; }
         .download { padding: 24px 20px; gap: 20px; border-radius: 20px; }
       }
@@ -284,9 +316,13 @@
         *, *::before, *::after { animation: none !important; transition: none !important; }
         .btn:hover, .card:hover, .shot:hover, .sticker-row img:hover { transform: none; }
         .reveal { opacity: 1; transform: none; }
+        .hero-gl { display: none; }
       }
       @media print {
         .reveal { opacity: 1 !important; transform: none !important; }
+        .hero-gl, .shots-controls { display: none !important; }
+        .shots-carousel.is-enhanced .shots { display: grid; transform: none !important; gap: 14px; }
+        .shots-carousel.is-enhanced .shot { width: auto; margin: 0 !important; }
       }
     </style>
   </head>
@@ -336,6 +372,7 @@
             <img src="/img/mascot/sticker-2.webp" srcset="/img/mascot/sticker-2.webp 1x, /img/mascot/sticker-2@2x.webp 2x" alt="">
             <img src="/img/mascot/sticker-3.webp" srcset="/img/mascot/sticker-3.webp 1x, /img/mascot/sticker-3@2x.webp 2x" alt="">
           </div>
+          <div class="hero-gl" aria-hidden="true"></div>
         </div>
       </div>
 
@@ -383,22 +420,33 @@
       <section id="shots">
         <div class="wrap">
           <div class="section-h">
-            <h2>安静的阅读工作台</h2>
+            <h2 id="shots-title">安静的阅读工作台</h2>
             <p>中性底 + 白色主区，强调色只用于焦点与 AI；狐狸橙留给吉祥物和庆祝时刻。</p>
           </div>
-          <div class="shots">
-            <figure class="shot">
-              <img src="/img/screenshots/reader.jpg" alt="阅读器：按水平标注生词，点词看语境释义" loading="lazy">
-              <figcaption>阅读器：生词按你的水平标出来，点一下看这句里的意思</figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="/img/screenshots/home.jpg" alt="首页：大输入框导入或提问" loading="lazy">
-              <figcaption>首页：今天想读点什么？</figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="/img/screenshots/words.jpg" alt="生词本界面" loading="lazy">
-              <figcaption>生词本：从阅读里长出来的词表</figcaption>
-            </figure>
+          <div class="shots-carousel" role="region" aria-labelledby="shots-title">
+            <div class="shots-viewport">
+              <div class="shots swiper-wrapper" id="shots-track">
+                <figure class="shot swiper-slide">
+                  <img src="/img/screenshots/reader.jpg" alt="阅读器：按水平标注生词，点词看语境释义" loading="lazy">
+                  <figcaption>阅读器：生词按你的水平标出来，点一下看这句里的意思</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <img src="/img/screenshots/home.jpg" alt="首页：大输入框导入或提问" loading="lazy">
+                  <figcaption>首页：今天想读点什么？</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <img src="/img/screenshots/words.jpg" alt="生词本界面" loading="lazy">
+                  <figcaption>生词本：从阅读里长出来的词表</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="shots-controls">
+              <div class="shots-pagination" aria-label="选择截图"></div>
+              <div class="shots-navigation">
+                <button type="button" class="shots-prev" aria-label="上一张截图" aria-controls="shots-track"><span aria-hidden="true">←</span></button>
+                <button type="button" class="shots-next" aria-label="下一张截图" aria-controls="shots-track"><span aria-hidden="true">→</span></button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -493,7 +541,7 @@
         const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (motion.matches || !('IntersectionObserver' in window)) return;
 
-        const items = document.querySelectorAll('.features .card, .shot, .mascot-band, .privacy .card, .download');
+        const items = document.querySelectorAll('.features .card, .shots-carousel, .mascot-band, .privacy .card, .download');
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(({ target, isIntersecting }) => {
             if (!isIntersecting) return;
@@ -515,5 +563,6 @@
         });
       })();
     </script>
+    <script type="module" src="/js/interactions.js"></script>
   </body>
 </html>
