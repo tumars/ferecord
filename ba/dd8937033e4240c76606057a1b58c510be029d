@@ -1,0 +1,16 @@
+sites/tibi/design.md
+  h_93af5c22d6d8a7 5
+sites/tibi/public/index.html
+  h_93af5c22d6d8a7 6,8-9,14,340
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "badd8937033e4240c76606057a1b58c510be029d",
+  "prompts": {},
+  "humans": {
+    "h_93af5c22d6d8a7": {
+      "author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
