@@ -1,0 +1,33 @@
+sites/tibi/design.md
+  s_125aae0adab521::t_33d54cc0cfbe71 74-78
+  s_125aae0adab521::t_8ee245206309a8 3,5-11,13-31,33-73
+sites/tibi/public/index.html
+  s_125aae0adab521::t_33d54cc0cfbe71 404
+  s_125aae0adab521::t_93a7ee59350313 358,366,390,398
+  s_125aae0adab521::t_0edf02d1ae7ed5 12,32,87,90-93,104,117-121,240,265,276,281,307,317-323,505
+sites/tibi/scripts/capture-ui.cjs
+  s_125aae0adab521::t_0aa3e70ba8ddc5 144
+  s_125aae0adab521::t_f28f52fa61e567 128
+  s_125aae0adab521::t_e8c888991a3e23 1-115,117-127,129-143,145,150-163
+  s_125aae0adab521::t_33d54cc0cfbe71 116,147-149
+  s_125aae0adab521::t_bcd96f8a65f6b1 146
+docs/design.md
+  s_125aae0adab521::t_afe5227d984151 41,46
+  s_125aae0adab521::t_05165aebc7edc1 47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e7aea7179ecfd812f6e34875b822611071be1ed8",
+  "prompts": {},
+  "sessions": {
+    "s_125aae0adab521": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a196bd-ad5a-7800-980f-f1bd63de9bf5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
