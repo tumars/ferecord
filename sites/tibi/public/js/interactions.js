@@ -5,6 +5,12 @@ async function enhanceShots() {
   const root = document.querySelector('.shots-carousel');
   const viewport = root.querySelector('.shots-viewport');
   let swiper;
+  function updateShotLinks(instance) {
+    // 只让当前截图进入 Tab 顺序，避免焦点落在视口外；其他截图仍可由按钮切换。
+    instance.slides.forEach((slide, index) => {
+      slide.querySelector('a').tabIndex = index === instance.activeIndex ? 0 : -1;
+    });
+  }
   try {
     const { default: Swiper } = await import('https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.mjs');
     swiper = new Swiper(viewport, {
@@ -13,6 +19,7 @@ async function enhanceShots() {
       spaceBetween: 16,
       speed: motion.matches ? 0 : 450,
       grabCursor: true,
+      on: { init: updateShotLinks, slideChange: updateShotLinks },
       navigation: {
         prevEl: root.querySelector('.shots-prev'),
         nextEl: root.querySelector('.shots-next'),
@@ -52,6 +59,7 @@ async function enhanceShots() {
   } catch {
     swiper?.destroy(true, true);
     root.classList.remove('is-enhanced');
+    root.querySelectorAll('.shot a').forEach((link) => link.removeAttribute('tabindex'));
   }
 }
 
@@ -180,10 +188,11 @@ function createHero(THREE) {
 
 let disposeHero = () => {};
 let heroRequest = 0;
+let heroReady = false;
 async function enhanceHero() {
   const request = ++heroRequest;
   disposeHero();
-  if (motion.matches) return;
+  if (!heroReady || motion.matches || navigator.connection?.saveData) return;
   try {
     const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');
     if (request === heroRequest && !motion.matches) disposeHero = createHero(THREE);
@@ -192,6 +201,27 @@ async function enhanceHero() {
   }
 }
 
-enhanceShots();
-enhanceHero();
+// 轮播临近视口才加载；观察器不可用时仍能增强，CDN 失败则保留静态网格。
+if ('IntersectionObserver' in window) {
+  const shotsObserver = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    shotsObserver.disconnect();
+    enhanceShots();
+  }, { rootMargin: '600px 0px' });
+  shotsObserver.observe(document.querySelector('.shots-carousel'));
+} else {
+  enhanceShots();
+}
+
+// 装饰不与首屏图片争抢资源；减少动态效果或节省流量时不请求 Three.js。
+function scheduleHero() {
+  const start = () => {
+    heroReady = true;
+    enhanceHero();
+  };
+  if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 1500 });
+  else window.setTimeout(start, 0);
+}
+if (document.readyState === 'complete') scheduleHero();
+else window.addEventListener('load', scheduleHero, { once: true });
 motion.addEventListener('change', enhanceHero);

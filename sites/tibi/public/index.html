@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tibi 提比：读你感兴趣的英文文章，顺便把英语学会。本地优先 · AI 原生 · 开源（MIT）。">
+    <meta name="description" content="Tibi 提比：读感兴趣的英文，让生词慢慢变熟悉。导入文章、点词查义、原句复习。无需账号、本地优先、MIT 开源的桌面阅读工具。">
     <meta name="theme-color" content="#f6f6f5">
     <meta property="og:title" content="Tibi 提比">
-    <meta property="og:description" content="读你感兴趣的英文文章，顺便把英语学会。本地优先 · AI 原生 · 开源。">
+    <meta property="og:description" content="读感兴趣的英文，让生词慢慢变熟悉。导入文章、点词查义、原句复习。无需账号 · 本地优先 · MIT 开源。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tibi.ferecord.com/">
     <meta property="og:image" content="https://tibi.ferecord.com/img/mascot/about@2x.webp">
     <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
-    <title>Tibi 提比 · 读你感兴趣的英文，顺便把英语学会</title>
+    <title>Tibi 提比 · 读感兴趣的英文，让生词慢慢变熟悉</title>
     <style>
       :root {
         color-scheme: light;
@@ -42,7 +42,9 @@
         line-height: 1.55;
       }
       a { color: var(--accent); text-underline-offset: 3px; }
-      a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+      :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+      .skip-link { position: fixed; top: 8px; left: 16px; z-index: 30; padding: 12px 16px; background: var(--surface); border-radius: 8px; transform: translateY(-150%); }
+      .skip-link:focus { transform: none; }
       img { max-width: 100%; height: auto; display: block; }
       .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
       .top {
@@ -100,18 +102,15 @@
         line-height: 1.2; letter-spacing: -.035em; font-weight: 700;
       }
       .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
-      .en { margin-top: 10px; max-width: 36em; color: var(--ink-3); font-size: 14px; line-height: 1.7; }
+      .hero-note { margin: 14px 0 0; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
       .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-      .meta {
-        display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+      .trust-bar {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        margin: 0; padding: 24px 0; list-style: none; border-block: 1px solid var(--line);
       }
-      .chip {
-        display: inline-flex; align-items: center; gap: 6px;
-        min-height: 30px; padding: 4px 12px; border-radius: 999px;
-        background: var(--surface); color: var(--ink-2); font-size: 12.5px;
-        box-shadow: inset 0 0 0 1px var(--line);
-      }
-      .chip b { color: var(--ink); font-weight: 600; }
+      .trust-bar li { min-width: 0; }
+      .trust-bar strong { display: block; font-size: 14px; font-weight: 600; }
+      .trust-bar span { display: block; margin-top: 4px; color: var(--ink-2); font-size: 13px; }
       .hero-art {
         position: relative; min-height: 320px;
         background: linear-gradient(180deg, #fbfaf8, #f2f2f1);
@@ -145,8 +144,11 @@
         letter-spacing: -.03em; line-height: 1.2;
       }
       .section-h p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.75; }
+      .section-note { margin: 16px 0 0; color: var(--ink-3); font-size: 13px; line-height: 1.75; }
+      .section-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+      .section-cta p { margin: 0; color: var(--ink-2); font-size: 14px; }
       .features {
-        display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
       }
       .card {
         background: var(--surface); border-radius: var(--radius);
@@ -154,25 +156,16 @@
         display: flex; flex-direction: column; gap: 0; min-height: 100%;
         overflow: hidden;
       }
-      .features .card { padding: 0; gap: 0; overflow: hidden; }
       .card-media {
         aspect-ratio: 16 / 10; flex-shrink: 0; overflow: hidden;
         border-radius: var(--radius) var(--radius) 0 0;
         background: var(--sunken); border-bottom: 1px solid var(--line);
       }
-      .card-media img {
-        width: 100%; height: 100%; object-fit: cover;
-        transition: transform .35s ease;
-      }
-      @media (hover: hover) {
-        .card:hover .card-media img { transform: scale(1.02); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .card-media img { transition: none; }
-        .card:hover .card-media img { transform: none; }
-      }
-      .card-content { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-      .card h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; }
+      .card-media img { width: 100%; height: 100%; object-fit: cover; }
+      .card-content { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+      .card-step { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--brand); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+      .prototype-label { margin-left: auto; padding: 2px 7px; border-radius: 4px; background: var(--sunken); color: var(--ink-2); font-weight: 400; letter-spacing: 0; }
+      .card h3 { margin: 0; font-size: 18px; letter-spacing: -.01em; }
       .card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.7; flex: 1; }
       .shots {
         display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 14px;
@@ -206,7 +199,9 @@
         background: var(--surface); border-radius: 16px; overflow: hidden;
         box-shadow: inset 0 0 0 1px var(--line);
       }
-      .shot img { width: 100%; aspect-ratio: 16/11; object-fit: cover; object-position: top; }
+      .shot > a { display: block; }
+      .shot > a:focus-visible { outline-offset: -4px; }
+      .shot img { width: 100%; height: auto; aspect-ratio: 8/5; }
       .shot figcaption {
         padding: 12px 14px 14px; font-size: 13px; color: var(--ink-2);
       }
@@ -236,7 +231,10 @@
       .privacy {
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
       }
-      .privacy .card h3 { font-size: 15px; }
+      .privacy .card { padding: 24px; gap: 12px; }
+      .privacy .ico { width: 48px; height: 48px; }
+      .privacy .ico img { width: 100%; height: 100%; object-fit: contain; }
+      .text-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
       .download {
         background: var(--surface); border-radius: 24px; padding: clamp(28px, 5vw, 40px);
         box-shadow: inset 0 0 0 1px var(--line);
@@ -245,27 +243,24 @@
       .download h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; }
       .download p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 40em; }
       .dl-actions { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+      .download .download-platforms { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+      .install-note { margin-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+      .install-note summary { min-height: 44px; padding-block: 12px; cursor: pointer; color: var(--ink); }
+      .install-note p { font-size: 13px; }
+      .install-note p + p { margin-top: 8px; }
       footer {
         border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--ink-3); font-size: 13px;
       }
       .foot {
         display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between; align-items: center;
       }
-      .foot a { color: var(--ink-2); text-decoration: none; }
+      .foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-2); text-decoration: none; }
       .foot a:hover { color: var(--accent); }
-      .card, .shot {
-        transition: transform .25s ease, box-shadow .25s ease;
-      }
       .sticker-row img { transition: transform .25s ease; }
       @media (hover: hover) and (pointer: fine) {
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(0,0,0,.1); }
         .btn-primary:hover { background: #303036; }
         .btn-secondary:hover { background: var(--sunken); }
-        .card:hover, .shot:hover {
-          transform: translateY(-3px);
-          box-shadow: inset 0 0 0 1px var(--line-2), 0 8px 24px rgba(0,0,0,.05);
-        }
-        .is-enhanced .shot:hover { transform: none; }
         .shots-navigation button:hover:not(:disabled) { background: var(--accent-wash); color: var(--accent); }
         .sticker-row img:hover { transform: scale(1.06) rotate(-3deg); }
       }
@@ -278,15 +273,14 @@
         50% { transform: translateY(-6px) rotate(var(--tilt)); }
       }
       @media (prefers-reduced-motion: no-preference) {
-        .hero .eyebrow, .hero h1, .hero .lead, .hero .en, .hero .cta, .hero .meta {
+        .hero .eyebrow, .hero h1, .hero .lead, .hero .cta, .hero .hero-note {
           animation: enter .65s cubic-bezier(.2,.7,.3,1) both;
         }
         .hero h1 { animation-delay: .06s; }
         .hero .lead { animation-delay: .12s; }
-        .hero .en { animation-delay: .16s; }
         .hero .cta { animation-delay: .2s; }
-        .hero .meta { animation-delay: .26s; }
-        .float-stickers img { animation-name: float; animation-duration: 5s; animation-iteration-count: 2; animation-timing-function: ease-in-out; }
+        .hero .hero-note { animation-delay: .26s; }
+        .float-stickers img { animation-name: float; animation-duration: 2.4s; animation-iteration-count: 2; animation-timing-function: ease-in-out; }
         /* 只有观察器成功启用后才隐藏，禁用脚本时内容保持可见。 */
         .reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease; }
         .reveal:not(.is-visible) { opacity: 0; transform: translateY(18px); }
@@ -296,8 +290,13 @@
         .hero, .mascot-band, .download { grid-template-columns: 1fr; }
         .features, .privacy { grid-template-columns: 1fr 1fr; }
         .shots { grid-template-columns: 1fr; }
-        .hero-art > img { min-height: 280px; }
+        .hero-art { min-height: 0; }
+        .hero-art > img { height: 320px; min-height: 0; }
+        .mascot-panel img { max-width: 280px; }
         .dl-actions { min-width: 0; width: 100%; }
+      }
+      @media (max-width: 760px) {
+        .nav a.ghost-secondary { display: none; }
       }
       @media (max-width: 560px) {
         html { scroll-padding-top: 76px; }
@@ -307,16 +306,18 @@
         .nav a.ghost { display: none; }
         .hero { gap: 28px; padding-block: 32px 24px; }
         h1 { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
-        .eyebrow { font-size: 10px; letter-spacing: .1em; gap: 7px; }
+        .eyebrow { font-size: 12px; letter-spacing: .04em; gap: 7px; }
         .eyebrow .dot { flex-shrink: 0; }
         .cta { gap: 10px; margin-top: 24px; }
         .cta .btn { flex: 1 1 auto; }
-        .meta { gap: 8px; margin-top: 18px; }
+        .trust-bar { grid-template-columns: 1fr; gap: 14px; padding-block: 20px; }
+        .trust-bar li { display: grid; grid-template-columns: 6em 1fr; gap: 12px; align-items: baseline; }
+        .trust-bar span { margin: 0; }
         .hero-art { min-height: 0; border-radius: 20px; }
-        .hero-art > img { height: auto; min-height: 0; aspect-ratio: 6/5; }
+        .hero-art > img { height: auto; min-height: 0; aspect-ratio: 3/2; }
         section { padding: 36px 0; }
         .section-h { margin-bottom: 22px; }
-        .features, .privacy, .shots, .mascot-band { gap: 12px; }
+        .features, .privacy, .shots, .mascot-band { gap: 16px; }
         .shots-carousel.is-enhanced .shot { width: 100%; }
         .mascot-copy { padding: 24px 20px; }
         .download { padding: 24px 20px; gap: 20px; border-radius: 20px; }
@@ -328,7 +329,7 @@
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         *, *::before, *::after { animation: none !important; transition: none !important; }
-        .btn:hover, .card:hover, .shot:hover, .sticker-row img:hover { transform: none; }
+        .btn:hover, .sticker-row img:hover { transform: none; }
         .reveal { opacity: 1; transform: none; }
         .hero-gl { display: none; }
       }
@@ -341,6 +342,7 @@
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#top">跳到正文</a>
     <header class="top">
       <div class="wrap top-inner">
         <a class="brand" href="#top">
@@ -350,36 +352,30 @@
         <nav class="nav" aria-label="页面导航">
           <a class="ghost" href="#features">功能</a>
           <a class="ghost" href="#shots">界面</a>
-          <a class="ghost" href="#mascot">吉祥物</a>
-          <a class="ghost" href="https://github.com/tumars/tibi">GitHub</a>
-          <a class="btn btn-primary" href="https://github.com/tumars/tibi/releases">下载</a>
+          <a class="ghost ghost-secondary" href="#privacy">隐私</a>
+          <a class="ghost ghost-secondary" href="https://github.com/tumars/tibi">GitHub</a>
+          <a class="btn btn-primary" href="#download">下载提比</a>
         </nav>
       </div>
     </header>
 
-    <main id="top">
+    <main id="top" tabindex="-1">
       <div class="wrap hero">
         <div>
-          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Local-first · AI-native · MIT</p>
-          <h1>读你感兴趣的英文文章，<br>顺便把英语学会。</h1>
-          <p class="lead">Tibi（提比）是给中文母语学习者的英语阅读学习工具：按你的水平标生词，点一下看「这句里」的意思，读过的词自动进复习。内容存在本机，不必注册账号。</p>
-          <p class="en">Read English you actually care about — and learn the language along the way. Open source, privacy-first.</p>
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>给中文母语学习者的英语阅读工具</p>
+          <h1>读感兴趣的英文，<br>让生词慢慢变熟悉。</h1>
+          <p class="lead">把想读的文章带进提比，按你的水平标出生词。点词查释义，再用读过的原句复习，让每一次阅读都有积累。</p>
           <div class="cta">
-            <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">前往 Releases 下载</a>
-            <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi">查看源码</a>
+            <a class="btn btn-primary btn-lg" href="#download">下载提比</a>
+            <a class="btn btn-secondary btn-lg" href="#shots">看看阅读界面 <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="meta" aria-label="产品标签">
-            <span class="chip"><b>macOS</b> · Windows · Linux</span>
-            <span class="chip"><b>本地 SQLite</b></span>
-            <span class="chip"><b>FSRS 复习</b></span>
-            <span class="chip"><b>MCP</b> 可接 Claude / Codex</span>
-          </div>
+          <p class="hero-note">macOS · Windows · Linux 桌面应用<br>不连模型也能阅读、查词典、复习；AI 功能需自行连接模型。</p>
         </div>
-        <div class="hero-art" aria-label="吉祥物藏狐 Tibi（提比）">
+        <div class="hero-art">
           <img
             src="/img/mascot/hero-morning.webp"
             srcset="/img/mascot/hero-morning.webp 1x, /img/mascot/hero-morning@2x.webp 2x"
-            width="768" height="512"
+            width="768" height="512" fetchpriority="high"
             alt="藏狐 Tibi（提比）坐在书上，捧着一本蓝色的书">
           <div class="float-stickers" aria-hidden="true">
             <img src="/img/mascot/sticker-1.webp" srcset="/img/mascot/sticker-1.webp 1x, /img/mascot/sticker-1@2x.webp 2x" alt="">
@@ -390,56 +386,71 @@
         </div>
       </div>
 
+      <div class="wrap">
+        <ul class="trust-bar" aria-label="提比的产品承诺">
+          <li><strong>无需账号</strong><span>打开应用，从一篇示例文章开始</span></li>
+          <li><strong>本地优先</strong><span>文章、生词和学习记录保存在本机</span></li>
+          <li><strong>MIT 开源</strong><span>源码公开，使用方式由你选择</span></li>
+        </ul>
+      </div>
+
       <section id="features">
         <div class="wrap">
           <div class="section-h">
-            <h2>它能做什么</h2>
-            <p>从导入到复习，一条连贯的阅读学习路径；AI 按需出现，不连模型也能读、查词、复习。</p>
+            <h2>从想读，到读懂，再到记住</h2>
+            <p>围绕你读过的内容，把导入、查词和复习连起来。需要深入理解时，再请 AI 帮一把。</p>
           </div>
           <div class="features">
             <article class="card">
               <div class="card-media"><img src="/img/features/import.sm.webp" srcset="/img/features/import.sm.webp 1x, /img/features/import.webp 2x" width="1200" height="750" alt="Tibi 提比首页：粘贴网址或英文内容导入阅读" loading="lazy"></div>
               <div class="card-content">
-                <h3>导入什么都行</h3>
-                <p>网址、粘贴英文、EPUB、PDF、Word、图片与扫描版 PDF（本地 OCR），浏览器剪藏一键发送。</p>
+                <span class="card-step">01 · 带进来</span>
+                <h3>从你想读的内容开始</h3>
+                <p>粘贴网址或英文正文，也可导入 EPUB、PDF、Word。图片和扫描件支持本地文字识别。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/mark.sm.webp" srcset="/img/features/mark.sm.webp 1x, /img/features/mark.webp 2x" width="1200" height="750" alt="Tibi 提比阅读器：英文原文中按掌握程度标注生词" loading="lazy"></div>
               <div class="card-content">
-                <h3>按水平标生词</h3>
-                <p>先花约 3 分钟测词汇量，之后只标出你可能不认识的词；读得越多越准。</p>
+                <span class="card-step">02 · 读起来</span>
+                <h3>把注意力留给生词</h3>
+                <p>按你的水平标出可能不认识的词。认识的词随手标为掌握，让标注更贴合你。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/lookup.sm.webp" srcset="/img/features/lookup.sm.webp 1x, /img/features/lookup.webp 2x" width="1200" height="750" alt="Tibi 提比查词卡片：显示 compiler 的语境释义、音标与掌握程度" loading="lazy"></div>
               <div class="card-content">
-                <h3>点词就懂</h3>
-                <p>词卡给出「在这句里」的意思（AI 生成、可缓存），也有 ECDICT 词典、音标和发音。</p>
+                <span class="card-step">03 · 查一查</span>
+                <h3>不离开文章，就能查词</h3>
+                <p>点词查看词典释义、音标与发音。连接模型后，还能看这个词「在这句里」的意思。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/ai.sm.webp" srcset="/img/features/ai.sm.webp 1x, /img/features/ai.webp 2x" width="1200" height="750" alt="Tibi 提比 AI 阅读器原型：英文文章、重点词句及译文和总结入口" loading="lazy"></div>
               <div class="card-content">
-                <h3>AI 帮你读</h3>
-                <p>导入时总结、挑短语和长难句；整篇译文、选中追问、在对话里继续问 Tibi。</p>
+                <span class="card-step">04 · 读深入<span class="prototype-label">界面原型</span></span>
+                <h3>难懂的地方，问问提比</h3>
+                <p>连接模型，让 AI 梳理文章、解释长句，或选中一段继续追问。按需查看整篇译文。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/review.sm.webp" srcset="/img/features/review.sm.webp 1x, /img/features/review.webp 2x" width="1200" height="750" alt="Tibi 提比复习原型：结合英文原句选择生词含义并查看复习进度" loading="lazy"></div>
               <div class="card-content">
-                <h3>记得住</h3>
-                <p>生词进 FSRS 复习，用的是你读过的原句；还有听写、拼写、易混词、造句批改。</p>
+                <span class="card-step">05 · 再遇见<span class="prototype-label">界面原型</span></span>
+                <h3>在熟悉的句子里复习</h3>
+                <p>生词按记忆情况安排复习，带着读过的原句再见面。也能用听写、拼写巩固记忆。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/progress.sm.webp" srcset="/img/features/progress.sm.webp 1x, /img/features/progress.webp 2x" width="1200" height="750" alt="Tibi 提比统计原型：已知词、阅读时长、学习天数与复习次数趋势" loading="lazy"></div>
               <div class="card-content">
-                <h3>看得见进步</h3>
-                <p>已知词、每日阅读、复习表现、学习日历；打开统计时 Tibi 会写一段观察和建议。</p>
+                <span class="card-step">06 · 看积累<span class="prototype-label">界面原型</span></span>
+                <h3>回看一点一滴的进步</h3>
+                <p>已知词、阅读时长和复习记录，留下你的学习轨迹。连接模型后，可获得观察与建议。</p>
               </div>
             </article>
           </div>
+          <p class="section-note">前三张为应用截图，后三张为功能界面原型；实际界面以安装版本为准。</p>
         </div>
       </section>
 
@@ -447,21 +458,21 @@
         <div class="wrap">
           <div class="section-h">
             <h2 id="shots-title">安静的阅读工作台</h2>
-            <p>中性底 + 白色主区，强调色只用于焦点与 AI；狐狸橙留给吉祥物和庆祝时刻。</p>
+            <p>文章、生词和释义放在一起，少一点来回切换，多一点读下去的专注。以下为应用实拍，点击图片可查看原图。</p>
           </div>
           <div class="shots-carousel" role="region" aria-labelledby="shots-title">
             <div class="shots-viewport">
               <div class="shots swiper-wrapper" id="shots-track">
                 <figure class="shot swiper-slide">
-                  <img src="/img/screenshots/reader.jpg" alt="阅读器：按水平标注生词，点词看语境释义" loading="lazy">
+                  <a href="/img/screenshots/reader.jpg"><img src="/img/screenshots/reader.jpg" width="1920" height="1200" alt="查看提比阅读器原图：英文原文中标出生词，侧边词卡显示语境释义" loading="lazy" decoding="async"></a>
                   <figcaption>阅读器：生词按你的水平标出来，点一下看这句里的意思</figcaption>
                 </figure>
                 <figure class="shot swiper-slide">
-                  <img src="/img/screenshots/home.jpg" alt="首页：大输入框导入或提问" loading="lazy">
+                  <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="查看提比首页原图：在输入框粘贴英文内容、导入网址或提问" loading="lazy" decoding="async"></a>
                   <figcaption>首页：今天想读点什么？</figcaption>
                 </figure>
                 <figure class="shot swiper-slide">
-                  <img src="/img/screenshots/words.jpg" alt="生词本界面" loading="lazy">
+                  <a href="/img/screenshots/words.jpg"><img src="/img/screenshots/words.jpg" width="1920" height="1200" alt="查看提比生词本原图：浏览阅读中积累的单词和熟练程度" loading="lazy" decoding="async"></a>
                   <figcaption>生词本：从阅读里长出来的词表</figcaption>
                 </figure>
               </div>
@@ -473,6 +484,10 @@
                 <button type="button" class="shots-next" aria-label="下一张截图" aria-controls="shots-track"><span aria-hidden="true">→</span></button>
               </div>
             </div>
+          </div>
+          <div class="section-cta">
+            <p>第一篇不用挑太久。打开提比，先读一篇内置示例。</p>
+            <a class="btn btn-secondary" href="#download">下载提比，开始阅读 <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -488,16 +503,16 @@
               loading="lazy">
           </div>
           <div class="mascot-copy">
-            <h2>吉祥物：藏狐 Tibi</h2>
-            <p>圆润、略带一本正经的藏狐。饱和暖橙毛色、奶油色脸颊与肚皮、半垂眼皮的淡定表情——和产品「安静的 AI 工作台」同一套温度。</p>
-            <p>应用内空状态、庆祝、引导和贴纸都用同一角色；本页配图复用仓库已定稿的吉祥物素材，不再另造形象。</p>
+            <h2>认识提比，陪你读下去的藏狐</h2>
+            <p>有一点认真，也有一点呆。它会在第一次打开应用时与你打招呼，也会在你完成复习时，为这一小步高兴。</p>
+            <p>不用一口气读懂所有。今天多读一段，多认得一个词，就很好。</p>
             <div class="sticker-row" aria-label="贴纸表情">
-              <img src="/img/mascot/sticker-1.webp" srcset="/img/mascot/sticker-1.webp 1x, /img/mascot/sticker-1@2x.webp 2x" alt="赞">
-              <img src="/img/mascot/sticker-2.webp" srcset="/img/mascot/sticker-2.webp 1x, /img/mascot/sticker-2@2x.webp 2x" alt="笑">
-              <img src="/img/mascot/sticker-3.webp" srcset="/img/mascot/sticker-3.webp 1x, /img/mascot/sticker-3@2x.webp 2x" alt="疑问">
-              <img src="/img/mascot/sticker-4.webp" srcset="/img/mascot/sticker-4.webp 1x, /img/mascot/sticker-4@2x.webp 2x" alt="加油">
-              <img src="/img/mascot/sticker-5.webp" srcset="/img/mascot/sticker-5.webp 1x, /img/mascot/sticker-5@2x.webp 2x" alt="睡">
-              <img src="/img/mascot/sticker-6.webp" srcset="/img/mascot/sticker-6.webp 1x, /img/mascot/sticker-6@2x.webp 2x" alt="惊">
+              <img src="/img/mascot/sticker-1.webp" srcset="/img/mascot/sticker-1.webp 1x, /img/mascot/sticker-1@2x.webp 2x" width="56" height="56" alt="提比点赞" loading="lazy">
+              <img src="/img/mascot/sticker-2.webp" srcset="/img/mascot/sticker-2.webp 1x, /img/mascot/sticker-2@2x.webp 2x" width="56" height="56" alt="提比微笑" loading="lazy">
+              <img src="/img/mascot/sticker-3.webp" srcset="/img/mascot/sticker-3.webp 1x, /img/mascot/sticker-3@2x.webp 2x" width="56" height="56" alt="提比疑惑" loading="lazy">
+              <img src="/img/mascot/sticker-4.webp" srcset="/img/mascot/sticker-4.webp 1x, /img/mascot/sticker-4@2x.webp 2x" width="56" height="56" alt="提比加油" loading="lazy">
+              <img src="/img/mascot/sticker-5.webp" srcset="/img/mascot/sticker-5.webp 1x, /img/mascot/sticker-5@2x.webp 2x" width="56" height="56" alt="提比打盹" loading="lazy">
+              <img src="/img/mascot/sticker-6.webp" srcset="/img/mascot/sticker-6.webp 1x, /img/mascot/sticker-6@2x.webp 2x" width="56" height="56" alt="提比惊讶" loading="lazy">
             </div>
           </div>
         </div>
@@ -506,26 +521,30 @@
       <section id="privacy">
         <div class="wrap">
           <div class="section-h">
-            <h2>数据在你电脑上</h2>
-            <p>没有账号、没有遥测。只有你主动用到的功能才会联网：抓取你导入的网页、调用你配置的模型、首次下载 OCR / 语音包。</p>
+            <h2>你的学习，自己掌握</h2>
+            <p>提比应用无需账号，不收集使用数据。文章与学习记录在本机保存；联网功能的去向，也说清楚。</p>
           </div>
           <div class="privacy">
             <article class="card">
-              <div class="ico"><img src="/img/mascot/icon-face.webp" srcset="/img/mascot/icon-face.webp 1x, /img/mascot/icon-face@2x.webp 2x" alt=""></div>
-              <h3>本地优先</h3>
-              <p>全部内容存在本机 SQLite；模型 API Key 放在系统钥匙串；可随时导出、备份、恢复。</p>
+              <div class="ico"><img src="/img/mascot/icon-face.webp" srcset="/img/mascot/icon-face.webp 1x, /img/mascot/icon-face@2x.webp 2x" width="48" height="48" alt="" loading="lazy"></div>
+              <h3>记录留在本机</h3>
+              <p>文章、生词与复习记录本地保存。可备份和恢复，生词还能导出为 CSV 或 Anki 格式。</p>
+              <a class="text-link" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md#10-数据">了解备份与导出 <span aria-hidden="true">↗</span></a>
             </article>
             <article class="card">
-              <div class="ico"><img src="/img/mascot/empty-review.webp" srcset="/img/mascot/empty-review.webp 1x, /img/mascot/empty-review@2x.webp 2x" alt=""></div>
-              <h3>朗读与复习</h3>
-              <p>系统语音或本地神经网络语音（Kokoro）；句级跟随、倍速、单句循环。</p>
+              <div class="ico"><img src="/img/mascot/empty-review.webp" srcset="/img/mascot/empty-review.webp 1x, /img/mascot/empty-review@2x.webp 2x" width="48" height="48" alt="" loading="lazy"></div>
+              <h3>AI 由你选择</h3>
+              <p>不连模型也能阅读、查词典与复习。启用 AI 时，所需内容和相关学习信息会发给你配置的模型服务商。</p>
+              <a class="text-link" href="https://github.com/tumars/tibi/blob/main/PRIVACY.md">阅读隐私说明 <span aria-hidden="true">↗</span></a>
             </article>
             <article class="card">
-              <div class="ico"><img src="/img/mascot/celebrate-streak.webp" srcset="/img/mascot/celebrate-streak.webp 1x, /img/mascot/celebrate-streak@2x.webp 2x" alt=""></div>
-              <h3>接其他 AI 工具</h3>
-              <p>内置 MCP Server，Claude Code、Codex 等可读学习进度、帮你加生词（写操作需确认）。</p>
+              <div class="ico"><img src="/img/mascot/celebrate-streak.webp" srcset="/img/mascot/celebrate-streak.webp 1x, /img/mascot/celebrate-streak@2x.webp 2x" width="48" height="48" alt="" loading="lazy"></div>
+              <h3>开源，可以查证</h3>
+              <p>按 MIT 协议开放源码。你可以查看代码、反馈问题，也可以按自己的需要修改与使用。</p>
+              <a class="text-link" href="https://github.com/tumars/tibi">查看 GitHub 源码 <span aria-hidden="true">↗</span></a>
             </article>
           </div>
+          <p class="section-note">导入网页、读取订阅源和首次下载文字识别／语音包也需要联网；如主动配置同步，数据会同步到你选择的位置。</p>
         </div>
       </section>
 
@@ -533,11 +552,17 @@
         <div class="wrap">
           <div class="download">
             <div>
-              <h2>开始用 Tibi</h2>
-              <p>从 GitHub Releases 下载对应系统的安装包。尚未签名的版本：macOS 在 Finder 里右键 → 打开；Windows 遇到 SmartScreen 时选「更多信息 → 仍要运行」。</p>
+              <h2>从一篇想读的英文开始</h2>
+              <p>下载提比，读一篇内置示例，或导入你收藏已久的文章。</p>
+              <p class="download-platforms">支持 macOS（Apple 芯片 / Intel）、Windows 10 / 11、Linux。<br>安装包发布在 GitHub Releases，请按系统选择。</p>
+              <details class="install-note">
+                <summary>首次安装与 AI 设置</summary>
+                <p>未签名版本首次打开：macOS 在 Finder 里右键 → 打开；Windows 遇到 SmartScreen 时选「更多信息 → 仍要运行」。</p>
+                <p>AI 为可选功能，在「设置 → 高级 → 模型」连接服务。模型服务可能产生费用，按所选服务商规则计费。</p>
+              </details>
             </div>
             <div class="dl-actions">
-              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">下载安装包</a>
+              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">前往 GitHub 下载安装包 <span aria-hidden="true">↗</span></a>
               <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md">使用指南</a>
             </div>
           </div>
@@ -558,7 +583,9 @@
         </div>
         <div>
           <!-- 正式备案号待用户提供后填写，并链接 https://beian.miit.gov.cn/ -->
-          <span>MIT License</span>
+          <a href="https://github.com/tumars/tibi/blob/main/PRIVACY.md">隐私说明</a>
+          <span aria-hidden="true"> · </span>
+          <a href="https://github.com/tumars/tibi/blob/main/LICENSE">MIT License</a>
         </div>
       </div>
     </footer>
