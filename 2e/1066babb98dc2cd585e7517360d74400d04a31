@@ -1,0 +1,26 @@
+sites/tibi/public/index.html
+  s_9ff679a829d205::t_ea2e3057d9d198 371-376
+  s_9ff679a829d205::t_adc1ef2602ce98 56,58,60,78-80,126-130,137-138,140-141,156,166,169-171,173,186,194,197-198,211,213,220-221,224-226,247,249-254,257,259,261-263,289-290,292-293,300
+  s_9ff679a829d205::t_a4f039611d9ea3 369-370,377-378,384-385,390-391,394-395,398-399,402,406-407,410-411,414-415,418-419,422-423,426,430-431,434-435,438-439,446-447,453-454,457-458,462,485,515
+sites/tibi/public/js/interactions.js
+  s_9ff679a829d205::t_798ceabdcb958a 3-63
+sites/tibi/design.md
+  s_9ff679a829d205::t_ea2e3057d9d198 6,8,47-49,55-58
+  s_9ff679a829d205::t_2dd93e27686b04 94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2e1066babb98dc2cd585e7517360d74400d04a31",
+  "prompts": {},
+  "sessions": {
+    "s_9ff679a829d205": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1974f-302c-7930-be1f-bf1ba5e7c96e",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
