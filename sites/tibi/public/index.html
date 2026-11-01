@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tibi 缇比：读你感兴趣的英文文章，顺便把英语学会。本地优先 · AI 原生 · 开源（MIT）。">
+    <meta name="theme-color" content="#f6f6f5">
+    <meta property="og:title" content="Tibi 缇比">
+    <meta property="og:description" content="读你感兴趣的英文文章，顺便把英语学会。本地优先 · AI 原生 · 开源。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tibi.ferecord.com/">
+    <meta property="og:image" content="https://tibi.ferecord.com/img/mascot/about@2x.webp">
+    <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+    <title>Tibi 缇比 · 读你感兴趣的英文，顺便把英语学会</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f6f5;
+        --surface: #ffffff;
+        --sunken: #f2f2f1;
+        --line: rgba(0,0,0,.08);
+        --line-2: rgba(0,0,0,.13);
+        --ink: #18181b;
+        --ink-2: #55555c;
+        --ink-3: #6b6b74;
+        --accent: #3d52e0;
+        --accent-wash: rgba(61,82,224,.08);
+        --warm: #f5a043;
+        --warm-wash: rgba(245,160,67,.14);
+        --brand: #2f3fa8;
+        --radius: 12px;
+        --f: system-ui, -apple-system, "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: var(--f);
+        background: var(--bg);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+      }
+      a { color: var(--accent); text-underline-offset: 3px; }
+      img { max-width: 100%; height: auto; display: block; }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+      .top {
+        position: sticky; top: 0; z-index: 20;
+        backdrop-filter: saturate(1.2) blur(12px);
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .top-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 16px; height: 64px;
+      }
+      .brand {
+        display: inline-flex; align-items: center; gap: 10px;
+        text-decoration: none; color: var(--ink); font-weight: 650; letter-spacing: -.02em;
+      }
+      .brand img { width: 32px; height: 32px; border-radius: 9px; }
+      .nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+      .nav a.ghost {
+        text-decoration: none; color: var(--ink-2); font-size: 14px;
+        padding: 8px 12px; border-radius: 8px;
+      }
+      .nav a.ghost:hover { background: rgba(0,0,0,.04); color: var(--ink); }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        height: 40px; padding: 0 16px; border-radius: 10px; font-size: 14px; font-weight: 600;
+        text-decoration: none; border: 0; cursor: pointer;
+      }
+      .btn-primary { background: var(--ink); color: #fff; }
+      .btn-primary:hover { filter: brightness(1.08); }
+      .btn-secondary {
+        background: var(--surface); color: var(--ink);
+        box-shadow: inset 0 0 0 1px var(--line-2);
+      }
+      .btn-secondary:hover { background: var(--sunken); }
+      .btn-lg { height: 48px; padding: 0 20px; font-size: 15px; border-radius: 12px; }
+      .hero {
+        display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 56px);
+        align-items: center; padding: clamp(36px, 7vh, 72px) 0 clamp(28px, 5vh, 48px);
+      }
+      .eyebrow {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+        color: var(--ink-3); font-weight: 600;
+      }
+      .eyebrow .dot {
+        width: 8px; height: 8px; border-radius: 50%; background: var(--warm);
+        box-shadow: 0 0 0 4px var(--warm-wash);
+      }
+      h1 {
+        margin: 14px 0 16px; font-size: clamp(34px, 5.4vw, 56px);
+        line-height: 1.12; letter-spacing: -.035em; font-weight: 700;
+      }
+      .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
+      .en { margin-top: 10px; max-width: 36em; color: var(--ink-3); font-size: 14px; line-height: 1.7; }
+      .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+      .meta {
+        display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+      }
+      .chip {
+        display: inline-flex; align-items: center; gap: 6px;
+        height: 30px; padding: 0 12px; border-radius: 999px;
+        background: var(--surface); color: var(--ink-2); font-size: 12.5px;
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+      .chip b { color: var(--ink); font-weight: 600; }
+      .hero-art {
+        position: relative; min-height: 320px;
+        background: linear-gradient(180deg, #fbfaf8, #f2f2f1);
+        border-radius: 24px; overflow: hidden;
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+      .hero-art img {
+        width: 100%; height: 100%; object-fit: contain; object-position: center bottom;
+        min-height: 360px;
+      }
+      .float-stickers {
+        position: absolute; inset: 0; pointer-events: none;
+      }
+      .float-stickers img {
+        position: absolute; width: 64px; height: 64px; min-height: 0;
+        filter: drop-shadow(0 8px 16px rgba(0,0,0,.08));
+      }
+      .float-stickers img:nth-child(1) { top: 18px; left: 18px; transform: rotate(-8deg); }
+      .float-stickers img:nth-child(2) { top: 28px; right: 22px; transform: rotate(10deg); width: 56px; height: 56px; }
+      .float-stickers img:nth-child(3) { bottom: 24px; left: 28px; transform: rotate(6deg); width: 52px; height: 52px; }
+      section { padding: clamp(40px, 8vh, 72px) 0; }
+      .section-h { max-width: 40em; margin-bottom: 28px; }
+      .section-h h2 {
+        margin: 0 0 10px; font-size: clamp(24px, 3.4vw, 34px);
+        letter-spacing: -.03em; line-height: 1.2;
+      }
+      .section-h p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.75; }
+      .features {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      }
+      .card {
+        background: var(--surface); border-radius: var(--radius);
+        box-shadow: inset 0 0 0 1px var(--line); padding: 20px;
+        display: flex; flex-direction: column; gap: 10px; min-height: 100%;
+      }
+      .card .ico {
+        width: 72px; height: 72px; border-radius: 18px; overflow: hidden;
+        background: var(--sunken); display: grid; place-items: center;
+      }
+      .card .ico img { width: 72px; height: 72px; object-fit: cover; }
+      .card h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; }
+      .card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.7; flex: 1; }
+      .shots {
+        display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 14px;
+      }
+      .shot {
+        background: var(--surface); border-radius: 16px; overflow: hidden;
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+      .shot img { width: 100%; aspect-ratio: 16/11; object-fit: cover; object-position: top; }
+      .shot figcaption {
+        padding: 12px 14px 14px; font-size: 13px; color: var(--ink-2);
+      }
+      .mascot-band {
+        display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: stretch;
+      }
+      .mascot-panel {
+        background: var(--surface); border-radius: 20px; overflow: hidden;
+        box-shadow: inset 0 0 0 1px var(--line);
+        display: grid; place-items: center; padding: 18px;
+        background-image: radial-gradient(circle at 30% 20%, var(--warm-wash), transparent 55%),
+                          radial-gradient(circle at 80% 80%, var(--accent-wash), transparent 45%);
+      }
+      .mascot-panel img { width: min(100%, 420px); }
+      .mascot-copy {
+        background: var(--surface); border-radius: 20px; padding: 28px;
+        box-shadow: inset 0 0 0 1px var(--line);
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      .mascot-copy h2 { margin: 0 0 12px; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; }
+      .mascot-copy p { margin: 0 0 12px; color: var(--ink-2); font-size: 15px; line-height: 1.75; }
+      .sticker-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+      .sticker-row img {
+        width: 56px; height: 56px; border-radius: 14px; background: var(--sunken);
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+      .privacy {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      }
+      .privacy .card h3 { font-size: 15px; }
+      .download {
+        background: var(--surface); border-radius: 24px; padding: clamp(28px, 5vw, 40px);
+        box-shadow: inset 0 0 0 1px var(--line);
+        display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+      }
+      .download h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; }
+      .download p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 40em; }
+      .dl-actions { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+      footer {
+        border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--ink-3); font-size: 13px;
+      }
+      .foot {
+        display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between; align-items: center;
+      }
+      .foot a { color: var(--ink-2); text-decoration: none; }
+      .foot a:hover { color: var(--accent); }
+      @media (max-width: 900px) {
+        .hero, .mascot-band, .download { grid-template-columns: 1fr; }
+        .features, .privacy { grid-template-columns: 1fr 1fr; }
+        .shots { grid-template-columns: 1fr; }
+        .hero-art img { min-height: 280px; }
+        .dl-actions { min-width: 0; width: 100%; }
+      }
+      @media (max-width: 560px) {
+        .features, .privacy { grid-template-columns: 1fr; }
+        .nav a.ghost { display: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="brand" href="#top">
+          <img src="/img/logo.svg" width="32" height="32" alt="">
+          <span>Tibi 缇比</span>
+        </a>
+        <nav class="nav" aria-label="页面导航">
+          <a class="ghost" href="#features">功能</a>
+          <a class="ghost" href="#shots">界面</a>
+          <a class="ghost" href="#mascot">吉祥物</a>
+          <a class="ghost" href="https://github.com/tumars/tibi">GitHub</a>
+          <a class="btn btn-primary" href="https://github.com/tumars/tibi/releases">下载</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="wrap hero">
+        <div>
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Local-first · AI-native · MIT</p>
+          <h1>读你感兴趣的英文文章，<br>顺便把英语学会。</h1>
+          <p class="lead">Tibi（缇比）是给中文母语学习者的英语阅读学习工具：按你的水平标生词，点一下看「这句里」的意思，读过的词自动进复习。内容存在本机，不必注册账号。</p>
+          <p class="en">Read English you actually care about — and learn the language along the way. Open source, privacy-first.</p>
+          <div class="cta">
+            <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">前往 Releases 下载</a>
+            <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi">查看源码</a>
+          </div>
+          <div class="meta" aria-label="产品标签">
+            <span class="chip"><b>macOS</b> · Windows · Linux</span>
+            <span class="chip"><b>本地 SQLite</b></span>
+            <span class="chip"><b>FSRS 复习</b></span>
+            <span class="chip"><b>MCP</b> 可接 Claude / Codex</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="吉祥物藏狐 Tibi">
+          <img
+            src="/img/mascot/hero-morning.webp"
+            srcset="/img/mascot/hero-morning.webp 1x, /img/mascot/hero-morning@2x.webp 2x"
+            width="768" height="512"
+            alt="藏狐 Tibi 坐在书上，捧着一本蓝色的书">
+          <div class="float-stickers" aria-hidden="true">
+            <img src="/img/mascot/sticker-1.webp" srcset="/img/mascot/sticker-1.webp 1x, /img/mascot/sticker-1@2x.webp 2x" alt="">
+            <img src="/img/mascot/sticker-2.webp" srcset="/img/mascot/sticker-2.webp 1x, /img/mascot/sticker-2@2x.webp 2x" alt="">
+            <img src="/img/mascot/sticker-3.webp" srcset="/img/mascot/sticker-3.webp 1x, /img/mascot/sticker-3@2x.webp 2x" alt="">
+          </div>
+        </div>
+      </div>
+
+      <section id="features">
+        <div class="wrap">
+          <div class="section-h">
+            <h2>它能做什么</h2>
+            <p>从导入到复习，一条连贯的阅读学习路径；AI 按需出现，不连模型也能读、查词、复习。</p>
+          </div>
+          <div class="features">
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/onboarding-read.webp" srcset="/img/mascot/onboarding-read.webp 1x, /img/mascot/onboarding-read@2x.webp 2x" alt=""></div>
+              <h3>导入什么都行</h3>
+              <p>网址、粘贴英文、EPUB、PDF、Word、图片与扫描版 PDF（本地 OCR），浏览器剪藏一键发送。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/empty-words.webp" srcset="/img/mascot/empty-words.webp 1x, /img/mascot/empty-words@2x.webp 2x" alt=""></div>
+              <h3>按水平标生词</h3>
+              <p>先花约 3 分钟测词汇量，之后只标出你可能不认识的词；读得越多越准。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/hero-day.webp" srcset="/img/mascot/hero-day.webp 1x, /img/mascot/hero-day@2x.webp 2x" alt=""></div>
+              <h3>点词就懂</h3>
+              <p>词卡给出「在这句里」的意思（AI 生成、可缓存），也有 ECDICT 词典、音标和发音。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/onboarding-hello.webp" srcset="/img/mascot/onboarding-hello.webp 1x, /img/mascot/onboarding-hello@2x.webp 2x" alt=""></div>
+              <h3>AI 帮你读</h3>
+              <p>导入时总结、挑短语和长难句；整篇译文、选中追问、在对话里继续问 Tibi。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/celebrate-review.webp" srcset="/img/mascot/celebrate-review.webp 1x, /img/mascot/celebrate-review@2x.webp 2x" alt=""></div>
+              <h3>记得住</h3>
+              <p>生词进 FSRS 复习，用的是你读过的原句；还有听写、拼写、易混词、造句批改。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/celebrate-streak.webp" srcset="/img/mascot/celebrate-streak.webp 1x, /img/mascot/celebrate-streak@2x.webp 2x" alt=""></div>
+              <h3>看得见进步</h3>
+              <p>已知词、每日阅读、复习表现、学习日历；打开统计时 Tibi 会写一段观察和建议。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="shots">
+        <div class="wrap">
+          <div class="section-h">
+            <h2>安静的阅读工作台</h2>
+            <p>中性底 + 白色主区，强调色只用于焦点与 AI；狐狸橙留给吉祥物和庆祝时刻。</p>
+          </div>
+          <div class="shots">
+            <figure class="shot">
+              <img src="/img/screenshots/reader.jpg" alt="阅读器：按水平标注生词，点词看语境释义" loading="lazy">
+              <figcaption>阅读器：生词按你的水平标出来，点一下看这句里的意思</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="/img/screenshots/home.jpg" alt="首页：大输入框导入或提问" loading="lazy">
+              <figcaption>首页：今天想读点什么？</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="/img/screenshots/words.jpg" alt="生词本界面" loading="lazy">
+              <figcaption>生词本：从阅读里长出来的词表</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="mascot">
+        <div class="wrap mascot-band">
+          <div class="mascot-panel">
+            <img
+              src="/img/mascot/about.webp"
+              srcset="/img/mascot/about.webp 1x, /img/mascot/about@2x.webp 2x"
+              width="420" height="420"
+              alt="藏狐吉祥物 Tibi（缇比）全身像"
+              loading="lazy">
+          </div>
+          <div class="mascot-copy">
+            <h2>吉祥物：藏狐 Tibi</h2>
+            <p>圆润、略带一本正经的藏狐。饱和暖橙毛色、奶油色脸颊与肚皮、半垂眼皮的淡定表情——和产品「安静的 AI 工作台」同一套温度。</p>
+            <p>应用内空状态、庆祝、引导和贴纸都用同一角色；本页配图复用仓库已定稿的吉祥物素材，不再另造形象。</p>
+            <div class="sticker-row" aria-label="贴纸表情">
+              <img src="/img/mascot/sticker-1.webp" srcset="/img/mascot/sticker-1.webp 1x, /img/mascot/sticker-1@2x.webp 2x" alt="赞">
+              <img src="/img/mascot/sticker-2.webp" srcset="/img/mascot/sticker-2.webp 1x, /img/mascot/sticker-2@2x.webp 2x" alt="笑">
+              <img src="/img/mascot/sticker-3.webp" srcset="/img/mascot/sticker-3.webp 1x, /img/mascot/sticker-3@2x.webp 2x" alt="疑问">
+              <img src="/img/mascot/sticker-4.webp" srcset="/img/mascot/sticker-4.webp 1x, /img/mascot/sticker-4@2x.webp 2x" alt="加油">
+              <img src="/img/mascot/sticker-5.webp" srcset="/img/mascot/sticker-5.webp 1x, /img/mascot/sticker-5@2x.webp 2x" alt="睡">
+              <img src="/img/mascot/sticker-6.webp" srcset="/img/mascot/sticker-6.webp 1x, /img/mascot/sticker-6@2x.webp 2x" alt="惊">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="privacy">
+        <div class="wrap">
+          <div class="section-h">
+            <h2>数据在你电脑上</h2>
+            <p>没有账号、没有遥测。只有你主动用到的功能才会联网：抓取你导入的网页、调用你配置的模型、首次下载 OCR / 语音包。</p>
+          </div>
+          <div class="privacy">
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/icon-face.webp" srcset="/img/mascot/icon-face.webp 1x, /img/mascot/icon-face@2x.webp 2x" alt=""></div>
+              <h3>本地优先</h3>
+              <p>全部内容存在本机 SQLite；模型 API Key 放在系统钥匙串；可随时导出、备份、恢复。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/empty-review.webp" srcset="/img/mascot/empty-review.webp 1x, /img/mascot/empty-review@2x.webp 2x" alt=""></div>
+              <h3>朗读与复习</h3>
+              <p>系统语音或本地神经网络语音（Kokoro）；句级跟随、倍速、单句循环。</p>
+            </article>
+            <article class="card">
+              <div class="ico"><img src="/img/mascot/celebrate-streak.webp" srcset="/img/mascot/celebrate-streak.webp 1x, /img/mascot/celebrate-streak@2x.webp 2x" alt=""></div>
+              <h3>接其他 AI 工具</h3>
+              <p>内置 MCP Server，Claude Code、Codex 等可读学习进度、帮你加生词（写操作需确认）。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="download">
+        <div class="wrap">
+          <div class="download">
+            <div>
+              <h2>开始用 Tibi</h2>
+              <p>从 GitHub Releases 下载对应系统的安装包。尚未签名的版本：macOS 在 Finder 里右键 → 打开；Windows 遇到 SmartScreen 时选「更多信息 → 仍要运行」。</p>
+            </div>
+            <div class="dl-actions">
+              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">下载安装包</a>
+              <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md">使用指南</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap foot">
+        <div>
+          <span>Tibi · ferecord</span>
+          <span aria-hidden="true"> · </span>
+          <a href="https://www.ferecord.com">主站</a>
+          <span aria-hidden="true"> · </span>
+          <a href="https://blog.ferecord.com">博客</a>
+          <span aria-hidden="true"> · </span>
+          <a href="https://github.com/tumars/tibi">GitHub</a>
+        </div>
+        <div>
+          <!-- 正式备案号待用户提供后填写，并链接 https://beian.miit.gov.cn/ -->
+          <span>MIT License</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

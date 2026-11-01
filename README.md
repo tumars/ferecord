@@ -2,7 +2,7 @@
 
 产品介绍网站仓库：一个 Git 仓库管理多个站点，每个站点使用独立的 EdgeOne Makers 项目和域名。
 
-当前包含主站与一个产品示例。主站已接入 EdgeOne Makers，正式入口为 `https://www.ferecord.com`；页面仍是占位内容，示例文案不代表真实产品。域名配置与验证状态见部署说明。
+当前包含主站、博客与产品站 Tibi。主站正式入口为 `https://www.ferecord.com`，博客为 `https://blog.ferecord.com`，Tibi 目标域名为 `https://tibi.ferecord.com`。域名配置与验证状态见部署说明。
 
 ## 目录
 
@@ -13,6 +13,9 @@ sites/
     public/              # 图片、图标等公开静态资源
     edgeone.json
   main/                  # ferecord 主站
+    edgeone.json
+    public/index.html
+  tibi/                  # Tibi 缇比产品介绍
     edgeone.json
     public/index.html
   product-example/       # 产品站点示例，新增产品时复制
@@ -37,17 +40,17 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory sites/main/public
 
 ## 在 Makers 中关联仓库
 
-| 配置 | 主站 | 产品示例 |
-| --- | --- | --- |
-| Git 仓库 | 同一个 ferecord 仓库 | 同一个 ferecord 仓库 |
-| 生产分支 | `main` | `main` |
-| 项目名 | `ferecord`（已创建） | `ferecord-product-example`（建议，未创建） |
-| 框架预设 | `Other` | `Other` |
-| 根目录 | `sites/main` | `sites/product-example` |
-| 安装命令 | `true` | `true` |
-| 构建命令 | `true` | `true` |
-| 输出目录 | `public` | `public` |
-| 域名 | `www.ferecord.com` | `product.ferecord.com`（示例，未配置） |
+| 配置 | 主站 | Tibi | 产品示例 |
+| --- | --- | --- | --- |
+| Git 仓库 | 同一个 ferecord 仓库 | 同一个 ferecord 仓库 | 同一个 ferecord 仓库 |
+| 生产分支 | `main` | `main` | `main` |
+| 项目名 | `ferecord`（已创建） | `ferecord-tibi`（建议） | `ferecord-product-example`（建议，未创建） |
+| 框架预设 | `Other` | `Other` | `Other` |
+| 根目录 | `sites/main` | `sites/tibi` | `sites/product-example` |
+| 安装命令 | `true` | `true` | `true` |
+| 构建命令 | `true` | `true` | `true` |
+| 输出目录 | `public` | `public` | `public` |
+| 域名 | `www.ferecord.com` | `tibi.ferecord.com` | 示例域名，未配置 |
 
 `true` 是 Bash 的成功空操作：当前纯静态文件无需安装或构建。每个站点的 `edgeone.json` 已记录安装、构建和输出目录设置；项目根目录需要在 Makers 中选择。
 

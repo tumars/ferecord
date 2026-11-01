@@ -14,7 +14,8 @@
 GitHub: ferecord / main
   ├─ sites/main            → Makers: ferecord                 → www.ferecord.com
   ├─ sites/blog            → Makers: ferecord-blog            → blog.ferecord.com
-  └─ sites/product-example → Makers: ferecord-product-example → 产品子域名
+  ├─ sites/tibi            → Makers: ferecord-tibi            → tibi.ferecord.com
+  └─ sites/product-example → Makers: ferecord-product-example → 产品子域名示例
 ```
 
 多个域名仅绑定同一个静态项目，会展示同一份页面；因此这里通过独立项目选择不同的站点目录，不添加按 Host 分流的后端。
@@ -37,9 +38,10 @@ GitHub: ferecord / main
 | --- | --- | --- | --- |
 | `sites/main` | ferecord 主站 | `www.ferecord.com` | 已接入，实际配置与验证状态见部署说明 |
 | `sites/blog` | 中文博客 | `blog.ferecord.com` | 已部署并绑定域名、HTTPS，验证状态见部署说明 |
+| `sites/tibi` | Tibi 缇比产品介绍 | `tibi.ferecord.com` | 代码已就绪；Makers 项目与 DNS 待创建（见部署说明） |
 | `sites/product-example` | 产品站点示例 | 待提供 | 未接入 |
 
-当前不建立虚假的产品跳转链接。真实产品上线后，再更新主站和本表。
+主站已链接至 Tibi 产品页。
 
 DNS 继续由 GoDaddy 托管。每个产品子域名使用对应 Makers 项目分配的 CNAME，不能复用主站的 CNAME 目标。主站与裸域名转发的具体记录、HTTPS 状态及回滚信息维护在 `docs/deployment.md`。
 

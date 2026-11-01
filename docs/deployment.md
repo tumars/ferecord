@@ -113,3 +113,26 @@ GoDaddy 已添加 `blog` CNAME → `blog.ferecord.com.pages.dnsoe4.com`，控制
 - [构建指南：根目录、输出目录与构建命令](https://pages.edgeone.ai/zh/document/build-guide)
 - [edgeone.json 配置](https://pages.edgeone.ai/zh/document/edgeone-json)
 - [中国站域名与 HTTPS 配置](https://edgeone.cloud.tencent.com/pages/document/162936836982489088)
+
+## Tibi 产品站接入（2026-11-01）
+
+产品站目录为 `sites/tibi`，目标域名 `tibi.ferecord.com`，静态发布 `public/`（安装 / 构建命令均为 `true`）。
+
+建议 Makers 项目名：`ferecord-tibi`。关联同一个 GitHub 仓库 `tumars/ferecord` 的 `main` 分支，根目录填 `sites/tibi`，输出目录 `public`。
+
+DNS（GoDaddy）需在创建 Makers 项目并添加自定义域名后，按控制台给出的 **专属** CNAME 目标配置，例如形如：
+
+| 主机名 | 类型 | 目标 | TTL |
+| --- | --- | --- | --- |
+| `tibi` | CNAME | `tibi.ferecord.com.pages.dnsoe4.com`（以控制台实际值为准） | 1 小时 |
+
+**不要**复用 `www` 或 `blog` 的 CNAME 目标。启用平台免费 HTTPS，并开启强制 HTTPS。
+
+上线核对：
+
+- 页面标题含「Tibi 缇比」，吉祥物与截图资源可加载。
+- `https://tibi.ferecord.com` 返回 200，证书有效。
+- 主站 `https://www.ferecord.com` 已包含指向 Tibi 的链接。
+- ICP 备案号仍待用户提供；页脚暂留注释占位。
+
+当前状态：仓库内页面与素材已就绪；Makers 项目创建与 GoDaddy `tibi` CNAME 需账号持有人在控制台完成（本机无 EdgeOne / GoDaddy CLI）。
