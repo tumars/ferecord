@@ -3,32 +3,35 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tibi 提比：读感兴趣的英文，让生词慢慢变熟悉。导入文章、点词查义、原句复习。无需账号、本地优先、MIT 开源的桌面阅读工具。">
-    <meta name="theme-color" content="#f6f6f5">
-    <meta property="og:title" content="Tibi 提比">
-    <meta property="og:description" content="读感兴趣的英文，让生词慢慢变熟悉。导入文章、点词查义、原句复习。无需账号 · 本地优先 · MIT 开源。">
+    <meta name="description" content="Tibi 提比，你的英语学习全能 AI 助手。从阅读、词汇、朗读跟练到听写与造句，连接 AI 获得讲解、纠错和学习建议，陪你听说读写练。无需账号 · 本地优先 · MIT 开源。">
+    <meta name="theme-color" content="#fffaf2">
+    <meta property="og:title" content="Tibi 提比 · 英语学习全能 AI 助手">
+    <meta property="og:description" content="听说读写练，陪你一点点学会。阅读积累词汇，朗读带着跟练；连接 AI，让讲解、纠错和学习建议陪你向前。无需账号 · 本地优先 · MIT 开源。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tibi.ferecord.com/">
     <meta property="og:image" content="https://tibi.ferecord.com/img/screenshots/reader.jpg">
     <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
-    <title>Tibi 提比 · 读感兴趣的英文，让生词慢慢变熟悉</title>
+    <title>Tibi 提比 · 英语学习全能 AI 助手</title>
     <style>
       :root {
         color-scheme: light;
-        --bg: #f6f6f5;
+        --bg: #fffaf2;
         --surface: #ffffff;
-        --sunken: #f2f2f1;
-        --line: rgba(0,0,0,.08);
-        --line-2: rgba(0,0,0,.13);
-        --ink: #18181b;
-        --ink-2: #55555c;
-        --ink-3: #6b6b74;
+        --sunken: #f5f0e8;
+        --line: rgba(88,61,37,.10);
+        --line-2: rgba(88,61,37,.18);
+        --ink: #292521;
+        --ink-2: #60584f;
+        --ink-3: #75695e;
         --accent: #3d52e0;
         --accent-wash: rgba(61,82,224,.08);
-        --warm: #f5a043;
-        --warm-wash: rgba(245,160,67,.14);
+        --warm: #e9a34f;
+        --warm-wash: #fff0d8;
+        --warm-ink: #984425;
+        --mint-wash: #eaf4ed;
+        --mint-ink: #39634b;
         --brand: #2f3fa8;
-        --radius: 12px;
+        --radius: 22px;
         --f: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
       }
       * { box-sizing: border-box; }
@@ -36,7 +39,7 @@
       body {
         margin: 0;
         font-family: var(--f);
-        background: var(--bg);
+        background: radial-gradient(ellipse 780px 560px at 50% 0, #ffe8c6 0, transparent 85%), var(--bg);
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
         line-height: 1.55;
@@ -73,17 +76,17 @@
       .nav a.ghost:hover { background: rgba(0,0,0,.04); color: var(--ink); }
       .btn {
         display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        min-height: 44px; padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 600;
+        min-height: 44px; padding: 10px 16px; border-radius: 16px; font-size: 14px; font-weight: 600;
         text-decoration: none; border: 0; cursor: pointer;
         text-align: center;
-        transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+        transition: transform .25s cubic-bezier(.2,.8,.3,1.3), background-color .2s ease, box-shadow .2s ease;
       }
-      .btn-primary { background: var(--ink); color: #fff; }
+      .btn-primary { background: var(--warm-ink); color: #fff; }
       .btn-secondary {
         background: var(--surface); color: var(--ink);
         box-shadow: inset 0 0 0 1px var(--line-2);
       }
-      .btn-lg { min-height: 48px; padding: 12px 20px; font-size: 15px; border-radius: 12px; }
+      .btn-lg { min-height: 48px; padding: 12px 20px; font-size: 15px; border-radius: 18px; }
       .hero {
         display: grid; grid-template-columns: 1fr; gap: 32px;
         align-items: center; padding-block: clamp(36px, 7vh, 72px) clamp(28px, 5vh, 48px);
@@ -94,18 +97,24 @@
       .hero > *, .features > *, .shots > *, .privacy > *, .download > * { min-width: 0; }
       .eyebrow {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+        font-size: 12px; letter-spacing: .14em;
         color: var(--ink-3); font-weight: 600;
       }
       .eyebrow .dot {
         width: 8px; height: 8px; border-radius: 50%; background: var(--warm);
         box-shadow: 0 0 0 4px var(--warm-wash);
       }
+      .hero .eyebrow { padding: 8px 14px; border-radius: 999px; background: var(--warm-wash); color: var(--warm-ink); letter-spacing: .04em; }
       h1 {
         margin: 14px 0 16px; font-size: clamp(34px, 4.5vw, 50px);
         line-height: 1.2; letter-spacing: -.035em; font-weight: 700;
       }
+      .hero h1 span { background: linear-gradient(transparent 72%, #f9d99d 72%, #f9d99d 94%, transparent 94%); }
       .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
+      .learning-modes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+      .learning-modes li { padding: 7px 12px; border-radius: 14px 14px 14px 5px; background: var(--warm-wash); color: var(--warm-ink); font-size: 13px; }
+      .learning-modes li:nth-child(3n + 2) { background: var(--mint-wash); color: var(--mint-ink); border-radius: 14px 5px 14px 14px; }
+      .learning-modes li:nth-child(3n) { background: var(--accent-wash); color: var(--brand); }
       .hero-note { margin: 14px 0 0; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
       .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
       .trust-bar {
@@ -115,7 +124,7 @@
       .trust-bar li { min-width: 0; }
       .trust-bar strong { display: block; font-size: 14px; font-weight: 600; }
       .trust-bar span { display: block; margin-top: 4px; color: var(--ink-2); font-size: 13px; }
-      .hero-evidence { margin: 0; background: var(--surface); border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(24,24,27,.06), 0 0 0 1px var(--line); }
+      .hero-evidence { margin: 0; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: 0 14px 40px rgba(117,73,25,.08), 0 0 0 1px var(--line); }
       .hero-evidence a { display: block; }
       .hero-evidence a:focus-visible { outline-offset: -4px; }
       .hero-evidence img { width: 100%; }
@@ -151,15 +160,16 @@
       }
       .card-media img { width: 100%; height: 100%; object-fit: cover; }
       .card-content { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-      .card-step { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--brand); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
-      .prototype-label { margin-left: auto; padding: 2px 7px; border-radius: 4px; background: var(--sunken); color: var(--ink-2); font-weight: 400; letter-spacing: 0; }
+      .card-step { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 12px 12px 12px 4px; background: var(--warm-wash); color: var(--warm-ink); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+      .features .card:nth-child(even) .card-step { background: var(--mint-wash); color: var(--mint-ink); }
+      .prototype-label { margin-left: auto; padding: 2px 7px; border-radius: 6px; background: var(--surface); color: var(--ink-2); font-weight: 400; letter-spacing: 0; }
       .card h3 { margin: 0; font-size: 18px; letter-spacing: -.01em; }
       .card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.7; flex: 1; }
       .shots {
         display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 14px;
       }
       .shots-carousel { min-width: 0; }
-      .shots-viewport { overflow: hidden; border-radius: 16px; }
+      .shots-viewport { overflow: hidden; border-radius: var(--radius); }
       .shots-carousel.is-enhanced .shots-viewport { touch-action: pan-y; }
       .shots-carousel.is-enhanced .shots {
         display: flex; gap: 0; position: relative; width: 100%;
@@ -184,7 +194,7 @@
       .swiper-notification { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
       .shot {
         margin: 0;
-        background: var(--surface); border-radius: 16px; overflow: hidden;
+        background: var(--surface); border-radius: var(--radius); overflow: hidden;
         box-shadow: inset 0 0 0 1px var(--line);
       }
       .shot > a { display: block; }
@@ -199,7 +209,7 @@
       .privacy .card { padding: 24px; gap: 12px; }
       .text-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
       .download {
-        background: var(--surface); border-radius: 24px; padding: clamp(28px, 5vw, 40px);
+        background: linear-gradient(120deg, var(--warm-wash), #fff8ec 65%, var(--mint-wash)); border-radius: 32px; padding: clamp(28px, 5vw, 40px);
         box-shadow: inset 0 0 0 1px var(--line);
         display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
       }
@@ -218,11 +228,11 @@
       .foot {
         display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between; align-items: center;
       }
-      .foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-2); text-decoration: none; }
+      .foot a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--ink-2); text-decoration: none; }
       .foot a:hover { color: var(--accent); }
       @media (hover: hover) and (pointer: fine) {
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(0,0,0,.1); }
-        .btn-primary:hover { background: #303036; }
+        .btn-primary:hover { background: #7e361d; }
         .btn-secondary:hover { background: var(--sunken); }
         .shots-navigation button:hover:not(:disabled) { background: var(--accent-wash); color: var(--accent); }
       }
@@ -238,6 +248,9 @@
         .hero .lead { animation-delay: .12s; }
         .hero .cta { animation-delay: .2s; }
         .hero .hero-note { animation-delay: .26s; }
+        .learning-modes li { animation: enter .5s cubic-bezier(.2,.8,.3,1.15) both; }
+        .learning-modes li:nth-child(2n) { animation-delay: .08s; }
+        .learning-modes li:nth-child(3n) { animation-delay: .16s; }
         /* 只有观察器成功启用后才隐藏，禁用脚本时内容保持可见。 */
         .reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease; }
         .reveal:not(.is-visible) { opacity: 0; transform: translateY(18px); }
@@ -266,6 +279,8 @@
         .eyebrow .dot { flex-shrink: 0; }
         .cta { gap: 10px; margin-top: 24px; }
         .cta .btn { flex: 1 1 auto; }
+        .learning-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .learning-modes li { padding-inline: 6px; }
         .trust-bar { grid-template-columns: 1fr; gap: 14px; padding-block: 20px; }
         .trust-bar li { display: grid; grid-template-columns: 6em 1fr; gap: 12px; align-items: baseline; }
         .trust-bar span { margin: 0; }
@@ -318,12 +333,20 @@
     <main id="top" tabindex="-1">
       <div class="wrap hero">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>给中文母语学习者的英语阅读工具</p>
-          <h1>读感兴趣的英文，<br>让生词慢慢变熟悉。</h1>
-          <p class="lead">把想读的文章带进提比，按你的水平标出生词。点词查释义，再用读过的原句复习，让每一次阅读都有积累。</p>
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Tibi 提比 · 你的全能英语 AI 学伴</p>
+          <h1>英语学习全能 AI 助手，<br><span>陪你一点点学会。</span></h1>
+          <p class="lead">从读懂一篇英文，到听一句、说一句、写一句。提比帮你积累词汇；连接 AI 后，陪你理解、练习、纠错，也为下一步学习出主意。</p>
+          <ul class="learning-modes" aria-label="提比陪你这样学">
+            <li>听 · 朗读原文</li>
+            <li>说 · 跟读模仿</li>
+            <li>读 · 理解文章</li>
+            <li>写 · 造句纠错</li>
+            <li>词 · 语境积累</li>
+            <li>练 · 复习巩固</li>
+          </ul>
           <div class="cta">
-            <a class="btn btn-primary btn-lg" href="#download">下载提比</a>
-            <a class="btn btn-secondary btn-lg" href="#shots">看看阅读界面 <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-primary btn-lg" href="#download">下载提比，一起学英语</a>
+            <a class="btn btn-secondary btn-lg" href="#features">看看怎么陪你学 <span aria-hidden="true">↓</span></a>
           </div>
           <p class="hero-note">macOS · Windows · Linux 桌面应用<br>不连模型也能阅读、查词典、复习；AI 功能需自行连接模型。</p>
         </div>
@@ -334,7 +357,7 @@
           </a>
           <figcaption>
             <img class="garnish" src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
-            <span>读原文，点词查义，留住上下文。应用界面 · 示例数据</span>
+            <span>先从一篇英文开始，把词汇与练习串起来。应用阅读器 · 示例数据</span>
           </figcaption>
         </figure>
       </div>
@@ -351,8 +374,8 @@
         <div class="wrap">
           <div class="section-heading-with-art">
             <div class="section-h">
-              <h2>从想读，到读懂，再到记住</h2>
-              <p>围绕你读过的内容，把导入、查词和复习连起来。需要深入理解时，再请 AI 帮一把。</p>
+              <h2>听说读写练，每一步都有伴</h2>
+              <p>以阅读和词汇打底，用朗读带着听、跟着说，再用听写与造句练习巩固。连接 AI，让讲解、文字陪练和学习建议接上每一步。</p>
             </div>
             <img class="garnish feature-garnish" src="/img/mascot/sticker-1.webp" width="256" height="256" alt="" loading="lazy" decoding="async">
           </div>
@@ -360,49 +383,49 @@
             <article class="card">
               <div class="card-media"><img src="/img/features/import.sm.webp" srcset="/img/features/import.sm.webp 1x, /img/features/import.webp 2x" width="1200" height="750" alt="Tibi 提比首页：粘贴网址或英文内容导入阅读" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">01 · 带进来</span>
-                <h3>从你想读的内容开始</h3>
-                <p>粘贴网址或英文正文，也可导入 EPUB、PDF、Word。图片和扫描件支持本地文字识别。</p>
+                <span class="card-step">01 · 读点喜欢的</span>
+                <h3>好奇心，就是学习的起点</h3>
+                <p>把喜欢的英文变成学习材料。粘贴网址或正文，导入 EPUB、PDF、Word；图片和扫描件也能本地识别。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/mark.sm.webp" srcset="/img/features/mark.sm.webp 1x, /img/features/mark.webp 2x" width="1200" height="750" alt="Tibi 提比阅读器：英文原文中按掌握程度标注生词" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">02 · 读起来</span>
-                <h3>把注意力留给生词</h3>
-                <p>按你的水平标出可能不认识的词。认识的词随手标为掌握，让标注更贴合你。</p>
+                <span class="card-step">02 · 听听，再说说</span>
+                <h3>听一句，试着跟一句</h3>
+                <p>原文朗读支持调速与单句循环，方便反复听、开口模仿。阅读时按水平标出生词，难点慢慢拆开学。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/lookup.sm.webp" srcset="/img/features/lookup.sm.webp 1x, /img/features/lookup.webp 2x" width="1200" height="750" alt="Tibi 提比查词卡片：显示 upshot 的语境释义、音标与掌握程度" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">03 · 查一查</span>
-                <h3>不离开文章，就能查词</h3>
+                <span class="card-step">03 · 和生词交朋友</span>
+                <h3>记住意思，也听听发音</h3>
                 <p>点词查看词典释义、音标与发音。连接模型后，还能看这个词「在这句里」的意思。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/ai.sm.webp" srcset="/img/features/ai.sm.webp 1x, /img/features/ai.webp 2x" width="1200" height="750" alt="Tibi 提比 AI 阅读器原型：英文原文与侧栏中的文章总结和重点词汇" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">04 · 读深入<span class="prototype-label">界面原型</span></span>
-                <h3>难懂的地方，问问提比</h3>
-                <p>连接模型，让 AI 梳理文章、解释长句，或选中一段继续追问。按需查看整篇译文。</p>
+                <span class="card-step">04 · 问问 AI 学伴<span class="prototype-label">界面原型</span></span>
+                <h3>不懂就问，想表达就试</h3>
+                <p>连接模型，让 AI 解释长句、梳理文章，也可在文字对话中练习英文表达、请它讲解用法。带着自己的问题继续聊。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/review.sm.webp" srcset="/img/features/review.sm.webp 1x, /img/features/review.webp 2x" width="1200" height="750" alt="Tibi 提比复习原型：结合英文原句选择生词含义并查看复习进度" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">05 · 再遇见<span class="prototype-label">界面原型</span></span>
-                <h3>在熟悉的句子里复习</h3>
-                <p>生词按记忆情况安排复习，带着读过的原句再见面。也能用听写、拼写巩固记忆。</p>
+                <span class="card-step">05 · 动笔练一练<span class="prototype-label">界面原型</span></span>
+                <h3>从「认识」练到「会用」</h3>
+                <p>在原句里复习生词，用听写、拼写加深记忆。连接 AI 后试着造个句，让提比帮你批改、解释哪里能更好。</p>
               </div>
             </article>
             <article class="card">
               <div class="card-media"><img src="/img/features/progress.sm.webp" srcset="/img/features/progress.sm.webp 1x, /img/features/progress.webp 2x" width="1200" height="750" alt="Tibi 提比统计原型：已知词、阅读时长、学习天数与复习次数趋势" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step">06 · 看积累<span class="prototype-label">界面原型</span></span>
-                <h3>回看一点一滴的进步</h3>
-                <p>已知词、阅读时长和复习记录，留下你的学习轨迹。连接模型后，可获得观察与建议。</p>
+                <span class="card-step">06 · 下一步，一起想<span class="prototype-label">界面原型</span></span>
+                <h3>小小进步，也值得看见</h3>
+                <p>词汇积累、阅读时长和复习记录，留下学习轨迹。连接 AI 后，获得基于记录的观察与建议，找到下一步练习方向。</p>
               </div>
             </article>
           </div>
@@ -413,8 +436,8 @@
       <section id="shots">
         <div class="wrap">
           <div class="section-h">
-            <h2 id="shots-title">安静的阅读工作台</h2>
-            <p>文章、生词和释义放在一起，少一点来回切换，多一点读下去的专注。以下采自应用界面，使用内置示例数据；点击图片可查看原图。</p>
+            <h2 id="shots-title">给每天的英语，留一个小天地</h2>
+            <p>从阅读器到生词本，把理解、积累与练习接起来。以下是应用中阅读与词汇功能的界面，使用内置示例数据；点击图片可查看原图。</p>
           </div>
           <div class="shots-carousel" role="region" aria-labelledby="shots-title">
             <div class="shots-viewport">
@@ -425,7 +448,7 @@
                 </figure>
                 <figure class="shot swiper-slide">
                   <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="查看提比首页原图：在输入框粘贴英文内容、导入网址或提问" loading="lazy" decoding="async"></a>
-                  <figcaption>首页：今天想读点什么？</figcaption>
+                  <figcaption>首页：带来一篇文章，也带来一个想问的问题</figcaption>
                 </figure>
                 <figure class="shot swiper-slide">
                   <a href="/img/screenshots/words.jpg"><img src="/img/screenshots/words.jpg" width="1920" height="1200" alt="查看提比生词本原图：浏览阅读中积累的单词和熟练程度" loading="lazy" decoding="async"></a>
@@ -442,8 +465,8 @@
             </div>
           </div>
           <div class="section-cta">
-            <p>第一篇不用挑太久。打开提比，先读一篇内置示例。</p>
-            <a class="btn btn-secondary" href="#download">下载提比，开始阅读 <span aria-hidden="true">→</span></a>
+            <p>今天先学一点点：听一句英文，记一个新词，试着写一句。</p>
+            <a class="btn btn-secondary" href="#download">让提比陪你练一练 <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -482,8 +505,8 @@
         <div class="wrap">
           <div class="download">
             <div>
-              <h2>从一篇想读的英文开始</h2>
-              <p>下载提比，读一篇内置示例，或导入你收藏已久的文章。</p>
+              <h2>把英语学伴，带到桌面上</h2>
+              <p>和提比一起听、说、读、写、练。从一篇示例、一句跟读开始；连接 AI，让讲解、纠错和学习建议随时帮上忙。</p>
               <p class="download-platforms">支持 macOS（Apple 芯片 / Intel）、Windows 10 / 11、Linux。<br>安装包发布在 GitHub Releases，请按系统选择。</p>
               <details class="install-note">
                 <summary>首次安装与 AI 设置</summary>
@@ -493,7 +516,7 @@
             </div>
             <div class="dl-actions">
               <img class="garnish download-garnish" src="/img/mascot/onboarding-hello.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
-              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">前往 GitHub 下载安装包 <span aria-hidden="true">↗</span></a>
+              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">下载提比，开启学习 <span aria-hidden="true">↗</span></a>
               <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md">使用指南</a>
             </div>
           </div>
