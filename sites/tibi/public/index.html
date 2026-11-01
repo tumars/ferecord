@@ -129,7 +129,8 @@
       .hero-evidence a:focus-visible { outline-offset: -4px; }
       .hero-evidence img { width: 100%; }
       .hero-evidence figcaption { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 16px; color: var(--ink-2); font-size: 13px; text-align: left; }
-      .hero-evidence .garnish { width: 72px; }
+      .hero-evidence .garnish { width: 96px; height: 96px; }
+      .hero-fox > img, .hero-fox > svg { width: 100%; height: 100%; }
       section { padding: clamp(40px, 8vh, 72px) 0; }
       .section-h { max-width: 40em; margin-bottom: 28px; }
       .section-heading-with-art { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
@@ -272,7 +273,7 @@
         .features, .privacy { grid-template-columns: 1fr; }
         .nav a.ghost { display: none; }
         .hero { gap: 28px; padding-block: 32px 24px; }
-        .hero-evidence .garnish { width: 56px; }
+        .hero-evidence .garnish { width: 72px; height: 72px; }
         .hero-evidence figcaption { gap: 8px; padding-inline: 12px; }
         h1 { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
         .eyebrow { font-size: 12px; letter-spacing: .04em; gap: 7px; }
@@ -356,7 +357,9 @@
               alt="Tibi 提比应用阅读器：英文原文、生词标注与点词释义">
           </a>
           <figcaption>
-            <img class="garnish" src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
+            <span class="garnish hero-fox" aria-hidden="true">
+              <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
+            </span>
             <span>先从一篇英文开始，把词汇与练习串起来。应用阅读器 · 示例数据</span>
           </figcaption>
         </figure>
@@ -570,6 +573,7 @@
         });
       })();
     </script>
+    <script defer src="/js/fox.js"></script>
     <script type="module" src="/js/interactions.js"></script>
   </body>
 </html>
