@@ -9,7 +9,7 @@
     <meta property="og:description" content="听说读写练，陪你一点点学会。阅读积累词汇，朗读带着跟练；连接 AI，让讲解、纠错和学习建议陪你向前。无需账号 · 本地优先 · MIT 开源。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tibi.ferecord.com/">
-    <meta property="og:image" content="https://tibi.ferecord.com/img/screenshots/reader.jpg">
+    <meta property="og:image" content="https://tibi.ferecord.com/img/screenshots/home.jpg">
     <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
     <title>Tibi 提比 · 英语学习全能 AI 助手</title>
     <style>
@@ -89,8 +89,9 @@
       .btn-lg { min-height: 48px; padding: 12px 20px; font-size: 15px; border-radius: 18px; }
       .hero {
         display: grid; grid-template-columns: 1fr; gap: 32px;
-        align-items: center; padding-block: clamp(36px, 7vh, 72px) clamp(28px, 5vh, 48px);
+        align-items: center; padding-block: clamp(24px, 4vh, 40px) clamp(28px, 5vh, 48px);
       }
+      .hero-fox { width: 184px; height: 184px; margin-inline: auto; }
       .hero-copy { max-width: 760px; margin-inline: auto; text-align: center; }
       .hero .lead { margin-inline: auto; }
       .hero .cta { justify-content: center; }
@@ -128,8 +129,7 @@
       .hero-evidence a { display: block; }
       .hero-evidence a:focus-visible { outline-offset: -4px; }
       .hero-evidence img { width: 100%; }
-      .hero-evidence figcaption { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 16px; color: var(--ink-2); font-size: 13px; text-align: left; }
-      .hero-evidence .garnish { width: 96px; height: 96px; }
+      .hero-evidence figcaption { padding: 14px 16px; color: var(--ink-2); font-size: 13px; text-align: center; }
       .hero-fox > img, .hero-fox > svg { width: 100%; height: 100%; }
       section { padding: clamp(40px, 8vh, 72px) 0; }
       .section-h { max-width: 40em; margin-bottom: 28px; }
@@ -273,8 +273,8 @@
         .features, .privacy { grid-template-columns: 1fr; }
         .nav a.ghost { display: none; }
         .hero { gap: 28px; padding-block: 32px 24px; }
-        .hero-evidence .garnish { width: 72px; height: 72px; }
-        .hero-evidence figcaption { gap: 8px; padding-inline: 12px; }
+        .hero-fox { width: 128px; height: 128px; }
+        .hero-evidence figcaption { padding-inline: 12px; }
         h1 { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
         .eyebrow { font-size: 12px; letter-spacing: .04em; gap: 7px; }
         .eyebrow .dot { flex-shrink: 0; }
@@ -333,6 +333,9 @@
 
     <main id="top" tabindex="-1">
       <div class="wrap hero">
+        <div class="garnish hero-fox" aria-hidden="true">
+          <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" decoding="async">
+        </div>
         <div class="hero-copy">
           <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Tibi 提比 · 你的全能英语 AI 学伴</p>
           <h1>英语学习全能 AI 助手，<br><span>陪你一点点学会。</span></h1>
@@ -352,16 +355,11 @@
           <p class="hero-note">macOS · Windows · Linux 桌面应用<br>不连模型也能阅读、查词典、复习；AI 功能需自行连接模型。</p>
         </div>
         <figure class="hero-evidence">
-          <a href="/img/screenshots/reader.jpg">
-            <img src="/img/screenshots/reader.jpg" width="1920" height="1200" fetchpriority="high"
-              alt="Tibi 提比应用阅读器：英文原文、生词标注与点词释义">
+          <a href="/img/screenshots/home.jpg">
+            <img src="/img/screenshots/home.jpg" width="1920" height="1200" fetchpriority="high"
+              alt="查看 Tibi 提比首页原图：在输入框粘贴英文内容、导入网址或提问">
           </a>
-          <figcaption>
-            <span class="garnish hero-fox" aria-hidden="true">
-              <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>先从一篇英文开始，把词汇与练习串起来。应用阅读器 · 示例数据</span>
-          </figcaption>
+          <figcaption>粘贴英文、导入网址，或从一个问题开始。应用首页 · 示例数据</figcaption>
         </figure>
       </div>
 
