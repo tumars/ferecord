@@ -123,10 +123,11 @@
       .learning-modes li:nth-child(3n) { background: var(--accent-wash); color: var(--brand); }
       .hero-note { margin: 14px 0 0; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
       .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-      .value-band { background: #f7eddc; border-block: 1px solid var(--line); padding-block: 32px 40px; }
-      .trust-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 0; padding: 0; list-style: none; }
-      .trust-bar li { min-width: 0; padding: 8px 20px; border-left: 2px solid #d9b68e; }
-      .trust-bar strong { display: block; color: var(--warm-ink); font-size: clamp(20px, 2.5vw, 25px); font-weight: 650; }
+      .value-band { padding-block: 40px 24px; }
+      .trust-bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+      .trust-bar li { position: relative; min-width: 0; padding: 28px; background: rgba(255,255,255,.75); border: 1px solid rgba(152,68,37,.12); border-radius: 20px; box-shadow: 0 6px 20px rgba(88,61,37,.04); }
+      .trust-bar li::before { content: ''; display: block; width: 8px; height: 8px; margin-bottom: 18px; border-radius: 50%; background: var(--warm-ink); box-shadow: 0 0 0 5px var(--warm-wash); }
+      .trust-bar strong { display: block; color: var(--ink); font-size: 20px; font-weight: 650; letter-spacing: -.02em; }
       .trust-bar span { display: block; margin-top: 6px; color: var(--ink-2); font-size: 14px; }
       .hero-evidence { margin: 0; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: 0 14px 40px rgba(117,73,25,.08), 0 0 0 1px var(--line); }
       .hero-evidence a { display: block; }
@@ -135,7 +136,7 @@
       .hero-evidence figcaption { padding: 14px 16px; color: var(--ink-2); font-size: 13px; text-align: center; }
       .hero-fox > img, .hero-fox > svg { width: 100%; height: 100%; }
       section { padding: clamp(48px, 8vw, 88px) 0; }
-      #shots { background: #f5f0e8; border-block: 1px solid var(--line); }
+      #shots { padding-block: 24px 32px; }
       .section-h { max-width: 40em; margin-bottom: 28px; }
       .section-kicker, .section-h .section-kicker, .download .section-kicker { display: block; margin: 0 0 12px; color: var(--warm-ink); font-size: 12px; font-weight: 650; letter-spacing: .16em; }
       .value-band .section-kicker { margin-bottom: 20px; }
@@ -148,6 +149,8 @@
         letter-spacing: -.03em; line-height: 1.2;
       }
       .section-h p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.75; }
+      #shots .section-h { margin-bottom: 20px; }
+      #shots h2 { margin: 0; font-size: clamp(20px, 2.5vw, 26px); line-height: 1.5; }
       .section-note { margin: 16px 0 0; color: var(--ink-3); font-size: 13px; line-height: 1.75; }
       .section-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
       .section-cta p { margin: 0; color: var(--ink-2); font-size: 14px; }
@@ -286,11 +289,11 @@
         .cta .btn { flex: 1 1 auto; }
         .learning-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
         .learning-modes li { padding-inline: 6px; }
-        .trust-bar { grid-template-columns: 1fr; gap: 20px; }
-        .trust-bar li { display: grid; grid-template-columns: 5em 1fr; gap: 12px; align-items: baseline; padding: 4px 0 4px 16px; }
-        .trust-bar span { margin: 0; }
+        .trust-bar { grid-template-columns: 1fr; gap: 12px; }
+        .trust-bar li { padding: 22px 24px 22px 48px; }
+        .trust-bar li::before { position: absolute; top: 34px; left: 24px; margin: 0; }
         section { padding: 48px 0; }
-        .value-band { padding-block: 28px 32px; }
+        .value-band { padding-block: 24px 16px; }
         .section-h { margin-bottom: 22px; }
         .section-heading-with-art { gap: 12px; margin-bottom: 22px; align-items: flex-start; }
         .feature-garnish { width: 56px; margin: 0; }
@@ -327,8 +330,8 @@
           <span>Tibi 提比</span>
         </a>
         <nav class="nav" aria-label="页面导航">
-          <a class="ghost" href="#features">功能</a>
           <a class="ghost" href="#shots">界面</a>
+          <a class="ghost" href="#features">功能</a>
           <a class="ghost ghost-secondary" href="#privacy">隐私</a>
           <a class="ghost ghost-secondary" href="https://github.com/tumars/tibi">源码</a>
           <a class="btn btn-primary" href="#download">下载提比</a>
@@ -354,7 +357,7 @@
           </ul>
           <div class="cta">
             <a class="btn btn-primary btn-lg" href="#download">下载提比</a>
-            <a class="btn btn-secondary btn-lg" href="#features">认识提比 <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-secondary btn-lg" href="#shots">看看界面 <span aria-hidden="true">↓</span></a>
           </div>
           <p class="hero-note">macOS · Windows · Linux</p>
         </div>
@@ -365,6 +368,43 @@
           </a>
         </figure>
       </div>
+
+      <section id="shots" aria-labelledby="shots-title">
+        <div class="wrap">
+          <div class="section-h">
+            <h2 id="shots-title">导入、阅读、积累，一处完成</h2>
+          </div>
+          <div class="shots-carousel" role="region" aria-labelledby="shots-title">
+            <div class="shots-viewport">
+              <div class="shots swiper-wrapper" id="shots-track">
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="提比首页：英文导入与提问入口" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>01 · 首页</strong>从一份好奇开始</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/reader.jpg"><img src="/img/screenshots/reader.jpg" width="1920" height="1200" alt="提比阅读器：生词标记与语境词卡" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>02 · 阅读</strong>在字里行间，读懂更多</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/words.jpg"><img src="/img/screenshots/words.jpg" width="1920" height="1200" alt="提比生词本：积累的单词与熟练程度" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>03 · 生词本</strong>从阅读里长出来的词表</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="shots-controls">
+              <div class="shots-pagination" aria-label="选择截图"></div>
+              <div class="shots-navigation">
+                <button type="button" class="shots-prev" aria-label="上一张截图" aria-controls="shots-track"><span aria-hidden="true">←</span></button>
+                <button type="button" class="shots-next" aria-label="下一张截图" aria-controls="shots-track"><span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="section-cta">
+            <p>今天，也学会一点点。</p>
+            <a class="btn btn-secondary" href="#download">开始学习 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
 
       <section id="value" class="value-band" aria-labelledby="value-title">
         <div class="wrap">
@@ -437,44 +477,6 @@
               </div>
             </li>
           </ol>
-        </div>
-      </section>
-
-      <section id="shots">
-        <div class="wrap">
-          <div class="section-h">
-            <p class="section-kicker">界面</p>
-            <h2 id="shots-title">导入、阅读、积累，一处完成</h2>
-          </div>
-          <div class="shots-carousel" role="region" aria-labelledby="shots-title">
-            <div class="shots-viewport">
-              <div class="shots swiper-wrapper" id="shots-track">
-                <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="提比首页：英文导入与提问入口" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>01 · 首页</strong>从一份好奇开始</figcaption>
-                </figure>
-                <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/reader.jpg"><img src="/img/screenshots/reader.jpg" width="1920" height="1200" alt="提比阅读器：生词标记与语境词卡" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>02 · 阅读</strong>在字里行间，读懂更多</figcaption>
-                </figure>
-                <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/words.jpg"><img src="/img/screenshots/words.jpg" width="1920" height="1200" alt="提比生词本：积累的单词与熟练程度" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>03 · 生词本</strong>从阅读里长出来的词表</figcaption>
-                </figure>
-              </div>
-            </div>
-            <div class="shots-controls">
-              <div class="shots-pagination" aria-label="选择截图"></div>
-              <div class="shots-navigation">
-                <button type="button" class="shots-prev" aria-label="上一张截图" aria-controls="shots-track"><span aria-hidden="true">←</span></button>
-                <button type="button" class="shots-next" aria-label="下一张截图" aria-controls="shots-track"><span aria-hidden="true">→</span></button>
-              </div>
-            </div>
-          </div>
-          <div class="section-cta">
-            <p>今天，也学会一点点。</p>
-            <a class="btn btn-secondary" href="#download">开始学习 <span aria-hidden="true">→</span></a>
-          </div>
         </div>
       </section>
 

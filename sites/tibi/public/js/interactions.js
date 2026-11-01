@@ -30,7 +30,8 @@ function enhanceReveals() {
 function enhanceNavigation() {
   const header = document.querySelector('.top');
   const links = [...header.querySelectorAll('.nav a[href^="#"]')];
-  const sections = links.map((link) => document.querySelector(link.hash));
+  // 按页面阅读顺序定位：界面 → 功能 → 隐私 → 下载，与页头导航一致。
+  const sections = ['shots', 'features', 'privacy', 'download'].map((id) => document.getElementById(id));
   let scheduled = false;
   function update() {
     scheduled = false;
