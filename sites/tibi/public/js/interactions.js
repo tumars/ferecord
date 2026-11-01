@@ -1,5 +1,66 @@
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+function enhanceReveals() {
+  if (motion.matches || !('IntersectionObserver' in window)) return;
+  const items = document.querySelectorAll('.section-h, .value-band .section-kicker, .trust-bar li, .features .card, .hero-evidence, .shots-carousel, .privacy .card, .download');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (!isIntersecting) return;
+      target.classList.add('is-visible');
+      observer.unobserve(target);
+      // 显现结束后移除延迟，悬停立即响应。
+      target.addEventListener('transitionend', (event) => {
+        if (event.target === target && event.propertyName === 'opacity') target.classList.remove('reveal');
+      });
+    });
+  }, { rootMargin: '0px 0px -24px 0px', threshold: 0 });
+  items.forEach((item) => {
+    // 首次视口内的内容直接显示，尤其不延迟首页截图的呈现。
+    if (item.getBoundingClientRect().top < window.innerHeight) return;
+    observer.observe(item);
+    item.classList.add('reveal');
+  });
+  motion.addEventListener('change', ({ matches }) => {
+    if (!matches) return;
+    observer.disconnect();
+    items.forEach((item) => item.classList.remove('reveal'));
+  });
+}
+
+function enhanceNavigation() {
+  const header = document.querySelector('.top');
+  const links = [...header.querySelectorAll('.nav a[href^="#"]')];
+  const sections = links.map((link) => document.querySelector(link.hash));
+  let scheduled = false;
+  function update() {
+    scheduled = false;
+    header.classList.toggle('is-scrolled', window.scrollY > 12);
+    const readingLine = header.offsetHeight + window.innerHeight * .25;
+    let current = -1;
+    sections.forEach((section, index) => {
+      if (section.getBoundingClientRect().top <= readingLine) current = index;
+    });
+    // 下载区靠近页底，即使不足一整屏也能激活。
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = sections.length - 1;
+    links.forEach((link, index) => {
+      if (index === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', schedule);
+  update();
+}
+
+enhanceReveals();
+enhanceNavigation();
+
 // 核心布局由本地 CSS 提供；CDN 不可用时继续展示完整的静态截图。
 async function enhanceShots() {
   const root = document.querySelector('.shots-carousel');
