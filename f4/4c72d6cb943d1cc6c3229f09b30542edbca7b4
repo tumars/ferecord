@@ -1,0 +1,22 @@
+sites/tibi/design.md
+  s_0e9c2b1d2361c0::t_21b3cafd57aa77 9,42,47,53
+  s_0e9c2b1d2361c0::t_871f1ed194da6d 96
+sites/tibi/public/index.html
+  s_0e9c2b1d2361c0::t_21b3cafd57aa77 99,114,116-124,347-350,454,462,470
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f44c72d6cb943d1cc6c3229f09b30542edbca7b4",
+  "prompts": {},
+  "sessions": {
+    "s_0e9c2b1d2361c0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19783-8daf-7581-9aac-034fa63ba67f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
