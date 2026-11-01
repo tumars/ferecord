@@ -2,7 +2,7 @@ const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function enhanceReveals() {
   if (motion.matches || !('IntersectionObserver' in window)) return;
-  const items = document.querySelectorAll('.section-h, .value-band .section-kicker, .trust-bar li, .features .card, .hero-evidence, .shots-carousel, .privacy .card, .download');
+  const items = document.querySelectorAll('.section-h, .value-band .section-kicker, .trust-bar li, .features .card, .shots-carousel, .privacy .card, .download');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting }) => {
       if (!isIntersecting) return;

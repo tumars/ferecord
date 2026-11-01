@@ -92,11 +92,11 @@
       }
       .btn-lg { min-height: 48px; padding: 12px 20px; font-size: 15px; border-radius: 18px; }
       .hero {
-        display: grid; grid-template-columns: 1fr; gap: 32px;
-        align-items: center; padding-block: clamp(24px, 4vh, 40px) clamp(28px, 5vh, 48px);
+        display: grid; grid-template-columns: 1fr; gap: 24px;
+        align-items: center; padding-block: clamp(24px, 4vh, 40px) 20px;
       }
       .hero-fox { width: 184px; height: 184px; margin-inline: auto; }
-      .hero-copy { max-width: 760px; margin-inline: auto; text-align: center; }
+      .hero-copy { width: 100%; max-width: 720px; margin-inline: auto; text-align: center; }
       .hero .lead { margin-inline: auto; }
       .hero .cta { justify-content: center; }
       .hero > *, .features > *, .shots > *, .privacy > *, .download > * { min-width: 0; }
@@ -111,9 +111,8 @@
       }
       .hero .eyebrow { padding: 8px 14px; border-radius: 999px; background: var(--warm-wash); color: var(--warm-ink); letter-spacing: .04em; }
       .hero h1 {
-        margin: 0 0 12px; font-size: clamp(20px, 6vw, 50px);
-        line-height: 1.4; letter-spacing: -.025em; font-weight: 700;
-        white-space: nowrap;
+        max-width: 18em; margin: 0 auto 16px; font-size: clamp(20px, 4.8vw, 42px);
+        line-height: 1.5; letter-spacing: -.015em; font-weight: 650;
       }
       .hero h1 span { background: linear-gradient(transparent 72%, #f9d99d 72%, #f9d99d 94%, transparent 94%); }
       .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
@@ -129,11 +128,6 @@
       .trust-bar li::before { content: ''; display: block; width: 8px; height: 8px; margin-bottom: 18px; border-radius: 50%; background: var(--warm-ink); box-shadow: 0 0 0 5px var(--warm-wash); }
       .trust-bar strong { display: block; color: var(--ink); font-size: 20px; font-weight: 650; letter-spacing: -.02em; }
       .trust-bar span { display: block; margin-top: 6px; color: var(--ink-2); font-size: 14px; }
-      .hero-evidence { margin: 0; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: 0 14px 40px rgba(117,73,25,.08), 0 0 0 1px var(--line); }
-      .hero-evidence a { display: block; }
-      .hero-evidence a:focus-visible { outline-offset: -4px; }
-      .hero-evidence img { width: 100%; }
-      .hero-evidence figcaption { padding: 14px 16px; color: var(--ink-2); font-size: 13px; text-align: center; }
       .hero-fox > img, .hero-fox > svg { width: 100%; height: 100%; }
       section { padding: clamp(48px, 8vw, 88px) 0; }
       #shots { padding-block: 24px 32px; }
@@ -252,12 +246,12 @@
       @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
         .card:hover, .card:focus-within { transform: translateY(-3px); box-shadow: inset 0 0 0 1px rgba(152,68,37,.3), 0 12px 24px rgba(88,61,37,.08); }
         .trust-bar li:hover { transform: translateY(-3px); border-color: var(--warm-ink); }
-        .shot:hover, .hero-evidence:hover { transform: translateY(-2px); }
+        .shot:hover { transform: translateY(-2px); }
         .shots-navigation button:hover:not(:disabled) { transform: translateY(-2px); }
         .btn:active, .shots-navigation button:active:not(:disabled) { transform: translateY(0); }
       }
       @media (prefers-reduced-motion: no-preference) {
-        .card, .trust-bar li, .shot, .hero-evidence, .shots-navigation button { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .card, .trust-bar li, .shot, .shots-navigation button { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
         /* 只有观察器成功启用后才隐藏，禁用脚本时内容保持可见。 */
         .reveal { transition: opacity .55s ease var(--reveal-delay, 0ms), transform .55s cubic-bezier(.2,.7,.3,1) var(--reveal-delay, 0ms); }
         .reveal:not(.is-visible) { opacity: 0; transform: translateY(18px); }
@@ -280,9 +274,8 @@
         .brand { gap: 8px; }
         .features, .privacy { grid-template-columns: 1fr; }
         .nav a.ghost { display: none; }
-        .hero { gap: 28px; padding-block: 32px 24px; }
+        .hero { gap: 20px; padding-block: 32px 16px; }
         .hero-fox { width: 128px; height: 128px; }
-        .hero-evidence figcaption { padding-inline: 12px; }
         .eyebrow { font-size: 12px; letter-spacing: .04em; gap: 7px; }
         .eyebrow .dot { flex-shrink: 0; }
         .cta { gap: 10px; margin-top: 24px; }
@@ -345,7 +338,7 @@
           <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" decoding="async">
         </div>
         <div class="hero-copy">
-          <h1>AI first的英语学习全能助手，<br><span>陪你英语阅读从入门到精通</span></h1>
+          <h1>AI&nbsp;first的英语学习全能助手，<br><span>陪你英语阅读从入门到精通</span></h1>
           <p class="lead">读喜欢的英文，听一句、跟一句，把新词用进自己的表达。</p>
           <ul class="learning-modes" aria-label="学习方式">
             <li>听</li>
@@ -361,12 +354,6 @@
           </div>
           <p class="hero-note">macOS · Windows · Linux</p>
         </div>
-        <figure class="hero-evidence">
-          <a href="/img/screenshots/home.jpg">
-            <img src="/img/screenshots/home.jpg" width="1920" height="1200" fetchpriority="high"
-              alt="Tibi 提比首页：英文导入与提问入口">
-          </a>
-        </figure>
       </div>
 
       <section id="shots" aria-labelledby="shots-title">
