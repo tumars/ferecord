@@ -96,7 +96,7 @@
         align-items: center; padding-block: clamp(24px, 4vh, 40px) 20px;
       }
       .hero-fox { width: 184px; height: 184px; margin-inline: auto; }
-      .hero-copy { width: 100%; max-width: 720px; margin-inline: auto; text-align: center; }
+      .hero-copy { width: 100%; max-width: 960px; margin-inline: auto; text-align: center; }
       .hero .lead { margin-inline: auto; }
       .hero .cta { justify-content: center; }
       .hero > *, .features > *, .shots > *, .privacy > *, .download > * { min-width: 0; }
@@ -111,10 +111,17 @@
       }
       .hero .eyebrow { padding: 8px 14px; border-radius: 999px; background: var(--warm-wash); color: var(--warm-ink); letter-spacing: .04em; }
       .hero h1 {
-        max-width: 18em; margin: 0 auto 16px; font-size: clamp(20px, 4.8vw, 42px);
-        line-height: 1.5; letter-spacing: -.015em; font-weight: 650;
+        margin: 0 auto 24px;
       }
-      .hero h1 span { background: linear-gradient(transparent 72%, #f9d99d 72%, #f9d99d 94%, transparent 94%); }
+      .hero-title-intro {
+        display: block; margin-bottom: 12px; color: var(--ink-2);
+        font-size: clamp(17px, 2.8vw, 30px); font-weight: 500; line-height: 1.45; letter-spacing: .035em;
+      }
+      .hero-title-main {
+        display: block; color: var(--warm-ink);
+        font-size: clamp(32px, 5.2vw, 64px); font-weight: 800; line-height: 1.2; letter-spacing: -.04em;
+      }
+      .hero-title-main span { display: inline-block; max-width: 100%; }
       .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
       .learning-modes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
       .learning-modes li { padding: 7px 12px; border-radius: 14px 14px 14px 5px; background: var(--warm-wash); color: var(--warm-ink); font-size: 13px; }
@@ -166,7 +173,6 @@
       .card-content { order: -1; padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
       .card-step { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--warm-ink); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
       .card-step b { font-size: 30px; line-height: 1; font-weight: 550; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
-      .prototype-label { margin-left: auto; padding: 2px 7px; border-radius: 6px; background: var(--surface); color: var(--ink-2); font-weight: 400; letter-spacing: 0; }
       .card h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; line-height: 1.4; }
       .card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.7; flex: 1; }
       .shots {
@@ -338,7 +344,10 @@
           <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" decoding="async">
         </div>
         <div class="hero-copy">
-          <h1>AI&nbsp;first的英语学习全能助手，<br><span>陪你英语阅读从入门到精通</span></h1>
+          <h1>
+            <span class="hero-title-intro">AI&nbsp;first的英语学习全能助手，</span>
+            <span class="hero-title-main"><span>陪你英语阅读</span><span>从入门到精通</span></span>
+          </h1>
           <p class="lead">读喜欢的英文，听一句、跟一句，把新词用进自己的表达。</p>
           <ul class="learning-modes" aria-label="学习方式">
             <li>听</li>
@@ -442,7 +451,7 @@
             <li class="card">
               <div class="card-media"><img src="/img/features/ai.sm.webp" srcset="/img/features/ai.sm.webp 1x, /img/features/ai.webp 2x" width="1200" height="750" alt="提比 AI 阅读器原型：文章总结与重点词汇" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step"><b>04</b> · AI 学伴<span class="prototype-label">界面原型</span></span>
+                <span class="card-step"><b>04</b> · AI 学伴</span>
                 <h3>难懂的句子，问问 AI</h3>
                 <p>和 AI 聊聊难懂的长句，在文字对话中练习表达。</p>
               </div>
@@ -450,7 +459,7 @@
             <li class="card">
               <div class="card-media"><img src="/img/features/review.sm.webp" srcset="/img/features/review.sm.webp 1x, /img/features/review.webp 2x" width="1200" height="750" alt="提比复习原型：原句选义与复习进度" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step"><b>05</b> · 练习<span class="prototype-label">界面原型</span></span>
+                <span class="card-step"><b>05</b> · 练习</span>
                 <h3>从「认识」练到「会用」</h3>
                 <p>听写、拼写、试着造句，用 AI 批改打磨表达。</p>
               </div>
@@ -458,7 +467,7 @@
             <li class="card">
               <div class="card-media"><img src="/img/features/progress.sm.webp" srcset="/img/features/progress.sm.webp 1x, /img/features/progress.webp 2x" width="1200" height="750" alt="提比统计原型：词汇、阅读与复习趋势" loading="lazy"></div>
               <div class="card-content">
-                <span class="card-step"><b>06</b> · 积累<span class="prototype-label">界面原型</span></span>
+                <span class="card-step"><b>06</b> · 积累</span>
                 <h3>看见进步，找到下一步</h3>
                 <p>记录每一点积累，用 AI 建议规划下一步练习。</p>
               </div>
