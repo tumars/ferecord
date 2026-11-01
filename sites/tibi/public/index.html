@@ -46,6 +46,7 @@
       .skip-link { position: fixed; top: 8px; left: 16px; z-index: 30; padding: 12px 16px; background: var(--surface); border-radius: 8px; transform: translateY(-150%); }
       .skip-link:focus { transform: none; }
       img { max-width: 100%; height: auto; display: block; }
+      .garnish { flex-shrink: 0; pointer-events: none; user-select: none; }
       .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
       .top {
         position: sticky; top: 0; z-index: 20;
@@ -118,9 +119,14 @@
       .hero-evidence a { display: block; }
       .hero-evidence a:focus-visible { outline-offset: -4px; }
       .hero-evidence img { width: 100%; }
-      .hero-evidence figcaption { padding: 12px 16px; color: var(--ink-2); font-size: 13px; text-align: center; }
+      .hero-evidence figcaption { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 16px; color: var(--ink-2); font-size: 13px; text-align: left; }
+      .hero-evidence .garnish { width: 72px; }
       section { padding: clamp(40px, 8vh, 72px) 0; }
       .section-h { max-width: 40em; margin-bottom: 28px; }
+      .section-heading-with-art { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+      .section-heading-with-art .section-h { min-width: 0; margin-bottom: 0; }
+      .feature-garnish { width: 96px; margin-inline: 20px; transform: rotate(8deg); }
+      .privacy-garnish { width: 144px; }
       .section-h h2 {
         margin: 0 0 10px; font-size: clamp(24px, 3.4vw, 34px);
         letter-spacing: -.03em; line-height: 1.2;
@@ -200,6 +206,7 @@
       .download h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; }
       .download p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 40em; }
       .dl-actions { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+      .download-garnish { width: 128px; align-self: center; margin-block: -16px -4px; }
       .download .download-platforms { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
       .install-note { margin-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
       .install-note summary { min-height: 44px; padding-block: 12px; cursor: pointer; color: var(--ink); }
@@ -252,6 +259,8 @@
         .features, .privacy { grid-template-columns: 1fr; }
         .nav a.ghost { display: none; }
         .hero { gap: 28px; padding-block: 32px 24px; }
+        .hero-evidence .garnish { width: 56px; }
+        .hero-evidence figcaption { gap: 8px; padding-inline: 12px; }
         h1 { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
         .eyebrow { font-size: 12px; letter-spacing: .04em; gap: 7px; }
         .eyebrow .dot { flex-shrink: 0; }
@@ -262,9 +271,13 @@
         .trust-bar span { margin: 0; }
         section { padding: 36px 0; }
         .section-h { margin-bottom: 22px; }
+        .section-heading-with-art { gap: 12px; margin-bottom: 22px; align-items: flex-start; }
+        .feature-garnish { width: 56px; margin: 0; }
+        .privacy-garnish { width: 80px; }
         .features, .privacy, .shots { gap: 16px; }
         .shots-carousel.is-enhanced .shot { width: 100%; }
         .download { padding: 24px 20px; gap: 20px; border-radius: 20px; }
+        .download-garnish { width: 96px; margin-block: -12px -4px; }
       }
       @media (max-width: 360px) {
         .wrap { padding-inline: 16px; }
@@ -319,7 +332,10 @@
             <img src="/img/screenshots/reader.jpg" width="1920" height="1200" fetchpriority="high"
               alt="Tibi 提比应用阅读器：英文原文、生词标注与点词释义">
           </a>
-          <figcaption>读原文，点词查义，留住上下文。应用界面 · 示例数据</figcaption>
+          <figcaption>
+            <img class="garnish" src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
+            <span>读原文，点词查义，留住上下文。应用界面 · 示例数据</span>
+          </figcaption>
         </figure>
       </div>
 
@@ -333,9 +349,12 @@
 
       <section id="features">
         <div class="wrap">
-          <div class="section-h">
-            <h2>从想读，到读懂，再到记住</h2>
-            <p>围绕你读过的内容，把导入、查词和复习连起来。需要深入理解时，再请 AI 帮一把。</p>
+          <div class="section-heading-with-art">
+            <div class="section-h">
+              <h2>从想读，到读懂，再到记住</h2>
+              <p>围绕你读过的内容，把导入、查词和复习连起来。需要深入理解时，再请 AI 帮一把。</p>
+            </div>
+            <img class="garnish feature-garnish" src="/img/mascot/sticker-1.webp" width="256" height="256" alt="" loading="lazy" decoding="async">
           </div>
           <div class="features">
             <article class="card">
@@ -431,9 +450,12 @@
 
       <section id="privacy">
         <div class="wrap">
-          <div class="section-h">
-            <h2>你的学习，自己掌握</h2>
-            <p>提比应用无需账号，不收集使用数据。文章与学习记录在本机保存；联网功能的去向，也说清楚。</p>
+          <div class="section-heading-with-art">
+            <div class="section-h">
+              <h2>你的学习，自己掌握</h2>
+              <p>提比应用无需账号，不收集使用数据。文章与学习记录在本机保存；联网功能的去向，也说清楚。</p>
+            </div>
+            <img class="garnish privacy-garnish" src="/img/mascot/empty-review.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
           </div>
           <div class="privacy">
             <article class="card">
@@ -470,6 +492,7 @@
               </details>
             </div>
             <div class="dl-actions">
+              <img class="garnish download-garnish" src="/img/mascot/onboarding-hello.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
               <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">前往 GitHub 下载安装包 <span aria-hidden="true">↗</span></a>
               <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md">使用指南</a>
             </div>
