@@ -38,10 +38,12 @@ GitHub: ferecord / main
 | --- | --- | --- | --- |
 | `sites/main` | ferecord 主站 | `www.ferecord.com` | 已接入，实际配置与验证状态见部署说明 |
 | `sites/blog` | 中文博客 | `blog.ferecord.com` | 已部署并绑定域名、HTTPS，验证状态见部署说明 |
-| `sites/tibi` | Tibi 缇比产品介绍 | `tibi.ferecord.com` | 代码已就绪；Makers 项目与 DNS 待创建（见部署说明） |
+| `sites/tibi` | Tibi 提比产品介绍 | `tibi.ferecord.com` | 代码已就绪；Makers 项目与 DNS 待创建（见部署说明） |
 | `sites/product-example` | 产品站点示例 | 待提供 | 未接入 |
 
 主站已链接至 Tibi 产品页。
+
+Tibi 产品页按「产品价值与真实界面 → 六步功能 → 应用截图 → 隐私 → 下载」组织，不设置吉祥物营销区。截图统一采用应用字体，并明确区分应用示例数据和界面原型；细节与素材采集方法见 [Tibi 设计约定](../sites/tibi/design.md)。本次只调整该产品页，不改变站点部署目录或域名映射。
 
 DNS 继续由 GoDaddy 托管。每个产品子域名使用对应 Makers 项目分配的 CNAME，不能复用主站的 CNAME 目标。主站与裸域名转发的具体记录、HTTPS 状态及回滚信息维护在 `docs/deployment.md`。
 
