@@ -116,14 +116,18 @@ GoDaddy 已添加 `blog` CNAME → `blog.ferecord.com.pages.dnsoe4.com`，控制
 - 复用主站 Makers 项目与现有构建配置，推送 `ferecord/main` 自动部署，无需新增 DNS。
 - 使用带尾斜杠的入口，确保图谱相对资源地址从该目录加载。
 
-更新时在干净的图谱源码目录执行（路径按实际本地仓库位置调整）：
+日常更新：推送或合入 `tumars/art-history-atlas/main` 后，`deploy.yml` 自动构建并将产物提交到本仓库 `main`，不再需要本地手动复制。取图工作流触发的 `deploy.yml` 同样会同步图片。同步凭证为图谱 Actions secret `FERECORD_DEPLOY_KEY`，对应本仓库专用可写 deploy key `art-history-atlas Actions sync`；不复用个人 GitHub token。该密钥能写整个仓库，工作流限制为仅同步图谱目录、仅在 `main` 执行。失败可手动重跑图谱的 `deploy.yml`。
+
+访问 `/art-history-atlas/source-version.txt` 可核对线上源码 SHA，自动提交消息也会记录相同 SHA。旧哈希资源会随同步清理，其他主站文件保留；主站有并发提交时先 rebase，冲突则失败，不强制覆盖。
+
+紧急手动更新时，在干净的图谱源码目录执行（路径按实际本地仓库位置调整）：
 
 ```sh
 npm ci --no-audit --no-fund
 npm run build -- --outDir ../ferecord/sites/main/public/art-history-atlas --emptyOutDir
 ```
 
-这里 `--emptyOutDir` 只清理图谱产物目录，不要指向主站 `public/`。构建包含 TypeScript 检查和内容校验。检查首页入口、图谱交互和图片后，将产物与本文记录的源码版本一同提交到 ferecord 并推送。GitHub Pages 更新不会自动同步此副本；每次更新须重复上述步骤。回滚时恢复上一版产物与首页，再推送部署。
+这里 `--emptyOutDir` 只清理图谱产物目录，不要指向主站 `public/`。构建包含 TypeScript 检查和内容校验。手动发布时也应将源码 SHA 写入产物目录的 `source-version.txt`。回滚时恢复上一版产物再推送部署，同时在图谱源码仓库回退对应改动，避免下一次自动同步重新发布问题版本。
 
 ### 首次上线验证
 
@@ -131,6 +135,12 @@ npm run build -- --outDir ../ferecord/sites/main/public/art-history-atlas --empt
 - 本次推送后未观察到自动部署任务，已在主站「构建部署 → 新建部署」选择 `main` 最新提交手动发布。以后推送应检查任务是否生成，未生成时使用此入口；自动触发原因尚未排查。
 - HTTPS 首页、图谱页面、JS/CSS、图片署名 JSON 与抽查的《蒙娜丽莎》原图均返回 200，响应内容与本地产物逐字节一致。
 - Chrome 从首页点击入口可进入图谱，切换至第 08 展厅成功，作品图片和缩略图显示正常；本地已核对全部 65 件作品的原图及缩略图文件存在。
+
+### 自动同步验证（2026-11-02）
+
+- 图谱提交 `eb8c622` 触发 Actions 运行 `41458076922`，构建、GitHub Pages 发布和 `sync-ferecord` 均成功；自动生成主站提交 `a6ab3fd`。
+- EdgeOne 生产环境保持 `main` 自动部署开启，自动生成部署 `dpqre9j2l8sz`，状态成功，本次没有手动触发。前述首次上线未触发的原因未确定；后续文档提交 `199c66e` 也已观察到自动部署记录 `dpksythmjjvh`。
+- 图谱源码与主站分开维护，后续只需更新图谱 `main`；如连续推送，现有工作流并发策略会取消旧任务、优先发布最新版本。
 
 ## 官方参考
 
