@@ -4,7 +4,7 @@
 
 主要面向中国大陆用户，使用已有腾讯云备案域名和 EdgeOne Makers，低成本展示多个产品。当前任务是初始化仓库与部署骨架，具体产品文案和视觉设计后续按真实需求制作。
 
-“多个二级站点”按独立子域名理解，例如 `product-a.ferecord.com`、`product-b.ferecord.com`，不采用主域名下的路径分站。主域名为 `ferecord.com`，正式入口使用 `https://www.ferecord.com`，裸域名通过 GoDaddy 301 转发至该入口。
+独立产品站点使用子域名，例如 `product-a.ferecord.com`；主站内的探索页面可以使用二级路径。主域名为 `ferecord.com`，正式入口使用 `https://www.ferecord.com`，裸域名通过 GoDaddy 301 转发至该入口。
 
 ## 架构决策
 
@@ -42,6 +42,8 @@ GitHub: ferecord / main
 | `sites/product-example` | 产品站点示例 | 待提供 | 未接入 |
 
 主站已链接至 Tibi 产品页。
+
+艺术史图谱作为主站二级页面，入口为 `https://www.ferecord.com/art-history-atlas/`，首页产品区提供链接。独立源码维护在 `tumars/art-history-atlas`，将经过类型与内容校验的 Vite 构建产物发布到 `sites/main/public/art-history-atlas/`，随主站部署；图片及署名清单一并托管，保留图谱原有交互与 GitHub Pages 发布方式。不使用 iframe，也不增加 Makers 项目或 DNS 记录。更新图谱时重新构建并同步产物，具体操作见部署说明。
 
 Tibi 产品页按「产品价值与真实界面 → 六步功能 → 应用截图 → 隐私 → 下载」组织，吉祥物仅作装饰配图，不设介绍文案/专区。保留品牌 Logo，静态 WebP 点缀截图说明、功能、隐私和下载区域，产品 UI 截图仍是主要展示依据。截图统一采用应用字体，并明确区分应用示例数据和界面原型；细节与素材采集方法见 [Tibi 设计约定](../sites/tibi/design.md)。本次只调整该产品页，不改变站点部署目录或域名映射。
 

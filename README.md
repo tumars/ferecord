@@ -4,6 +4,8 @@
 
 当前包含主站、博客与产品站 Tibi。主站正式入口为 `https://www.ferecord.com`，博客为 `https://blog.ferecord.com`，Tibi 目标域名为 `https://tibi.ferecord.com`。域名配置与验证状态见部署说明。
 
+艺术史图谱位于主站二级页面：<https://www.ferecord.com/art-history-atlas/>。源码独立维护，主站托管其构建产物；更新流程见 [部署说明](docs/deployment.md#艺术史图谱二级页面2026-11-02)。
+
 ## 目录
 
 ```text

@@ -108,6 +108,23 @@ GoDaddy 已添加 `blog` CNAME → `blog.ferecord.com.pages.dnsoe4.com`，控制
 
 首次部署 `dp9opyrj3noz` 在切换 Node.js 24.22.2 时失败。已改用平台设置中实际提供的预装版本 24.18.0，并同步 `.nvmrc`，避免构建时下载不可用版本。
 
+## 艺术史图谱二级页面（2026-11-02）
+
+- 入口：`https://www.ferecord.com/art-history-atlas/`，首页产品区提供链接。
+- 源码：`https://github.com/tumars/art-history-atlas`，首次同步版本 `8d0107c`。
+- 发布目录：`sites/main/public/art-history-atlas/`，包括 HTML、打包后的 JS/CSS、作品图片和署名清单；不复制源码或开发文档。
+- 复用主站 Makers 项目与现有构建配置，推送 `ferecord/main` 自动部署，无需新增 DNS。
+- 使用带尾斜杠的入口，确保图谱相对资源地址从该目录加载。
+
+更新时在干净的图谱源码目录执行（路径按实际本地仓库位置调整）：
+
+```sh
+npm ci --no-audit --no-fund
+npm run build -- --outDir ../ferecord/sites/main/public/art-history-atlas --emptyOutDir
+```
+
+这里 `--emptyOutDir` 只清理图谱产物目录，不要指向主站 `public/`。构建包含 TypeScript 检查和内容校验。检查首页入口、图谱交互和图片后，将产物与本文记录的源码版本一同提交到 ferecord 并推送。GitHub Pages 更新不会自动同步此副本；每次更新须重复上述步骤。回滚时恢复上一版产物与首页，再推送部署。
+
 ## 官方参考
 
 - [构建指南：根目录、输出目录与构建命令](https://pages.edgeone.ai/zh/document/build-guide)
