@@ -1,0 +1,34 @@
+sites/main/public/index.html
+  s_547e4a09912c7b::t_8a1bdf0ef095bb 34,38
+README.md
+  s_547e4a09912c7b::t_8a1bdf0ef095bb 7-8
+docs/design.md
+  s_547e4a09912c7b::t_8a1bdf0ef095bb 7,46
+  s_547e4a09912c7b::t_ed7e71250cbb80 47
+docs/deployment.md
+  s_547e4a09912c7b::t_8a1bdf0ef095bb 111-127
+sites/main/public/art-history-atlas/assets/index-607EDPcl.css
+  s_547e4a09912c7b::t_8dde8337ee9caa 1
+sites/main/public/art-history-atlas/assets/index-okwjjjv_.js
+  s_547e4a09912c7b::t_2f0a4b5a9474ff 1-230
+sites/main/public/art-history-atlas/images/credits.json
+  s_547e4a09912c7b::t_6cbc34d13f400f 1-543
+sites/main/public/art-history-atlas/index.html
+  s_547e4a09912c7b::t_c4b82a50331aad 1-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fc5a4bc33e28308512d17df5cab95eb8fdd3b774",
+  "prompts": {},
+  "sessions": {
+    "s_547e4a09912c7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19bca-58c4-70c0-b87a-7aca877d792a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
