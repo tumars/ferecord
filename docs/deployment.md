@@ -125,6 +125,13 @@ npm run build -- --outDir ../ferecord/sites/main/public/art-history-atlas --empt
 
 这里 `--emptyOutDir` 只清理图谱产物目录，不要指向主站 `public/`。构建包含 TypeScript 检查和内容校验。检查首页入口、图谱交互和图片后，将产物与本文记录的源码版本一同提交到 ferecord 并推送。GitHub Pages 更新不会自动同步此副本；每次更新须重复上述步骤。回滚时恢复上一版产物与首页，再推送部署。
 
+### 首次上线验证
+
+- 2026-11-02，提交 `fc5a4bc` 已部署至生产，Makers 部署 ID `dp0ffz37yjro`，控制台显示成功。
+- 本次推送后未观察到自动部署任务，已在主站「构建部署 → 新建部署」选择 `main` 最新提交手动发布。以后推送应检查任务是否生成，未生成时使用此入口；自动触发原因尚未排查。
+- HTTPS 首页、图谱页面、JS/CSS、图片署名 JSON 与抽查的《蒙娜丽莎》原图均返回 200，响应内容与本地产物逐字节一致。
+- Chrome 从首页点击入口可进入图谱，切换至第 08 展厅成功，作品图片和缩略图显示正常；本地已核对全部 65 件作品的原图及缩略图文件存在。
+
 ## 官方参考
 
 - [构建指南：根目录、输出目录与构建命令](https://pages.edgeone.ai/zh/document/build-guide)
