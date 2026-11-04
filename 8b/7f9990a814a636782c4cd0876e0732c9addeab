@@ -1,0 +1,25 @@
+sites/tibi/scripts/capture-ui.cjs
+  s_ddba7ee4ba27cf::t_90592aa9d03c75 66,68,71-74
+  s_ddba7ee4ba27cf::t_c1d5148a4e64b4 117
+  s_ddba7ee4ba27cf::t_bc5f79c4e48b8a 67,69-70
+sites/tibi/public/index.html
+  s_ddba7ee4ba27cf::t_c1d5148a4e64b4 413-414
+sites/tibi/design.md
+  s_ddba7ee4ba27cf::t_c1d5148a4e64b4 8,25,82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8b7f9990a814a636782c4cd0876e0732c9addeab",
+  "prompts": {},
+  "sessions": {
+    "s_ddba7ee4ba27cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "73ec4cde-2393-4809-a725-f3475bdce136",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
