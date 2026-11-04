@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tibi 提比，AI first的英语学习全能助手，陪你英语阅读从入门到精通">
+    <meta name="description" content="Tibi 提比，AI first的英语学习全能助手：导入网页、书和订阅，点词就懂，有问题问 AI 学伴，用读过的原句复习。本地优先，MIT 开源。">
     <meta name="theme-color" content="#fffaf2">
     <meta property="og:title" content="Tibi 提比 · AI first的英语学习全能助手，陪你英语阅读从入门到精通">
-    <meta property="og:description" content="Tibi 提比，AI first的英语学习全能助手，陪你英语阅读从入门到精通">
+    <meta property="og:description" content="Tibi 提比，AI first的英语学习全能助手：导入网页、书和订阅，点词就懂，有问题问 AI 学伴，用读过的原句复习。本地优先，MIT 开源。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tibi.ferecord.com/">
     <meta property="og:image" content="https://tibi.ferecord.com/img/screenshots/home.jpg">
@@ -175,6 +175,30 @@
       .card-step b { font-size: 30px; line-height: 1; font-weight: 550; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
       .card h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; line-height: 1.4; }
       .card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.7; flex: 1; }
+      .spots { display: grid; gap: clamp(40px, 6vw, 72px); }
+      .spot { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+      .spot:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+      .spot:nth-child(even) .spot-copy { order: 1; }
+      .spot-copy { display: flex; flex-direction: column; gap: 14px; }
+      .spot-copy h3 { margin: 0; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.35; letter-spacing: -.03em; }
+      .spot-copy p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.8; }
+      .spot-copy ul { display: grid; gap: 8px; margin: 4px 0 0; padding: 0; list-style: none; }
+      .spot-copy li { position: relative; padding-left: 22px; color: var(--ink-2); font-size: 14px; line-height: 1.65; }
+      .spot-copy li::before { content: ''; position: absolute; left: 4px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--warm); box-shadow: 0 0 0 3px var(--warm-wash); }
+      .spot-media {
+        aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius); background: var(--surface);
+        box-shadow: inset 0 0 0 1px var(--line), 0 18px 40px rgba(88,61,37,.10);
+      }
+      .spot-media img { width: 100%; height: 100%; object-fit: cover; }
+      .spot-ai { scroll-margin-top: 96px; padding: clamp(24px, 4vw, 40px); border-radius: 32px; background: linear-gradient(135deg, #eef0fd, #fff7ec); box-shadow: inset 0 0 0 1px rgba(61,82,224,.14); }
+      .spot-ai .card-step { color: var(--brand); }
+      .spot-ai li::before { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+      .more-title { margin: clamp(56px, 8vw, 88px) 0 20px; font-size: 20px; letter-spacing: -.02em; }
+      .features .card h3 { font-size: 18px; }
+      .extras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 20px 0 0; padding: 0; list-style: none; }
+      .extras li { padding: 18px 20px; border-radius: 18px; background: var(--sunken); }
+      .extras strong { display: block; font-size: 15px; }
+      .extras span { display: block; margin-top: 4px; color: var(--ink-2); font-size: 13px; line-height: 1.6; }
       .shots {
         display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 14px;
       }
@@ -266,6 +290,9 @@
         .features > :nth-child(3n), .trust-bar > :nth-child(3) { --reveal-delay: 120ms; }
       }
       @media (max-width: 900px) {
+        .spot, .spot:nth-child(even) { grid-template-columns: 1fr; }
+        .spot:nth-child(even) .spot-copy { order: 0; }
+        .extras { grid-template-columns: 1fr 1fr; }
         .download { grid-template-columns: 1fr; }
         .features, .privacy { grid-template-columns: 1fr 1fr; }
         .shots { grid-template-columns: 1fr; }
@@ -278,7 +305,8 @@
         html { scroll-padding-top: 76px; }
         .top-inner { height: 60px; gap: 12px; }
         .brand { gap: 8px; }
-        .features, .privacy { grid-template-columns: 1fr; }
+        .features, .privacy, .extras { grid-template-columns: 1fr; }
+        .spot-ai { margin-inline: -8px; padding: 20px 16px; border-radius: 24px; }
         .nav a.ghost { display: none; }
         .hero { gap: 20px; padding-block: 32px 16px; }
         .hero-fox { width: 128px; height: 128px; }
@@ -299,6 +327,9 @@
         .privacy-garnish { width: 80px; }
         .features, .privacy, .shots { gap: 16px; }
         .shots-carousel.is-enhanced .shot { width: 100%; }
+        /* 六个分页点加前后按钮一行放不下：分页点单独一行居中，按钮在下面 */
+        .shots-controls { flex-wrap: wrap; justify-content: center; }
+        .shots-pagination { flex: 1 1 100%; justify-content: center; }
         .download { padding: 36px 24px; gap: 28px; border-radius: 20px; }
         .download-garnish { width: 96px; margin-block: -12px -4px; }
       }
@@ -331,6 +362,7 @@
         <nav class="nav" aria-label="页面导航">
           <a class="ghost" href="#shots">界面</a>
           <a class="ghost" href="#features">功能</a>
+          <a class="ghost" href="#companion">AI 学伴</a>
           <a class="ghost ghost-secondary" href="#privacy">隐私</a>
           <a class="ghost ghost-secondary" href="https://github.com/tumars/tibi">源码</a>
           <a class="btn btn-primary" href="#download">下载提比</a>
@@ -348,7 +380,7 @@
             <span class="hero-title-intro">AI&nbsp;first的英语学习全能助手，</span>
             <span class="hero-title-main"><span>陪你英语阅读</span><span>从入门到精通</span></span>
           </h1>
-          <p class="lead">读喜欢的英文，听一句、跟一句，把新词用进自己的表达。</p>
+          <p class="lead">读喜欢的英文，点词就懂、有问就答，复习用的是你读过的原句。</p>
           <ul class="learning-modes" aria-label="学习方式">
             <li>听</li>
             <li>说</li>
@@ -368,22 +400,34 @@
       <section id="shots" aria-labelledby="shots-title">
         <div class="wrap">
           <div class="section-h">
-            <h2 id="shots-title">导入、阅读、积累，一处完成</h2>
+            <h2 id="shots-title">读、问、记，一处完成</h2>
           </div>
           <div class="shots-carousel" role="region" aria-labelledby="shots-title">
             <div class="shots-viewport">
               <div class="shots swiper-wrapper" id="shots-track">
                 <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="提比首页：英文导入与提问入口" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>01 · 首页</strong>从一份好奇开始</figcaption>
+                  <a href="/img/screenshots/home.jpg"><img src="/img/screenshots/home.jpg" width="1920" height="1200" alt="提比首页：导入英文、直接提问与继续阅读" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>01 · 首页</strong>粘贴网址或英文就能读，也能直接问 Tibi</figcaption>
                 </figure>
                 <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/reader.jpg"><img src="/img/screenshots/reader.jpg" width="1920" height="1200" alt="提比阅读器：生词标记与语境词卡" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>02 · 阅读</strong>在字里行间，读懂更多</figcaption>
+                  <a href="/img/screenshots/reader.jpg"><img src="/img/screenshots/reader.jpg" width="1920" height="1200" alt="提比阅读器：标过的生词着色，点词显示这句里的意思" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>02 · 阅读</strong>只标你的生词，点词看这句里的意思</figcaption>
                 </figure>
                 <figure class="shot swiper-slide">
-                  <a href="/img/screenshots/words.jpg"><img src="/img/screenshots/words.jpg" width="1920" height="1200" alt="提比生词本：积累的单词与熟练程度" loading="lazy" decoding="async"></a>
-                  <figcaption><strong>03 · 生词本</strong>从阅读里长出来的词表</figcaption>
+                  <a href="/img/screenshots/chat.jpg"><img src="/img/screenshots/chat.jpg" width="1920" height="1200" alt="提比对话：近义词辨析卡和练习题卡" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>03 · 对话</strong>辨析和练习题，直接在对话里做</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/feeds.jpg"><img src="/img/screenshots/feeds.jpg" width="1920" height="1200" alt="提比订阅：News in Levels 同一条新闻分三档难度" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>04 · 订阅</strong>新文章自动送来，标好难度和时长</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/review.jpg"><img src="/img/screenshots/review.jpg" width="1920" height="1200" alt="提比复习面板：今天的复习进度、未来七天和这周忘过的词" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>05 · 复习</strong>今天要做什么、做到哪了，一眼看清</figcaption>
+                </figure>
+                <figure class="shot swiper-slide">
+                  <a href="/img/screenshots/stats.jpg"><img src="/img/screenshots/stats.jpg" width="1920" height="1200" alt="提比统计：已掌握的词、阅读时间、复习次数和 Tibi 的洞察" loading="lazy" decoding="async"></a>
+                  <figcaption><strong>06 · 统计</strong>进步看得见，还有 Tibi 的建议</figcaption>
                 </figure>
               </div>
             </div>
@@ -417,62 +461,123 @@
         <div class="wrap">
           <div class="section-heading-with-art">
             <div class="section-h">
-              <p class="section-kicker">怎么学</p>
-              <h2>从读懂，到会用的六步</h2>
-              <p>读懂一篇文章，也多一份开口、动笔的底气。</p>
+              <p class="section-kicker">功能</p>
+              <h2>从读到懂，从懂到记住</h2>
+              <p>读你感兴趣的英文，顺便把英语学会。不测水平、不替你猜，只围绕你自己标过的词。</p>
             </div>
             <img class="garnish feature-garnish" src="/img/mascot/sticker-1.webp" width="256" height="256" alt="" loading="lazy" decoding="async">
           </div>
-          <ol class="features" aria-label="六步学习路径">
+
+          <div class="spots">
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="card-step"><b>01</b> · 读</span>
+                <h3>想读什么，就导入什么</h3>
+                <p>网址、粘贴的英文、EPUB、PDF、Word、图片和扫描件都能导入；也可以订阅英文博客和杂志，新文章自动送来。</p>
+                <ul>
+                  <li>扫描件和图片在本机识别文字</li>
+                  <li>自带 News in Levels 等订阅源，同一条新闻分三档难度</li>
+                  <li>每篇标出估算难度和阅读时长</li>
+                </ul>
+              </div>
+              <div class="spot-media"><img src="/img/features/feeds.sm.webp" srcset="/img/features/feeds.sm.webp 800w, /img/features/feeds.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比订阅：News in Levels 的新闻按 level 1–3 分档，标着 A2、B1、C1 难度和阅读时长" loading="lazy" decoding="async"></div>
+            </article>
+
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="card-step"><b>02</b> · 读懂</span>
+                <h3>点一个词，就懂这句里的意思</h3>
+                <p>只给你标过的词着色，越熟颜色越浅。词卡先说「在这句里」是什么意思，再给词典释义、音标和发音。</p>
+                <ul>
+                  <li>六档熟练度，点一下就标好</li>
+                  <li>一键整篇译文、生词上方显示中文</li>
+                  <li>不连模型也能读、查词典、复习</li>
+                </ul>
+              </div>
+              <div class="spot-media"><img src="/img/features/lookup.sm.webp" srcset="/img/features/lookup.sm.webp 800w, /img/features/lookup.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比词卡：ambiguity 在这句里是「歧义」，下面是词典释义和熟练度" loading="lazy" decoding="async"></div>
+            </article>
+
+            <article class="spot spot-ai" id="companion">
+              <div class="spot-copy">
+                <span class="card-step"><b>03</b> · AI 学伴</span>
+                <h3>有问题，直接问 Tibi</h3>
+                <p>Tibi 知道你在读什么、最近学了哪些词。讲词句和语法，辨析近义词，用你的生词出题，还能帮你找文章。</p>
+                <ul>
+                  <li>辨析、查词、练习题直接以卡片出现在对话里</li>
+                  <li>读到哪问到哪，回答带着这篇文章的上下文</li>
+                  <li>写入数据前按你选的权限先问你，改完可以撤销</li>
+                </ul>
+              </div>
+              <div class="spot-media"><img src="/img/features/chat.sm.webp" srcset="/img/features/chat.sm.webp 800w, /img/features/chat.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比对话：问 affect 和 effect 的区别，Tibi 给出辨析卡和一句话记法，接着出了一道选义题" loading="lazy" decoding="async"></div>
+            </article>
+
+            <article class="spot">
+              <div class="spot-copy">
+                <span class="card-step"><b>04</b> · 记住</span>
+                <h3>复习用的是你读过的原句</h3>
+                <p>标过的生词自动进复习，按 FSRS 排期。题目来自你读过的句子：选义、填空、识别。</p>
+                <ul>
+                  <li>键盘就能做完一轮：Enter、空格、1–4 评分</li>
+                  <li>练习：听写、拼写、易混词，造句由 AI 批改</li>
+                  <li>中途退出记住进度，做错的词最后再练一遍</li>
+                </ul>
+              </div>
+              <div class="spot-media"><img src="/img/features/review.sm.webp" srcset="/img/features/review.sm.webp 800w, /img/features/review.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比复习：用《麦琪的礼物》里的原句考 parsimony 的意思，四个选项" loading="lazy" decoding="async"></div>
+            </article>
+          </div>
+
+          <h3 class="more-title">还有这些</h3>
+          <ul class="features" aria-label="更多功能">
             <li class="card">
-              <div class="card-media"><img src="/img/features/import.sm.webp" srcset="/img/features/import.sm.webp 1x, /img/features/import.webp 2x" width="1200" height="750" alt="提比首页：网址与英文导入入口" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/ask.sm.webp" srcset="/img/features/ask.sm.webp 1x, /img/features/ask.webp 2x" width="1200" height="750" alt="提比阅读器侧栏：问 lexer 和 parser 的区别，Tibi 用表格对比并引用原文" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>01</b> · 阅读</span>
-                <h3>读点喜欢的英文</h3>
-                <p>导入网页、文档或图片，从喜欢的英文读起。</p>
+                <h3>在阅读器里问 Tibi</h3>
+                <p>选中一段或直接提问，侧栏里讲解，不用离开文章。</p>
               </div>
             </li>
             <li class="card">
-              <div class="card-media"><img src="/img/features/mark.sm.webp" srcset="/img/features/mark.sm.webp 1x, /img/features/mark.webp 2x" width="1200" height="750" alt="提比阅读器：按掌握程度标注生词" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/summary.sm.webp" srcset="/img/features/summary.sm.webp 1x, /img/features/summary.webp 2x" width="1200" height="750" alt="提比总结面板：文章总结、级别和值得学的短语" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>02</b> · 听说</span>
-                <h3>听一句，试着跟一句</h3>
-                <p>原文朗读可调速、单句循环，按自己的节奏听和跟读。</p>
+                <h3>导入就有总结</h3>
+                <p>自动写总结，挑出短语和长难句，给一段阅读建议。</p>
               </div>
             </li>
             <li class="card">
-              <div class="card-media"><img src="/img/features/lookup.sm.webp" srcset="/img/features/lookup.sm.webp 1x, /img/features/lookup.webp 2x" width="1200" height="750" alt="提比词卡：语境释义、音标与掌握程度" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/scout.sm.webp" srcset="/img/features/scout.sm.webp 1x, /img/features/scout.webp 2x" width="1200" height="750" alt="提比找文章：Tibi 列出三篇候选文章，可以多选" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>03</b> · 词汇</span>
-                <h3>在语境里认识生词</h3>
-                <p>查释义、听发音，读懂生词在这句里的意思。</p>
+                <h3>帮你找文章</h3>
+                <p>说想读什么，Tibi 挑几篇给你勾选，确认后才导入。</p>
               </div>
             </li>
             <li class="card">
-              <div class="card-media"><img src="/img/features/ai.sm.webp" srcset="/img/features/ai.sm.webp 1x, /img/features/ai.webp 2x" width="1200" height="750" alt="提比 AI 阅读器原型：文章总结与重点词汇" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/aloud.sm.webp" srcset="/img/features/aloud.sm.webp 1x, /img/features/aloud.webp 2x" width="1200" height="750" alt="提比朗读：当前句高亮，底部有播放、倍速和单句循环" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>04</b> · AI 学伴</span>
-                <h3>难懂的句子，问问 AI</h3>
-                <p>和 AI 聊聊难懂的长句，在文字对话中练习表达。</p>
+                <h3>听一句，跟一句</h3>
+                <p>全文朗读当前句高亮，可调倍速、单句循环，也能换更自然的本地语音。</p>
               </div>
             </li>
             <li class="card">
-              <div class="card-media"><img src="/img/features/review.sm.webp" srcset="/img/features/review.sm.webp 1x, /img/features/review.webp 2x" width="1200" height="750" alt="提比复习原型：原句选义与复习进度" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/dict.sm.webp" srcset="/img/features/dict.sm.webp 1x, /img/features/dict.webp 2x" width="1200" height="750" alt="提比词典：affect 的释义、辨析、词形和例句" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>05</b> · 练习</span>
-                <h3>从「认识」练到「会用」</h3>
-                <p>听写、拼写、试着造句，用 AI 批改打磨表达。</p>
+                <h3>离线词典</h3>
+                <p>不联网也能查，支持词形、中文反查和拼写提示，常用词带辨析和例句。</p>
               </div>
             </li>
             <li class="card">
-              <div class="card-media"><img src="/img/features/progress.sm.webp" srcset="/img/features/progress.sm.webp 1x, /img/features/progress.webp 2x" width="1200" height="750" alt="提比统计原型：词汇、阅读与复习趋势" loading="lazy"></div>
+              <div class="card-media"><img src="/img/features/stats.sm.webp" srcset="/img/features/stats.sm.webp 1x, /img/features/stats.webp 2x" width="1200" height="750" alt="提比统计：已掌握词数、阅读分钟、学习天数、复习次数和 Tibi 的洞察" loading="lazy" decoding="async"></div>
               <div class="card-content">
-                <span class="card-step"><b>06</b> · 积累</span>
-                <h3>看见进步，找到下一步</h3>
-                <p>记录每一点积累，用 AI 建议规划下一步练习。</p>
+                <h3>看得见进步</h3>
+                <p>已掌握的词、每日阅读和复习表现，Tibi 还会写一段观察和建议。</p>
               </div>
             </li>
-          </ol>
+          </ul>
+
+          <ul class="extras" aria-label="其他能力">
+            <li><strong>浏览器剪藏</strong><span>Chrome、Edge 插件，一键把网页发给 Tibi</span></li>
+            <li><strong>生词导出</strong><span>导出 CSV 或 Anki，也能导入词表</span></li>
+            <li><strong>接入其他 AI 工具</strong><span>内置 MCP，Claude Code、Codex 能读你的学习进度</span></li>
+            <li><strong>多设备同步</strong><span>经文件夹或 WebDAV，在几台设备间同步</span></li>
+          </ul>
         </div>
       </section>
 
@@ -518,7 +623,8 @@
                 <summary>安装与服务说明</summary>
                 <p>安装包在发布页提供，支持 macOS（苹果芯片与英特尔芯片）、Windows 10 / 11、Linux。</p>
                 <p>未签名版本首次打开：macOS 在「访达」里右键 → 打开；Windows 若提示阻止运行，选「更多信息 → 仍要运行」。</p>
-                <p>阅读、查词典和复习无需 AI；AI 功能需在「设置 → 高级 → 模型」连接服务，可能产生服务商费用。</p>
+                <p>GitHub 打不开或下载太慢时，用国内下载：<a href="https://dl.ferecord.com/latest/Tibi_aarch64.dmg">macOS（苹果芯片）</a> · <a href="https://dl.ferecord.com/latest/Tibi_x64.dmg">macOS（英特尔）</a> · <a href="https://dl.ferecord.com/latest/Tibi_x64-setup.exe">Windows</a> · <a href="https://dl.ferecord.com/latest/Tibi_amd64.AppImage">Linux（AppImage）</a> · <a href="https://dl.ferecord.com/latest/Tibi_amd64.deb">Linux（deb）</a></p>
+                <p>阅读、查词典和复习无需 AI；总结、语境释义、对话和批改需在「设置 → 模型」连接一个模型（推荐 DeepSeek，也可填任何 OpenAI 兼容服务），可能产生服务商费用。</p>
                 <p>网页导入、订阅与首次下载文字识别／语音包需要联网；开启同步后，数据存到你选择的位置。</p>
               </details>
             </div>

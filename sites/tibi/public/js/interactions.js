@@ -2,7 +2,7 @@ const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function enhanceReveals() {
   if (motion.matches || !('IntersectionObserver' in window)) return;
-  const items = document.querySelectorAll('.section-h, .value-band .section-kicker, .trust-bar li, .features .card, .shots-carousel, .privacy .card, .download');
+  const items = document.querySelectorAll('.section-h, .value-band .section-kicker, .trust-bar li, .spot, .features .card, .extras li, .shots-carousel, .privacy .card, .download');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting }) => {
       if (!isIntersecting) return;
@@ -30,8 +30,8 @@ function enhanceReveals() {
 function enhanceNavigation() {
   const header = document.querySelector('.top');
   const links = [...header.querySelectorAll('.nav a[href^="#"]')];
-  // 按页面阅读顺序定位：界面 → 功能 → 隐私 → 下载，与页头导航一致。
-  const sections = ['shots', 'features', 'privacy', 'download'].map((id) => document.getElementById(id));
+  // 按页面阅读顺序定位：界面 → 功能 → AI 学伴（功能区里的一段）→ 隐私 → 下载，与页头导航一致。
+  const sections = ['shots', 'features', 'companion', 'privacy', 'download'].map((id) => document.getElementById(id));
   let scheduled = false;
   function update() {
     scheduled = false;

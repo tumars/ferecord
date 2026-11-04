@@ -1,163 +1,154 @@
-// 只读应用预览与原型；不启动 Core、不写入产品仓库或用户数据。
-// 运行方法、依赖及预览服务见 ../design.md。
+// 采集产品页截图：真实 Tibi 界面（产品仓库的 Vite 界面 + demo-core.mts 演示 Core），不读本机学习数据。
+// 先按 1280×800、DPR 2 截原图到 TIBI_CAPTURE_RAW，再裁成发布图写入 ../public/img。运行方法见 ../design.md。
 const { createRequire } = require('node:module');
-const { readFileSync, mkdirSync, writeFileSync } = require('node:fs');
+const { mkdirSync } = require('node:fs');
 const path = require('node:path');
 const deps = process.env.TIBI_CAPTURE_DEPS
   ? createRequire(path.resolve(process.env.TIBI_CAPTURE_DEPS, 'package.json')) : require;
-const { chromium } = deps('playwright');
+const { chromium } = deps('playwright-core');
 const sharp = deps('sharp');
-const appPath = process.env.TIBI_APP_PATH;
-if (!appPath) throw new Error('请设置只读产品仓库路径 TIBI_APP_PATH');
-const appURL = process.env.TIBI_APP_URL || 'http://127.0.0.1:8871';
-const protoURL = process.env.TIBI_PROTO_URL || 'http://127.0.0.1:8872';
+const APP = process.env.TIBI_APP_URL || 'http://localhost:1430';
+const CORE = 'ws://127.0.0.1:3466';
+const raw = process.env.TIBI_CAPTURE_RAW || '/tmp/tibi-capture-raw';
 const output = path.resolve(__dirname, '../public/img');
-const proof = process.env.TIBI_CAPTURE_PROOF || '/tmp/tibi-capture-proof';
-mkdirSync(proof, { recursive: true });
-
-// 直接读取 shipping app 的三条声明，避免复制后随版本漂移。
-const appCSS = readFileSync(path.join(appPath, 'apps/desktop/src/styles.css'), 'utf8');
-const fontDeclarations = ['ui', 'read', 'mono'].map(kind => {
-  const declaration = appCSS.match(new RegExp(`--f-${kind}:\\s*[^;]+;`))?.[0];
-  if (!declaration || /PuHui/i.test(declaration)) throw new Error(`应用字体栈异常：${kind}`);
-  return declaration;
-});
-const fontCSS = `:root { ${fontDeclarations.join('\n')} }`;
-const audit = [];
+mkdirSync(raw, { recursive: true });
 
 async function ready(page) {
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
-    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   });
+  await page.waitForTimeout(300);
+}
+const shot = async (page, name) => { await ready(page); await page.screenshot({ path: path.join(raw, `${name}.png`), animations: 'disabled' }); console.log('截好', name); };
+async function go(page, hash) { await page.goto(`${APP}/#${hash}`); await page.waitForTimeout(1500); }
+async function docId(page, title) {
+  return page.evaluate(async ([url, t]) => {
+    const ws = new WebSocket(url);
+    await new Promise(r => { ws.onopen = r; });
+    const res = await new Promise(r => { ws.onmessage = e => r(JSON.parse(e.data)); ws.send(JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'documents.list', params: { limit: 50 } })); });
+    ws.close(); return res.result.items.find(d => d.title === t)?.id;
+  }, [CORE, title]);
 }
 
-async function fonts(page, name, selectors) {
-  const cdp = await page.context().newCDPSession(page);
-  await cdp.send('DOM.enable');
-  await cdp.send('CSS.enable');
-  const { root } = await cdp.send('DOM.getDocument');
-  const used = [];
-  for (const selector of selectors) {
-    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector });
-    if (!nodeId) throw new Error(`找不到字体检查节点：${name} ${selector}`);
-    used.push({ selector, ...(await cdp.send('CSS.getPlatformFontsForNode', { nodeId })) });
+const SHOTS = {
+  async home(page) { await go(page, '/'); await shot(page, 'home'); },
+  async reader(page) {
+    await go(page, `/read/${await docId(page, 'How a Compiler Sees Your Code')}`);
+    const panel = page.locator('.rpanel');
+    // 右侧面板：null 关掉，或 '总结' / 'Tibi'；开关状态会被应用记住，所以先看现在开着哪个
+    const setPanel = async want => {
+      const open = await panel.count() ? ((await panel.innerText()).includes('Tibi · 讲解') ? 'Tibi' : '总结') : null;
+      if (open === want) return;
+      if (open) await page.getByRole('button', { name: open, exact: true }).first().click();
+      await page.waitForTimeout(300);
+      if (want) { await page.getByRole('button', { name: want, exact: true }).first().click(); await page.waitForTimeout(800); }
+    };
+    // 面板默认偏窄，往左拖宽一些，表格和总结不至于挤
+    const widen = async () => {
+      const h = await page.locator('.rpanel-resize').boundingBox(); if (!h) return;
+      await page.mouse.move(h.x + 3, h.y + 300); await page.mouse.down();
+      await page.mouse.move(h.x - 130, h.y + 300, { steps: 8 }); await page.mouse.up(); await page.waitForTimeout(300);
+    };
+    await setPanel(null);
+    await page.locator('.rdwrap .scroll').first().evaluate(el => { el.scrollTop = 0; });
+    await setPanel('总结'); await widen();
+    await shot(page, 'reader-summary');
+    await setPanel(null);
+    // 滚到 Lexing 一节，点一个标过的生词
+    const word = page.locator('.w').filter({ hasText: /^ambiguity$/ }).first();
+    await word.evaluate(el => { const sc = el.closest('.scroll'); sc.scrollTop += el.getBoundingClientRect().top - 330; });
+    await word.click();
+    await page.locator('.wc').waitFor(); await page.waitForTimeout(1000);
+    await shot(page, 'reader-card');
+    await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+    await page.locator('.rdwrap .scroll').first().evaluate(el => { el.scrollTop = 0; });
+    await setPanel('Tibi'); await widen();
+    await shot(page, 'reader-ask');
+    await setPanel(null);
+  },
+  async chat(page) {
+    await go(page, '/');
+    await page.locator('aside a, nav a').filter({ hasText: 'affect' }).first().click(); await page.waitForTimeout(1500);
+    await page.locator('.scroll').last().evaluate(el => { el.scrollTop = 0; });
+    await shot(page, 'chat-compare');
+    await page.locator('aside a, nav a').filter({ hasText: '推荐一篇' }).first().click(); await page.waitForTimeout(1500);
+    await shot(page, 'chat-scout');
+  },
+  async feeds(page) {
+    await go(page, '/feeds');
+    await page.getByText('News in Levels', { exact: true }).first().click(); await page.waitForTimeout(800);
+    await shot(page, 'feeds-levels');
+  },
+  async dict(page) {
+    await go(page, '/dict');
+    await page.locator('input').first().fill('affect'); await page.keyboard.press('Enter'); await page.waitForTimeout(1200);
+    await shot(page, 'dict');
+  },
+  async review(page) {
+    await go(page, '/review'); await shot(page, 'review-overview');
+    await page.getByRole('button', { name: /接着复习|开始复习/ }).first().click(); await page.waitForTimeout(4500);
+    // 矮一点的视口让选项贴近题干，裁出来更紧凑
+    await page.setViewportSize({ width: 1280, height: 600 }); await page.waitForTimeout(500);
+    await shot(page, 'review-card');
+    await page.setViewportSize({ width: 1280, height: 800 });
+  },
+  async aloud(page) {
+    await go(page, `/read/${await docId(page, 'Why Cities Are Getting Hotter')}`);
+    if (await page.locator('.rpanel').count()) { await page.getByRole('button', { name: '总结', exact: true }).first().click(); await page.waitForTimeout(400); }
+    await page.getByRole('button', { name: /朗读/ }).first().click(); await page.waitForTimeout(2500);
+    await shot(page, 'aloud');
+    await page.getByRole('button', { name: /朗读|停止|暂停/ }).first().click().catch(() => {});
+  },
+  async stats(page) { await go(page, '/stats'); await shot(page, 'stats'); },
+};
+
+// 完整截图 1920×1200 JPEG（轮播）
+const FULL = { home: 'home', reader: 'reader-card', chat: 'chat-compare', feeds: 'feeds-levels', review: 'review-overview', stats: 'stats' };
+// 功能图 16:10 WebP：[原图, x, y, 宽]（CSS 像素，高 = 宽 × 10/16）；big 为重点大图 1600 / 800，其余 1200 / 600
+const CROPS = {
+  feeds: ['feeds-levels', 230, 8, 1000, true],
+  lookup: ['reader-card', 430, 210, 830, true],
+  chat: ['chat-compare', 300, 60, 960, true],
+  review: ['review-card', 374, 56, 768, true],
+  ask: ['reader-ask', 496, 40, 768],
+  summary: ['reader-summary', 512, 60, 768],
+  scout: ['chat-scout', 380, 70, 768],
+  aloud: ['aloud', 300, 160, 912],
+  dict: ['dict', 300, 50, 960],
+  stats: ['stats', 270, 60, 1000],
+};
+
+async function publish() {
+  for (const [name, src] of Object.entries(FULL)) {
+    await sharp(path.join(raw, `${src}.png`)).resize(1920, 1200).jpeg({ quality: 90, chromaSubsampling: '4:4:4', mozjpeg: true })
+      .toFile(path.join(output, 'screenshots', `${name}.jpg`));
   }
-  const stack = await page.evaluate(() => ['ui', 'read', 'mono'].map(k =>
-    getComputedStyle(document.documentElement).getPropertyValue(`--f-${k}`).trim()));
-  if (/PuHui/i.test(JSON.stringify({ stack, used }))) throw new Error(`${name} 仍在使用普惠体`);
-  audit.push({ name, stack, used });
-  await cdp.detach();
-}
-
-async function feature(page, name, clip) {
-  await ready(page);
-  const png = await page.screenshot({ clip, animations: 'disabled' });
-  for (const width of [1200, 600]) {
-    await sharp(png).resize(width, width * 5 / 8).webp({ quality: 92, effort: 6 })
-      .toFile(path.join(output, 'features', `${name}${width === 600 ? '.sm' : ''}.webp`));
+  for (const [name, [src, x, y, w, big]] of Object.entries(CROPS)) {
+    const region = { left: x * 2, top: y * 2, width: w * 2, height: Math.round(w * 10 / 16) * 2 };
+    for (const width of big ? [1600, 800] : [1200, 600]) {
+      await sharp(path.join(raw, `${src}.png`)).extract(region).resize(width, width * 10 / 16).webp({ quality: 90, effort: 6 })
+        .toFile(path.join(output, 'features', `${name}${width <= 800 ? '.sm' : ''}.webp`));
+    }
   }
-}
-
-async function fullShot(page, name) {
-  await ready(page);
-  await sharp(await page.screenshot({ animations: 'disabled' })).resize(1920, 1200)
-    .jpeg({ quality: 94, chromaSubsampling: '4:4:4' })
-    .toFile(path.join(output, 'screenshots', `${name}.jpg`));
+  console.log(`已生成 ${Object.keys(FULL).length} 张完整截图、${Object.keys(CROPS).length * 2} 张功能 WebP`);
 }
 
 (async () => {
-  const browser = await chromium.launch({ headless: true,
-    executablePath: process.env.TIBI_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
-  try {
-    const context = await browser.newContext({ viewport: { width: 1280, height: 800 },
-      deviceScaleFactor: 2, colorScheme: 'light', reducedMotion: 'reduce', locale: 'zh-CN' });
-    // 不加载外部字体或其它第三方服务。原型 CSS 在响应进入浏览器前处理。
-    const requests = [];
-    await context.route('**/*', async route => {
-      const url = new URL(route.request().url());
-      requests.push(url.href);
-      if (![new URL(appURL).origin, new URL(protoURL).origin].includes(url.origin)) return route.abort();
-      if (url.pathname.endsWith('/v2.css')) {
-        let css = readFileSync(path.join(appPath, 'docs/prototypes/v2.css'), 'utf8');
-        css = css.replace(/@font-face\s*\{[^}]*\}/g, '')
-          .replace(/"Alibaba PuHuiTi 3\.0",?\s*/g, '');
-        for (const declaration of fontDeclarations) {
-          css = css.replace(new RegExp(`${declaration.split(':')[0]}:\\s*[^;]+;`, 'g'), declaration);
-        }
-        return route.fulfill({ contentType: 'text/css', body: css });
+  const only = process.argv.slice(2);
+  if (!only.includes('--publish-only')) {
+    const browser = await chromium.launch({ headless: true,
+      executablePath: process.env.TIBI_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
+    try {
+      const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2, colorScheme: 'light', reducedMotion: 'reduce', locale: 'zh-CN' });
+      const page = await context.newPage();
+      page.on('pageerror', e => console.error('页面错误', e.message));
+      for (const [name, fn] of Object.entries(SHOTS)) {
+        if (only.length && !only.includes(name)) continue;
+        await fn(page);
       }
-      return route.continue();
-    });
-    const page = await context.newPage();
-    await page.goto(`${appURL}/?mock=1`);
-    await page.locator('.composer').waitFor();
-    await page.addStyleTag({ content: fontCSS });
-    // 首页自然滚动到导入框，截图聚焦真实操作区，不把欢迎插画当营销素材。
-    await page.locator('.composer').evaluate(el => {
-      const scroll = el.closest('.scroll');
-      scroll.scrollTop += el.getBoundingClientRect().top - scroll.getBoundingClientRect().top - 24;
-    });
-    await ready(page);
-    await fonts(page, 'home', ['.nav a span', '.lead .t', '.composer textarea']);
-    await fullShot(page, 'home');
-    const composer = await page.locator('.composer').boundingBox();
-    await feature(page, 'import', { x: composer.x - 20, y: composer.y - 16, width: 800, height: 500 });
-
-    await page.goto(`${appURL}/?mock=1#/read/d1`);
-    await page.locator('.rd .w').first().waitFor();
-    // 示例数据带有已读进度，恢复完成后回到文章开头。
-    await page.waitForTimeout(500);
-    await page.locator('.rdwrap .scroll').first().evaluate(el => { el.scrollTop = 0; });
-    await ready(page);
-    await fonts(page, 'reader', ['.crumb', '.rd h1', '.rd p', '.rd pre']);
-    const article = await page.locator('.rd').last().boundingBox();
-    await feature(page, 'mark', { x: article.x, y: 74, width: 720, height: 450 });
-    await page.locator('.w').filter({ hasText: /^upshot$/ }).click();
-    await page.locator('.wc .dict').waitFor();
-    await ready(page);
-    await fonts(page, 'lookup', ['.wc .h b', '.wc .dict', '.wc .stages button']);
-    await fullShot(page, 'reader');
-    const word = await page.locator('.wc').boundingBox();
-    await feature(page, 'lookup', { x: Math.min(640, Math.max(260, word.x - 140)),
-      y: Math.min(400, Math.max(64, word.y - 60)), width: 640, height: 400 });
-
-    await page.goto(`${appURL}/?mock=1#/words`);
-    await page.getByText('distinctive', { exact: true }).waitFor();
-    await fonts(page, 'words', ['.crumb', '.wrow.h span']);
-    await fullShot(page, 'words');
-
-    // mock 暂缺完整 AI、统计接口，复习示例的答案数据也未与当前界面对齐。
-    // 使用明确标注的原型，不伪造真实应用响应。
-    for (const [file, name, selectors] of [
-      ['reader', 'ai', ['.crumb', '#page h1', '#page p']],
-      ['review', 'review', ['.prompt', '.sentence', '.opt']],
-      ['stats', 'progress', ['.tile .k', '.tile .v', '.ph h2']],
-    ]) {
-      await page.goto(`${protoURL}/${file}.html`);
-      await page.locator(selectors[1]).first().waitFor();
-      await ready(page);
-      await fonts(page, name, selectors);
-      if (name === 'ai') {
-        await page.locator('#sumBtn').click();
-        await page.locator('#pane-sum .gloss').first().waitFor();
-        await page.waitForTimeout(400);
-        await page.locator('#reader').evaluate(el => { el.scrollTop = 0; });
-        await ready(page);
-        await fonts(page, 'ai-summary', ['#pane-sum .gloss', '#page .w']);
-        await feature(page, name, { x: 0, y: 0, width: 1280, height: 800 });
-      } else if (name === 'review') {
-        const card = await page.locator('#rv').boundingBox();
-        await feature(page, name, { x: card.x, y: 72, width: 720, height: 450 });
-      } else {
-        await feature(page, name, { x: 260, y: 64, width: 1000, height: 625 });
-      }
-      await page.screenshot({ path: path.join(proof, `${name}.png`), animations: 'disabled' });
-    }
-    if (requests.some(url => /Alibaba|PuHui/i.test(url))) throw new Error('采集期间请求了普惠体资源');
-    writeFileSync(path.join(proof, 'fonts.json'), JSON.stringify({ fontDeclarations, audit,
-      fontRequests: requests.filter(url => /font|woff/i.test(url)) }, null, 2));
-    console.log(`已生成 12 张功能 WebP、3 张完整截图；字体报告：${proof}/fonts.json`);
-  } finally { await browser.close(); }
+    } finally { await browser.close(); }
+  }
+  await publish();
 })().catch(error => { console.error(error); process.exitCode = 1; });
