@@ -14,8 +14,8 @@
     // 尽早应用用户选过的主题，避免闪烁
     try { var t = localStorage.getItem("aha.theme"); if (t === '"light"' || t === '"dark"') document.documentElement.dataset.theme = JSON.parse(t); } catch (e) {}
   </script>
-  <script type="module" crossorigin src="./assets/index-Zr90-YBB.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BWr4mPOa.css">
+  <script type="module" crossorigin src="/art-history-atlas/assets/index-BLZZnq4Z.js"></script>
+  <link rel="stylesheet" crossorigin href="/art-history-atlas/assets/index-CFRbvC_r.css">
 </head>
 <body>
 <a class="skip" href="#chronology">跳到正文</a>
@@ -26,6 +26,7 @@
     <nav class="index" id="index" aria-label="分区"></nav>
     <div class="tools">
       <select class="trad-switch" id="trad-switch" aria-label="切换艺术史体系" hidden></select>
+      <button class="search-open" id="search-open" aria-haspopup="dialog" aria-controls="search-dialog">搜索</button>
       <button class="icon-btn" id="theme-btn" aria-label="切换主题"></button>
       <a class="icon-btn" id="repo-link" target="_blank" rel="noopener" aria-label="在 GitHub 上查看源码">
         <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -36,9 +37,10 @@
 </header>
 
 <main id="top">
-  <!-- 序厅：三维长廊 -->
-  <section class="hero" id="hero" aria-label="序厅：长廊">
-    <div class="hero-stage" id="hero-stage"></div>
+  <!-- 序厅：浮空画海 -->
+  <section class="hero" id="hero" aria-label="序厅：浮空画海">
+    <div class="hero-stars" id="hero-stars" aria-hidden="true"></div>
+    <div class="hero-stage" id="hero-stage" tabindex="0" role="group" aria-label="画海作品"></div>
     <div class="hero-copy">
       <p class="kicker" id="hero-kicker"></p>
       <h1 class="hero-title" id="hero-title"></h1>
@@ -46,14 +48,21 @@
     </div>
     <div class="hero-now" aria-live="polite">
       <span class="now-year" id="now-year"></span>
+      <span class="now-work" id="now-work"></span>
       <span class="now-period" id="now-period"></span>
     </div>
-    <div class="hero-controls">
-      <button class="ctrl" id="walk-back" aria-label="往回走">←</button>
-      <button class="ctrl" id="walk-play" aria-label="暂停漫步">❚❚</button>
-      <button class="ctrl" id="walk-fwd" aria-label="往前走">→</button>
+    <div class="hero-depth" role="group" aria-label="画海视距">
+      <span class="sky-total" id="sky-total"></span>
+      <button class="ctrl" id="sky-farther" aria-label="拉远视距">−</button>
+      <span class="sky-depth-value" id="sky-depth-value">1.0×</span>
+      <button class="ctrl" id="sky-nearer" aria-label="拉近视距">+</button>
     </div>
-    <div class="hero-ruler" id="hero-ruler" aria-label="长廊位置"></div>
+    <div class="hero-controls">
+      <button class="ctrl" id="sky-prev" aria-label="上一件悬浮作品">←</button>
+      <button class="ctrl" id="sky-play" aria-label="暂停漂浮" aria-pressed="false">Ⅱ</button>
+      <button class="ctrl" id="sky-next" aria-label="下一件悬浮作品">→</button>
+    </div>
+    <nav class="hero-periods" id="hero-periods" aria-label="按时期浏览悬浮作品"></nav>
   </section>
 
   <div class="wrap">
@@ -84,6 +93,7 @@
       </header>
       <nav class="era-nav" aria-label="展厅索引"><ol id="era-nav"></ol></nav>
       <div class="hall-body" id="hall-body">
+        <div id="hall-readings" class="hall-readings"></div>
         <div class="hall">
           <div class="intro" id="intro"></div>
           <div class="feature" id="feature"></div>
@@ -100,19 +110,26 @@
       <header class="block-head" data-section="people">
         <div class="block-tools">
           <div class="seg" role="group" aria-label="视图">
-            <button id="pv-life" aria-pressed="true">生命线</button>
+            <button id="pv-schools" aria-pressed="true">艺术派系</button>
+            <button id="pv-life" aria-pressed="false">生命线</button>
             <button id="pv-graph" aria-pressed="false">关系图</button>
           </div>
         </div>
       </header>
       <div class="panel">
-        <div class="pv" id="pv-life-box">
+        <div class="pv" id="pv-schools-box"></div>
+        <div class="pv" id="pv-life-box" hidden>
           <div class="dg-wrap"><svg class="dg life" id="life-svg" role="img" aria-label="人物生命线：每人一条线，从出生到去世"></svg></div>
           <p class="tl-note" id="life-note" aria-live="polite"></p>
         </div>
         <div class="pv" id="pv-graph-box" hidden>
+          <div class="graph-filters">
+            <label>艺术派系<select id="graph-school" aria-label="关系图艺术派系"></select></label>
+            <label class="graph-outside"><input type="checkbox" id="graph-outside">显示跨派系关系</label>
+          </div>
+          <div class="graph-context" id="graph-context" aria-live="polite"></div>
           <div class="graph-legend" id="graph-legend" role="group" aria-label="显示哪些关系"></div>
-          <div class="dg-wrap"><svg class="dg graph" id="graph-svg" role="img" aria-label="人物关系图：师承、影响、对手、赞助与相遇"></svg></div>
+          <div class="dg-wrap"><svg class="dg graph" id="graph-svg" role="group" aria-label="人物关系图：师承、影响、对手、赞助与相遇"></svg></div>
         </div>
         <div class="who-card" id="who-card" aria-live="polite"></div>
       </div>
@@ -127,6 +144,12 @@
       <header class="block-head" data-section="pairs"></header>
       <div class="pair-tabs" id="pair-tabs" role="group" aria-label="选择一组作品"></div>
       <div class="panel" id="pair-body"></div>
+    </section>
+
+    <section class="block" id="readings">
+      <header class="block-head" data-section="readings"></header>
+      <div id="reading-shelf" class="reading-shelf"></div>
+      <article id="reading" class="reading" hidden aria-label="看画故事"></article>
     </section>
 
     <section class="block" id="sizes">
