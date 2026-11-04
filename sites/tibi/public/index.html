@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tibi 提比，AI first的英语学习全能助手：导入网页、书和订阅，点词就懂，有问题问 AI 学伴，用读过的原句复习。本地优先，MIT 开源。">
+    <meta name="description" content="Tibi 提比，AI first的英语学习全能助手：读喜欢的英文，点词就懂，有问就答，复习用你读过的原句。本地优先，MIT 开源。">
     <meta name="theme-color" content="#fffaf2">
-    <meta property="og:title" content="Tibi 提比 · AI first的英语学习全能助手，陪你英语阅读从入门到精通">
-    <meta property="og:description" content="Tibi 提比，AI first的英语学习全能助手：导入网页、书和订阅，点词就懂，有问题问 AI 学伴，用读过的原句复习。本地优先，MIT 开源。">
+    <meta property="og:title" content="Tibi 提比 · AI first的英语学习全能助手">
+    <meta property="og:description" content="Tibi 提比，AI first的英语学习全能助手：读喜欢的英文，点词就懂，有问就答，复习用你读过的原句。本地优先，MIT 开源。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tibi.ferecord.com/">
     <meta property="og:image" content="https://tibi.ferecord.com/img/screenshots/home.jpg">
     <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
-    <title>Tibi 提比 · AI first的英语学习全能助手，陪你英语阅读从入门到精通</title>
+    <title>Tibi 提比 · AI first的英语学习全能助手</title>
     <style>
       :root {
         color-scheme: light;
@@ -97,7 +97,8 @@
       }
       .hero-fox { width: 184px; height: 184px; margin-inline: auto; }
       .hero-copy { width: 100%; max-width: 960px; margin-inline: auto; text-align: center; }
-      .hero .lead { margin-inline: auto; }
+      .hero .lead { max-width: 42em; margin-inline: auto; }
+      .hero .lead span { display: inline-block; max-width: 100%; text-wrap: balance; }
       .hero .cta { justify-content: center; }
       .hero > *, .features > *, .shots > *, .privacy > *, .download > * { min-width: 0; }
       .eyebrow {
@@ -109,24 +110,16 @@
         width: 8px; height: 8px; border-radius: 50%; background: var(--warm);
         box-shadow: 0 0 0 4px var(--warm-wash);
       }
-      .hero .eyebrow { padding: 8px 14px; border-radius: 999px; background: var(--warm-wash); color: var(--warm-ink); letter-spacing: .04em; }
+      .hero .eyebrow { margin: 0 0 20px; padding: 8px 14px; border-radius: 999px; background: var(--warm-wash); color: var(--warm-ink); letter-spacing: .04em; }
       .hero h1 {
-        margin: 0 auto 24px;
+        margin: 0 auto 20px;
+        font-size: clamp(34px, 6vw, 68px); font-weight: 800; line-height: 1.18; letter-spacing: -.04em;
       }
-      .hero-title-intro {
-        display: block; margin-bottom: 12px; color: var(--ink-2);
-        font-size: clamp(17px, 2.8vw, 30px); font-weight: 500; line-height: 1.45; letter-spacing: .035em;
-      }
-      .hero-title-main {
-        display: block; color: var(--warm-ink);
-        font-size: clamp(32px, 5.2vw, 64px); font-weight: 800; line-height: 1.2; letter-spacing: -.04em;
-      }
-      .hero-title-main span { display: inline-block; max-width: 100%; }
-      .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; }
-      .learning-modes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
-      .learning-modes li { padding: 7px 12px; border-radius: 14px 14px 14px 5px; background: var(--warm-wash); color: var(--warm-ink); font-size: 13px; }
-      .learning-modes li:nth-child(3n + 2) { background: var(--mint-wash); color: var(--mint-ink); border-radius: 14px 5px 14px 14px; }
-      .learning-modes li:nth-child(3n) { background: var(--accent-wash); color: var(--brand); }
+      .hero h1 span { display: inline-block; max-width: 100%; }
+      .hero h1 .hl { color: var(--warm-ink); }
+      .lead { margin: 0; max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 19px); line-height: 1.75; }
+      .hero-note span { display: inline-block; }
+      .hero-note span + span { color: var(--ink-3); }
       .hero-note { margin: 14px 0 0; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
       .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
       .value-band { padding-block: 40px 24px; }
@@ -314,8 +307,6 @@
         .eyebrow .dot { flex-shrink: 0; }
         .cta { gap: 10px; margin-top: 24px; }
         .cta .btn { flex: 1 1 auto; }
-        .learning-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .learning-modes li { padding-inline: 6px; }
         .trust-bar { grid-template-columns: 1fr; gap: 12px; }
         .trust-bar li { padding: 22px 24px 22px 48px; }
         .trust-bar li::before { position: absolute; top: 34px; left: 24px; margin: 0; }
@@ -376,24 +367,14 @@
           <img src="/img/mascot/onboarding-read.webp" width="512" height="512" alt="" decoding="async">
         </div>
         <div class="hero-copy">
-          <h1>
-            <span class="hero-title-intro">AI&nbsp;first的英语学习全能助手，</span>
-            <span class="hero-title-main"><span>陪你英语阅读</span><span>从入门到精通</span></span>
-          </h1>
-          <p class="lead">读喜欢的英文，点词就懂、有问就答，复习用的是你读过的原句。</p>
-          <ul class="learning-modes" aria-label="学习方式">
-            <li>听</li>
-            <li>说</li>
-            <li>读</li>
-            <li>写</li>
-            <li>词</li>
-            <li>练</li>
-          </ul>
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>AI&nbsp;first 的英语学习全能助手</p>
+          <h1><span>读喜欢的英文，</span><span class="hl">顺便把英语学会</span></h1>
+          <p class="lead"><span>AI 学伴 Tibi 懂你在读什么：</span><span>讲透词句，用你的生词出题，帮你找文章。</span></p>
           <div class="cta">
             <a class="btn btn-primary btn-lg" href="#download">下载提比</a>
             <a class="btn btn-secondary btn-lg" href="#shots">看看界面 <span aria-hidden="true">↓</span></a>
           </div>
-          <p class="hero-note">macOS · Windows · Linux</p>
+          <p class="hero-note"><span>免费开源 · 无需账号 · 支持 macOS</span> <span>（iOS、Windows、Linux 即将支持）</span></p>
         </div>
       </div>
 
@@ -463,7 +444,7 @@
             <div class="section-h">
               <p class="section-kicker">功能</p>
               <h2>从读到懂，从懂到记住</h2>
-              <p>读你感兴趣的英文，顺便把英语学会。不测水平、不替你猜，只围绕你自己标过的词。</p>
+              <p>不测水平、不替你猜，一切围绕你自己标过的词。</p>
             </div>
             <img class="garnish feature-garnish" src="/img/mascot/sticker-1.webp" width="256" height="256" alt="" loading="lazy" decoding="async">
           </div>
@@ -473,11 +454,11 @@
               <div class="spot-copy">
                 <span class="card-step"><b>01</b> · 读</span>
                 <h3>想读什么，就导入什么</h3>
-                <p>网址、粘贴的英文、EPUB、PDF、Word、图片和扫描件都能导入；也可以订阅英文博客和杂志，新文章自动送来。</p>
+                <p>网址、EPUB、PDF、Word、图片、扫描件都能导入；订阅英文博客和杂志，新文章自动送来。</p>
                 <ul>
                   <li>扫描件和图片在本机识别文字</li>
                   <li>自带 News in Levels 等订阅源，同一条新闻分三档难度</li>
-                  <li>每篇标出估算难度和阅读时长</li>
+                  <li>每篇标出难度和阅读时长</li>
                 </ul>
               </div>
               <div class="spot-media"><img src="/img/features/feeds.sm.webp" srcset="/img/features/feeds.sm.webp 800w, /img/features/feeds.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比订阅：News in Levels 的新闻按 level 1–3 分档，标着 A2、B1、C1 难度和阅读时长" loading="lazy" decoding="async"></div>
@@ -486,8 +467,8 @@
             <article class="spot">
               <div class="spot-copy">
                 <span class="card-step"><b>02</b> · 读懂</span>
-                <h3>点一个词，就懂这句里的意思</h3>
-                <p>只给你标过的词着色，越熟颜色越浅。词卡先说「在这句里」是什么意思，再给词典释义、音标和发音。</p>
+                <h3>点一个词，就懂它在这句里的意思</h3>
+                <p>只给你标过的词着色，越熟越浅。词卡先讲它在这句里的意思，再给词典释义和发音。</p>
                 <ul>
                   <li>六档熟练度，点一下就标好</li>
                   <li>一键整篇译文、生词上方显示中文</li>
@@ -501,11 +482,11 @@
               <div class="spot-copy">
                 <span class="card-step"><b>03</b> · AI 学伴</span>
                 <h3>有问题，直接问 Tibi</h3>
-                <p>Tibi 知道你在读什么、最近学了哪些词。讲词句和语法，辨析近义词，用你的生词出题，还能帮你找文章。</p>
+                <p>Tibi 知道你在读什么、最近学了哪些词：讲词句和语法、辨析近义词、用你的生词出题，还能帮你找文章。</p>
                 <ul>
-                  <li>辨析、查词、练习题直接以卡片出现在对话里</li>
+                  <li>辨析、查词、练习题以卡片出现在对话里</li>
                   <li>读到哪问到哪，回答带着这篇文章的上下文</li>
-                  <li>写入数据前按你选的权限先问你，改完可以撤销</li>
+                  <li>改动你的数据前先问你，改完可以撤销</li>
                 </ul>
               </div>
               <div class="spot-media"><img src="/img/features/chat.sm.webp" srcset="/img/features/chat.sm.webp 800w, /img/features/chat.webp 1600w" sizes="(max-width: 900px) 100vw, 620px" width="1600" height="1000" alt="提比对话：问 affect 和 effect 的区别，Tibi 给出辨析卡和一句话记法，接着出了一道选义题" loading="lazy" decoding="async"></div>
@@ -515,7 +496,7 @@
               <div class="spot-copy">
                 <span class="card-step"><b>04</b> · 记住</span>
                 <h3>复习用的是你读过的原句</h3>
-                <p>标过的生词自动进复习，按 FSRS 排期。题目来自你读过的句子：选义、填空、识别。</p>
+                <p>标过的生词自动进复习，按 FSRS 排期；题目就是你读过的句子：选义、填空、识别。</p>
                 <ul>
                   <li>键盘就能做完一轮：Enter、空格、1–4 评分</li>
                   <li>练习：听写、拼写、易混词，造句由 AI 批改</li>
@@ -618,19 +599,19 @@
               <p class="section-kicker">下载</p>
               <h2>把英语学伴，带到桌面上</h2>
               <p>和提比一起，从喜欢的第一篇英文开始。</p>
-              <p class="download-platforms">支持 macOS · Windows · Linux</p>
+              <p class="download-platforms">目前支持 macOS · iOS、Windows、Linux 即将支持</p>
               <details class="install-note">
                 <summary>安装与服务说明</summary>
-                <p>安装包在发布页提供，支持 macOS（苹果芯片与英特尔芯片）、Windows 10 / 11、Linux。</p>
-                <p>未签名版本首次打开：macOS 在「访达」里右键 → 打开；Windows 若提示阻止运行，选「更多信息 → 仍要运行」。</p>
-                <p>GitHub 打不开或下载太慢时，用国内下载：<a href="https://dl.ferecord.com/latest/Tibi_aarch64.dmg">macOS（苹果芯片）</a> · <a href="https://dl.ferecord.com/latest/Tibi_x64.dmg">macOS（英特尔）</a> · <a href="https://dl.ferecord.com/latest/Tibi_x64-setup.exe">Windows</a> · <a href="https://dl.ferecord.com/latest/Tibi_amd64.AppImage">Linux（AppImage）</a> · <a href="https://dl.ferecord.com/latest/Tibi_amd64.deb">Linux（deb）</a></p>
+                <p>安装包在发布页提供，目前支持 macOS（苹果芯片与英特尔芯片）；iOS、Windows 和 Linux 版即将支持。</p>
+                <p>未签名版本首次打开：在「访达」里右键 → 打开。</p>
+                <p>GitHub 打不开或下载太慢时，用国内下载：<a href="https://dl.ferecord.com/latest/Tibi_aarch64.dmg">macOS（苹果芯片）</a> · <a href="https://dl.ferecord.com/latest/Tibi_x64.dmg">macOS（英特尔）</a></p>
                 <p>阅读、查词典和复习无需 AI；总结、语境释义、对话和批改需在「设置 → 模型」连接一个模型（推荐 DeepSeek，也可填任何 OpenAI 兼容服务），可能产生服务商费用。</p>
                 <p>网页导入、订阅与首次下载文字识别／语音包需要联网；开启同步后，数据存到你选择的位置。</p>
               </details>
             </div>
             <div class="dl-actions">
               <img class="garnish download-garnish" src="/img/mascot/onboarding-hello.webp" width="512" height="512" alt="" loading="lazy" decoding="async">
-              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">下载提比 <span aria-hidden="true">↗</span></a>
+              <a class="btn btn-primary btn-lg" href="https://github.com/tumars/tibi/releases">下载 macOS 版 <span aria-hidden="true">↗</span></a>
               <a class="btn btn-secondary btn-lg" href="https://github.com/tumars/tibi/blob/main/docs/guide/README.md">使用指南</a>
             </div>
           </div>
