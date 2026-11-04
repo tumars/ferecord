@@ -1,0 +1,43 @@
+sites/tibi/scripts/demo-model.mts
+  s_ddba7ee4ba27cf::t_9d142be4e6baae 2-6
+  s_ddba7ee4ba27cf::t_db18c31cea42a0 1
+  s_ddba7ee4ba27cf::t_09af4ded3760bb 7-9
+sites/tibi/scripts/seed-demo.mjs
+  s_ddba7ee4ba27cf::t_dcef95df404e1b 1-111
+sites/tibi/public/index.html
+  s_ddba7ee4ba27cf::t_be33e5a11d09f1 308-309
+  s_ddba7ee4ba27cf::t_9096f0ed5804ae 330-332
+  s_ddba7ee4ba27cf::t_dd257eff832953 383
+  s_ddba7ee4ba27cf::t_d0ee2aa72ac7d6 626-627
+  s_ddba7ee4ba27cf::t_5050186f777af2 178-179,181-201
+  s_ddba7ee4ba27cf::t_d0b925cae3db1a 365
+  s_ddba7ee4ba27cf::t_ee215c44867c8f 294-295
+  s_ddba7ee4ba27cf::t_f190f5a55b8dc0 403,409-410,413-414,417-430
+  s_ddba7ee4ba27cf::t_61d1a3e7e25e36 293
+  s_ddba7ee4ba27cf::t_e071176a02b4b8 180
+sites/tibi/scripts/capture-ui.cjs
+  s_ddba7ee4ba27cf::t_efb3c3c7ded7c7 1-2,4,8,10-12,14,20,22,24-32,35-105,107-135,139-149,151-153
+sites/tibi/scripts/demo-core.mts
+  s_ddba7ee4ba27cf::t_d20b3313f0386f 1-8,10-16
+  s_ddba7ee4ba27cf::t_4699c4e81748e8 9
+sites/tibi/design.md
+  s_ddba7ee4ba27cf::t_8a74d8678efdbd 5-6,8-9,14,16,18-21,23,25-27,29,38,45,58,64,67-69,72,75,78,82
+sites/tibi/public/js/interactions.js
+  s_ddba7ee4ba27cf::t_de46ad2cccc8fb 5,33-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "cce4e564dc270dc5f79ff94abd78dbcd681d79b9",
+  "prompts": {},
+  "sessions": {
+    "s_ddba7ee4ba27cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "73ec4cde-2393-4809-a725-f3475bdce136",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
