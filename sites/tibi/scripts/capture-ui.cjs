@@ -63,6 +63,15 @@ const SHOTS = {
     await page.locator('.wc').waitFor(); await page.waitForTimeout(1000);
     await shot(page, 'reader-card');
     await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+    // 轮播用：总结面板和词卡同时开着，一张图看到阅读器的主要功能
+    // 词卡弹在正文左侧，不挡总结；ambiguity 有预生成的语境释义
+    await setPanel('总结');
+    await word.evaluate(el => { const sc = el.closest('.scroll'); sc.scrollTop += el.getBoundingClientRect().top - 380; });
+    await word.click();
+    await page.locator('.wc').waitFor(); await page.waitForTimeout(1000);
+    await shot(page, 'reader-full');
+    await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+    await setPanel(null);
     await page.locator('.rdwrap .scroll').first().evaluate(el => { el.scrollTop = 0; });
     await setPanel('Tibi'); await widen();
     await shot(page, 'reader-ask');
@@ -105,7 +114,7 @@ const SHOTS = {
 };
 
 // 完整截图 1920×1200 JPEG（轮播）
-const FULL = { home: 'home', reader: 'reader-card', chat: 'chat-compare', feeds: 'feeds-levels', review: 'review-overview', stats: 'stats' };
+const FULL = { home: 'home', reader: 'reader-full', chat: 'chat-compare', feeds: 'feeds-levels', review: 'review-overview', stats: 'stats' };
 // 功能图 16:10 WebP：[原图, x, y, 宽]（CSS 像素，高 = 宽 × 10/16）；big 为重点大图 1600 / 800，其余 1200 / 600
 const CROPS = {
   feeds: ['feeds-levels', 230, 8, 1000, true],
