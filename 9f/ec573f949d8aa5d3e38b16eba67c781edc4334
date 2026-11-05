@@ -1,0 +1,27 @@
+sites/tibi/design.md
+  s_d774b158af16c6::t_85427a93289575 82
+  s_d774b158af16c6::t_a2643f899de86e 8
+  s_d774b158af16c6::t_d0be42acb2901d 9
+sites/tibi/public/index.html
+  s_d774b158af16c6::t_71b0d9df379511 522-523
+  s_d774b158af16c6::t_52210cb8cc29ab 403
+sites/tibi/scripts/capture-ui.cjs
+  s_d774b158af16c6::t_3e33f7b26986cd 39
+  s_d774b158af16c6::t_054c8f59b17758 36-38,40-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9fec573f949d8aa5d3e38b16eba67c781edc4334",
+  "prompts": {},
+  "sessions": {
+    "s_d774b158af16c6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89511e0c-8ac5-45f6-a5c7-d297a9354282",
+        "model": "unknown"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
