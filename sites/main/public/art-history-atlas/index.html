@@ -14,7 +14,7 @@
     // 尽早应用用户选过的主题，避免闪烁
     try { var t = localStorage.getItem("aha.theme"); if (t === '"light"' || t === '"dark"') document.documentElement.dataset.theme = JSON.parse(t); } catch (e) {}
     // 手机进入独立页层（判断与 main.ts 一致）：先隐藏桌面骨架，只显示启动画面
-    if (matchMedia("(max-width: 700px)").matches || (matchMedia("(pointer: coarse)").matches && Math.min(screen.width, screen.height) <= 700)) {
+    if (document.documentElement.classList.contains("native") || matchMedia("(max-width: 700px)").matches || (matchMedia("(pointer: coarse)").matches && Math.min(screen.width, screen.height) <= 700)) {
       var root = document.documentElement, dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
       root.classList.add("m-boot");
       document.querySelector('meta[name="theme-color"]').content = dark ? "#0b1520" : "#dcd7cd";
@@ -50,8 +50,11 @@
     html[data-theme="dark"] .boot-splash em { background: rgba(217, 182, 106, .2); }
     html[data-theme="dark"] .boot-splash em::after { background: #d9b66a; }
     @media (prefers-reduced-motion: reduce) { .boot-splash *, .boot-splash *::after { animation: none !important; } }
+    /* iOS App：原生启动画面只有底色（与第一屏一致，不放文字和品牌），网页启动画面也只留底色接上它 */
+    html.native .boot-splash > * { display: none !important; }
+    html.native .boot-splash.failed > span { display: block !important; }
   </style>
-  <script type="module" crossorigin src="/art-history-atlas/assets/index-CDn7CooG.js"></script>
+  <script type="module" crossorigin src="/art-history-atlas/assets/index-DAIz-vnw.js"></script>
   <link rel="stylesheet" crossorigin href="/art-history-atlas/assets/index-BokYIdXu.css">
 </head>
 <body>
