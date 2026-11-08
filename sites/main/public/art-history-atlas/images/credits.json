@@ -6801,20 +6801,6 @@
       "height": 378
     }
   },
-  "warhol-mao-warhol": {
-    "file": "images/works/warhol-mao-warhol.jpg",
-    "thumb": "images/works/warhol-mao-warhol.thumb.jpg",
-    "title": "毛",
-    "author": "Andy Warhol",
-    "license": "Fair use",
-    "source": "https://en.wikipedia.org/wiki/File:Mao_by_Andy_Warhol.jpg",
-    "optimized": {
-      "thumb": "images/optimized/warhol-mao-warhol-0d75c0fcdc2f.thumb.webp",
-      "display": "images/optimized/warhol-mao-warhol-0d75c0fcdc2f.display.webp",
-      "width": 290,
-      "height": 344
-    }
-  },
   "watteau-fetes-venitiennes": {
     "file": "images/works/watteau-fetes-venitiennes.jpg",
     "thumb": "images/works/watteau-fetes-venitiennes.thumb.jpg",

@@ -54,8 +54,8 @@
     html.native .boot-splash > * { display: none !important; }
     html.native .boot-splash.failed > span { display: block !important; }
   </style>
-  <script type="module" crossorigin src="/art-history-atlas/assets/index-BmUJlU28.js"></script>
-  <link rel="stylesheet" crossorigin href="/art-history-atlas/assets/index-BokYIdXu.css">
+  <script type="module" crossorigin src="/art-history-atlas/assets/index-CJ2-q6U8.js"></script>
+  <link rel="stylesheet" crossorigin href="/art-history-atlas/assets/index-IJx1bQKz.css">
 </head>
 <body>
 <div class="boot-splash" role="status" aria-label="正在打开画海"><div class="bs-frame"><i></i></div><b>画海</b><span>在画作之间，读懂西方艺术</span><em></em></div>
@@ -105,7 +105,7 @@
       <button class="ctrl" id="sky-next" aria-label="下一件悬浮作品">→</button>
     </div>
     <nav class="hero-periods" id="hero-periods" aria-label="按时期浏览悬浮作品"></nav>
-    <div class="hero-mobile-footer mobile-only"><div class="hero-mobile-links"><span>横拖探索 · 点作品看大图</span><button id="hero-options-open" aria-haspopup="dialog">画海选项</button></div><a class="hero-enter" href="#hall">进入十八间展厅 ↓</a></div>
+    <div class="hero-mobile-footer mobile-only"><div class="hero-mobile-links"><span>横拖探索 · 点作品看大图</span><button id="hero-options-open" aria-haspopup="dialog">画海选项</button></div><a class="hero-enter" href="#hall">按时期看 ↓</a></div>
   </section>
 
   <div class="wrap">
@@ -123,9 +123,7 @@
         <div class="ev-card band-note" id="band-note" hidden aria-live="polite"></div>
         <div class="ev-nav"><button class="btn" id="ev-prev">← 上一件</button><button class="btn" id="ev-next">下一件 →</button><span id="ev-count"></span></div>
         <div class="ev-card" id="ev-card" aria-live="polite" hidden></div>
-        <p class="tl-note" id="tl-note"></p>
         <div class="relay-wrap">
-          <div class="label-sm">艺术中心的接力</div>
           <div class="relay" id="relay"></div>
         </div>
       </div>
@@ -134,7 +132,7 @@
     <section class="block" id="hall">
       <header class="block-head" data-section="hall">
       </header>
-      <nav class="era-nav" aria-label="展厅索引"><ol id="era-nav"></ol></nav>
+      <nav class="era-nav" aria-label="时期索引"><ol id="era-nav"></ol></nav>
       <div class="hall-body" id="hall-body">
         <div id="hall-readings" class="hall-readings"></div>
         <div class="hall">
@@ -144,7 +142,7 @@
         <div class="diagram panel" id="diagram"></div>
         <div class="bridge-row">
           <p class="bridge" id="bridge"></p>
-          <div class="nav-btns"><button class="btn" id="prev">← 上一间</button><button class="btn" id="next">下一间 →</button></div>
+          <div class="nav-btns"><button class="btn" id="prev">← 上一个时期</button><button class="btn" id="next">下一个时期 →</button></div>
         </div>
       </div>
     </section>
@@ -180,7 +178,7 @@
 
     <section class="block" id="pendulum">
       <header class="block-head" data-section="pendulum"></header>
-      <div class="panel"><div class="chart-scroll"><svg class="dg" id="pend" viewBox="0 0 900 250" role="img" aria-label="各时期风格倾向的摆动"></svg></div><p class="tl-note" id="pend-note"></p></div>
+      <div class="panel"><div class="chart-scroll"><svg class="dg" id="pend" viewBox="0 0 900 250" role="img" aria-label="各时期风格倾向的摆动"></svg></div></div>
     </section>
 
     <section class="block" id="pairs">
@@ -211,26 +209,33 @@
         <div class="lt-reel" id="lt-reel" role="group" aria-label="全部作品，按时期排列"></div>
       </div>
     </section>
+    <section class="block" id="places">
+      <header class="block-head" data-section="places"></header>
+      <div class="pl">
+        <div class="pl-map" id="pl-map"></div>
+        <div class="pl-side" id="pl-side" aria-live="polite"></div>
+      </div>
+      <div class="pl-all" id="pl-countries"></div>
+    </section>
   </div>
 </main>
 
 <footer class="site-foot" id="footer"></footer>
 
-<dialog class="lightbox" id="lightbox" hidden aria-label="作品大图">
+<dialog class="lightbox" id="lightbox" hidden aria-label="作品">
+  <!-- 作品页：左边是一面被射灯照亮的墙（与手机版作品页同一套灯光），右边是展签、看点、资料与相关作品 -->
   <div class="lb-stage" id="lb-stage">
+    <div class="lb-lights" aria-hidden="true"><i class="beam"></i><i class="spot"></i><i class="vig"></i></div>
     <img id="lb-img" alt="">
     <div class="lb-none" id="lb-none" hidden></div>
+    <button class="lb-arrow prev" id="lb-prev" aria-label="上一件"></button>
+    <button class="lb-arrow next" id="lb-next" aria-label="下一件"></button>
+    <span class="lb-count" id="lb-count"></span>
   </div>
-  <aside class="lb-side">
+  <aside class="lb-side" id="lb-side">
     <div class="lb-cap" id="lb-cap"></div>
-    <div class="lb-actions">
-      <button class="btn btn-dark" id="lb-prev" aria-label="上一件">←</button>
-      <span class="lb-count" id="lb-count"></span>
-      <button class="btn btn-dark" id="lb-next" aria-label="下一件">→</button>
-      <button class="btn btn-dark" id="lb-go">去这个展厅</button>
-    </div>
   </aside>
-  <div class="lb-toolbar"><button class="lb-close" id="lb-close" aria-label="返回上一处">← 返回</button><button class="btn btn-dark" id="lb-zoom" aria-pressed="false">放大</button></div>
+  <div class="lb-toolbar"><button class="lb-close" id="lb-close" aria-label="返回上一处">← 返回</button><button class="lb-zoom" id="lb-zoom" aria-pressed="false" hidden>放大</button></div>
 </dialog>
 
 </body>
