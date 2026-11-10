@@ -1,0 +1,23 @@
+docs/design.md
+  s_8db638f451f6e2::t_02094243592ab6 7,50
+docs/deployment.md
+  s_8db638f451f6e2::t_02094243592ab6 50,55-56,59,61,63,65,74
+README.md
+  s_8db638f451f6e2::t_4b0e9135eda3d4 59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "902c01e268af8163aef2fe869045a2cd1ca81cd3",
+  "prompts": {},
+  "sessions": {
+    "s_8db638f451f6e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c373-a38b-7230-ab8b-2eba886516f9",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
