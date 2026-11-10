@@ -47,20 +47,22 @@
 - 根目录 `sites/main`，输出目录 `public`，安装与构建命令均为 `true`。
 - 默认预览域名：`ferecord-9xy1s4wr.edgeone.cool`，预览访问可能需要控制台生成的临时验证参数。
 - 正式入口：`https://www.ferecord.com`，绑定生产环境，使用 Makers 免费证书。
-- 权威 DNS：GoDaddy `ns05.domaincontrol.com`、`ns06.domaincontrol.com`。
+- 注册商：腾讯云国内站 DNSPod（帝思普）；权威 DNS：`draw.dnspod.net`、`ham.dnspod.net`。
 
 | 主机名 | 类型 | 目标 | TTL |
 | --- | --- | --- | --- |
 | `www` | CNAME | `www.ferecord.com.pages.dnsoe4.com` | 1 小时 |
+| `@` | CNAME | `ferecord.com.pages.dnsoe5.com` | 1 小时 |
+| `_dnsauth` | CNAME | `ferecord.com.eoacme0.com` | 10 分钟 |
 | `ftp` | A | `1.116.135.246` | 1 小时 |
 
-裸域名目前由 GoDaddy Domain Forwarding 以 Permanent (301) 转发到 `https://www.ferecord.com`，GoDaddy 管理转发所需的 A 记录及裸域名证书。
+裸域名由 EdgeOne Makers 返回 301 至 www，HTTPS 证书由 Makers 免费签发并自动续期。主站 `edgeone.json` 使用官方 `$host` → `$wwwhost` 规则，保留路径和查询参数。HTTP 裸域名先跳 HTTP www，再由 www 已有强制 HTTPS 升级。
 
-2026-11-10 转入准备：Makers 的 `ferecord.com` 绑定已重新启用，分配 CNAME 为 `ferecord.com.pages.dnsoe5.com`；通过 `_dnsauth` CNAME → `ferecord.com.eoacme0.com` 完成 DNS 委派验证，免费证书已部署。该验证记录已加入 GoDaddy 和 DNSPod，后续续期需保留。主站 `edgeone.json` 使用官方 `$host` → `$wwwhost` 301 规则接替裸域名转发；须在部署后指定边缘地址验证 HTTPS、路径及 www 无循环，才可切换解析。
+2026-11-10 转入完成：腾讯云显示 16:43:05 转入成功，注册局 RDAP 核实注册商为 `DNSPod, Inc.`，到期日延长至 2030-11-13；控制台显示正常、已实名认证，自动续费关闭。实付 88 元包含一年续期，无搭购。Makers 裸域名绑定已启用，DNS 委派验证及免费证书已部署；`_dnsauth` 验证记录需保留，以便续期。
 
-DNSPod 已导入原 19 条业务记录，按用户确认删除两条旧 MX 及 `email` CNAME，再新增上述证书验证记录，现应有 17 条。分配 NS 为 `draw.dnspod.net`、`ham.dnspod.net`；直接查询仍返回 NXDOMAIN，原因待查，尚未切换权威 NS，也未将裸域名 A 替换为 Makers CNAME。注册商转入订单尚未提交，不代表迁移完成。
+DNSPod 原 19 条业务记录导入后，按用户确认删除两条旧 MX 及 `email` CNAME，新增证书验证记录，并将两条 GoDaddy 裸域名转发 A 替换为 Makers CNAME，最终为 16 条。转入前曾返回 NXDOMAIN；转入并接管 NS 后，控制台显示正常，指定两台权威服务器的 TCP 非递归查询 32 项全部通过。公共 Google DoH 也已查到新 CNAME。按公共解析的新边缘地址验证，裸域名 HTTPS 301 正常，www、blog、tibi、app.tibi 均为 HTTPS 200，证书有效。主站生产部署 `dp2qornccxim`（`5d46ed3`）成功；各地旧 DNS 缓存仍可能尚未刷新。
 
-### 验证状态
+### 原 GoDaddy 接入验证（历史记录，已被上述迁移取代）
 
 - 修正目录后，生产部署 `dpo91o6x9qto` 成功。
 - `https://www.ferecord.com` 返回 HTTP 200，证书校验通过，页面标题为“ferecord · 产品与探索”，内容与仓库主站一致。
@@ -69,7 +71,7 @@ DNSPod 已导入原 19 条业务记录，按用户确认删除两条旧 MX 及 `
 - 本机递归 DNS 仍缓存原服务器 A 地址，普通裸域名请求仍超时；指定新地址的裸域名 HTTPS 也未验证通过。GoDaddy 提示 DNS 全球更新最多 48 小时，HTTPS 证书可能需要几小时。待缓存及证书更新后，再验证 `https://ferecord.com` 的完整跳转链。
 - 上述验证仅针对部署与域名接入；正式产品内容和备案号仍待填写，页面继续保留 `noindex`。
 
-### 本次问题与恢复依据
+### 原 GoDaddy 接入问题与恢复依据（历史记录）
 
 原先 Makers 只绑定 `ferecord.com`，但 GoDaddy 将其 CNAME 目标配置在 `www` 上，裸域名仍是 A → `1.116.135.246`，因此 Makers 提示未添加 CNAME。新增 www 绑定后，必须使用它专属的 CNAME 目标，不能沿用裸域名的 `ferecord.com.pages.dnsoe5.com`。
 

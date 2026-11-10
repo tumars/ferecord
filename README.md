@@ -56,7 +56,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory sites/main/public
 
 `true` 是 Bash 的成功空操作：当前纯静态文件无需安装或构建。每个站点的 `edgeone.json` 已记录安装、构建和输出目录设置；项目根目录需要在 Makers 中选择。
 
-裸域名 `ferecord.com` 使用 GoDaddy 301 转发到 www，产品子站按需添加独立域名。
+域名注册及 DNS 由腾讯云 DNSPod 管理；裸域名 `ferecord.com` 使用 EdgeOne Makers 301 转发到 www，产品子站按需添加独立域名。
 
 完整操作见 [部署说明](docs/deployment.md)，架构约定见 [设计文档](docs/design.md)。
 

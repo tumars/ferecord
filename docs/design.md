@@ -4,7 +4,7 @@
 
 主要面向中国大陆用户，使用已有腾讯云备案域名和 EdgeOne Makers，低成本展示多个产品。当前任务是初始化仓库与部署骨架，具体产品文案和视觉设计后续按真实需求制作。
 
-独立产品站点使用子域名，例如 `product-a.ferecord.com`；主站内的探索页面可以使用二级路径。主域名为 `ferecord.com`，正式入口使用 `https://www.ferecord.com`，裸域名通过 GoDaddy 301 转发至该入口。
+独立产品站点使用子域名，例如 `product-a.ferecord.com`；主站内的探索页面可以使用二级路径。主域名为 `ferecord.com`，正式入口使用 `https://www.ferecord.com`，裸域名通过 EdgeOne Makers 301 转发至该入口。
 
 ## 架构决策
 
@@ -47,7 +47,7 @@ GitHub: ferecord / main
 
 Tibi 产品页按「产品价值与真实界面 → 六步功能 → 应用截图 → 隐私 → 下载」组织，吉祥物仅作装饰配图，不设介绍文案/专区。保留品牌 Logo，静态 WebP 点缀截图说明、功能、隐私和下载区域，产品 UI 截图仍是主要展示依据。截图统一采用应用字体，并明确区分应用示例数据和界面原型；细节与素材采集方法见 [Tibi 设计约定](../sites/tibi/design.md)。本次只调整该产品页，不改变站点部署目录或域名映射。
 
-DNS 当前由 GoDaddy 托管，正在准备转至腾讯云 DNSPod。主站 `edgeone.json` 配置非 www 域名到 www 的 301，供裸域名切入 Makers 后接替 GoDaddy 转发；切换前仍由 GoDaddy 提供线上转发。每个产品子域名使用对应 Makers 项目分配的 CNAME，不能复用主站的 CNAME 目标。主站与裸域名转发的具体记录、HTTPS 状态及回滚信息维护在 `docs/deployment.md`。
+注册商及权威 DNS 已于 2026-11-10 从 GoDaddy 转至腾讯云 DNSPod。主站 `edgeone.json` 配置非 www 域名到 www 的 301，已接替 GoDaddy 裸域名转发。每个产品子域名使用对应 Makers 项目分配的 CNAME，不能复用主站的 CNAME 目标。主站与裸域名转发的具体记录、HTTPS 状态及历史恢复信息维护在 `docs/deployment.md`。
 
 ## 发布与维护
 
