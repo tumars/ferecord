@@ -1,0 +1,23 @@
+sites/main/edgeone.json
+  s_8db638f451f6e2::t_40c14b04785627 4-11
+docs/design.md
+  s_8db638f451f6e2::t_40c14b04785627 50
+docs/deployment.md
+  s_8db638f451f6e2::t_40c14b04785627 57-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5d46ed3286539201830006159a2a5ad761599984",
+  "prompts": {},
+  "sessions": {
+    "s_8db638f451f6e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c373-a38b-7230-ab8b-2eba886516f9",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
