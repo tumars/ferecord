@@ -1,5 +1,12 @@
 {
   "installCommand": "true",
   "buildCommand": "true",
-  "outputDirectory": "./public"
+  "outputDirectory": "./public",
+  "redirects": [
+    {
+      "source": "$host",
+      "destination": "$wwwhost",
+      "statusCode": 301
+    }
+  ]
 }

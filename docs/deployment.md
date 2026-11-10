@@ -54,7 +54,11 @@
 | `www` | CNAME | `www.ferecord.com.pages.dnsoe4.com` | 1 小时 |
 | `ftp` | A | `1.116.135.246` | 1 小时 |
 
-裸域名已配置 GoDaddy Domain Forwarding，以 Permanent (301) 转发到 `https://www.ferecord.com`。GoDaddy 管理转发所需的 A 记录及裸域名证书；证书签发与 DNS 缓存更新可能滞后。Makers 中原来的 `ferecord.com` 直连绑定已停用，后续无需为它添加 CNAME。
+裸域名目前由 GoDaddy Domain Forwarding 以 Permanent (301) 转发到 `https://www.ferecord.com`，GoDaddy 管理转发所需的 A 记录及裸域名证书。
+
+2026-11-10 转入准备：Makers 的 `ferecord.com` 绑定已重新启用，分配 CNAME 为 `ferecord.com.pages.dnsoe5.com`；通过 `_dnsauth` CNAME → `ferecord.com.eoacme0.com` 完成 DNS 委派验证，免费证书已部署。该验证记录已加入 GoDaddy 和 DNSPod，后续续期需保留。主站 `edgeone.json` 使用官方 `$host` → `$wwwhost` 301 规则接替裸域名转发；须在部署后指定边缘地址验证 HTTPS、路径及 www 无循环，才可切换解析。
+
+DNSPod 已导入原 19 条业务记录，按用户确认删除两条旧 MX 及 `email` CNAME，再新增上述证书验证记录，现应有 17 条。分配 NS 为 `draw.dnspod.net`、`ham.dnspod.net`；直接查询仍返回 NXDOMAIN，原因待查，尚未切换权威 NS，也未将裸域名 A 替换为 Makers CNAME。注册商转入订单尚未提交，不代表迁移完成。
 
 ### 验证状态
 
