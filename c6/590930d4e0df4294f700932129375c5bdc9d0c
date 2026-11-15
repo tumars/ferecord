@@ -1,0 +1,21 @@
+sites/main/public/art-history-atlas/privacy.html
+  s_0692331fcb1cab::t_c90b82a72030e5 20,22,28,31-34,40,43
+sites/main/public/art-history-atlas/privacy-en.html
+  s_0692331fcb1cab::t_c90b82a72030e5 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c6590930d4e0df4294f700932129375c5bdc9d0c",
+  "prompts": {},
+  "sessions": {
+    "s_0692331fcb1cab": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e01b-846f-7671-abbf-5301d1c3bf3f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
