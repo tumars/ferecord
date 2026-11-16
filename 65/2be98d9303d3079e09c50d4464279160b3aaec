@@ -1,0 +1,27 @@
+docs/design.md
+  s_68bb7f117ffcb0::t_9944f08d8ba796 48
+sites/tibi/public/index.html
+  s_68bb7f117ffcb0::t_fa92728945e587 359,374,425,607,614
+docs/deployment.md
+  s_68bb7f117ffcb0::t_ddf7516d068dfb 190
+  s_68bb7f117ffcb0::t_fa92728945e587 189
+sites/tibi/design.md
+  s_68bb7f117ffcb0::t_9944f08d8ba796 102,104
+  s_68bb7f117ffcb0::t_fa92728945e587 103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "652be98d9303d3079e09c50d4464279160b3aaec",
+  "prompts": {},
+  "sessions": {
+    "s_68bb7f117ffcb0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e49c-117b-7971-9533-5734a71867fd",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
