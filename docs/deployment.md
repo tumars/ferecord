@@ -186,3 +186,5 @@ DNS（GoDaddy）需在创建 Makers 项目并添加自定义域名后，按控�
 - ICP 备案号仍待用户提供；页脚暂留注释占位。
 
 当前状态：仓库内页面与素材已就绪；Makers 项目创建与 GoDaddy `tibi` CNAME 需账号持有人在控制台完成（本机无 EdgeOne / GoDaddy CLI）。
+
+2026-11-16 分发调整：官网四个主下载按钮改为 `https://dl.ferecord.com/latest/Tibi_aarch64.dmg`，校验和为同目录 `SHA256SUMS.txt`。腾讯云 COS 桶 `tibi-releases-1252518482`（广州）已补齐 0.1.0 的正式 Mac 安装包、签名更新包、固定下载名和更新清单；公开下载后的 SHA-256 与留存原包一致，Apple 公证和更新签名验证通过。`latest.json`、固定下载包与公告均返回 200，缓存为 `no-cache`。本站链接变更通过 `main` 的现有 Makers 集成部署，验收以线上四个主按钮均指向 COS 为准；客户端去除 GitHub 回退仍需随下一版应用发布。

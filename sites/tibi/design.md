@@ -99,3 +99,6 @@ TIBI_CAPTURE_DEPS=/path/to/node_modules node sites/tibi/scripts/capture-ui.cjs
 - 字体报告确认 PingFang SC、SF、Charter 与 Menlo；没有请求普惠体文件。全部 12 张 WebP 和 3 张 JPEG 尺寸正确，图片均有 alt 和宽高，页内锚点有效。
 - 已逐张目视检查功能图，检查桌面与手机首屏、功能区截图；不添加 App Store 外壳。此前删除的 32 张吉祥物 WebP 已恢复，按上表仅用作装饰；保留品牌 Logo。
 - JavaScript 语法与 git diff 空白检查通过。本轮仅修改本地文件，未提交、推送或部署；DNS 与其他站点未改动。
+## 腾讯云分发（2026-11-16）
+
+所有下载按钮统一使用 `https://dl.ferecord.com/latest/Tibi_aarch64.dmg`（腾讯云 COS），安装说明提供同源 `latest/SHA256SUMS.txt` 校验和，不再引导 GitHub 下载。只修改链接与说明，布局不变。COS 已上传并完成公开下载校验，使用原有已签名、公证的 0.1.0 Apple Silicon 正式产物。配套客户端与发布工具设计见 Tibi 仓库 `docs/dev/tencent-distribution.md`。此决定取代首发时的 GitHub 主下载方式。
