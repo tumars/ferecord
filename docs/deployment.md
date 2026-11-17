@@ -31,6 +31,10 @@
 
 ## 上线核对
 
+2026-11-17 主站首页在本地重构为 Tibi 与画海的悬浮作品墙，详见 [设计记录](homepage-2026-11-17.md)。部署配置、域名和图谱同步方式保持原样；发布范围仍为完整的 `sites/main/public/`，其中包含首页新增的 `styles.css`、`home.js` 与 `assets/`。本次本地预览不代表已经提交、推送或部署。
+
+同日增加 Three.js 动态背景与 Blender 云团模型，仍直接发布 `public/`：`assets/universe-scene.js` 为预构建运行包，`assets/soft-cloud.glb` 为模型，版权说明随资源发布。Makers 的安装、构建命令继续为 `true`。场景源码或依赖改变后，须先在 `sites/main/` 运行 `npm ci && npm run build:scene && npm run check`，把生成文件与源码一并提交；不要发布 `src/`、`scripts/`、`node_modules/` 和设计文档。Gzip 体积仅为本地测量值，线上压缩与缓存应在实际部署后读取响应头验证。
+
 - 页面中的产品名称、介绍和素材均已替换为真实内容。
 - 已在页脚填写与网站一致的真实 ICP 备案信息并链接至 `https://beian.miit.gov.cn/`；按实际情况处理其他备案展示要求。
 - 已将示例页的 `<meta name="robots" content="noindex, nofollow">` 移除。
@@ -159,6 +163,8 @@ npm run build -- --outDir ../ferecord/sites/main/public/art-history-atlas --empt
 - [中国站域名与 HTTPS 配置](https://edgeone.cloud.tencent.com/pages/document/162936836982489088)
 
 ## Tibi 产品站接入（2026-11-01）
+
+2026-11-16 分发调整：官网四个主下载按钮改为 `https://dl.ferecord.com/latest/Tibi_aarch64.dmg`，校验和为同目录 `SHA256SUMS.txt`。腾讯云 COS 桶 `tibi-releases-1252518482`（广州）已补齐 0.1.0 的正式 Mac 安装包、签名更新包、固定下载名和更新清单；公开下载后的 SHA-256 与留存原包一致，Apple 公证和更新签名验证通过。`latest.json`、固定下载包与公告均返回 200，缓存为 `no-cache`。本站链接变更通过 `main` 的现有 Makers 集成部署，验收以线上四个主按钮均指向 COS 为准；客户端去除 GitHub 回退仍需随下一版应用发布。
 
 产品站目录为 `sites/tibi`，目标域名 `tibi.ferecord.com`，静态发布 `public/`（安装 / 构建命令均为 `true`）。
 

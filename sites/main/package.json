@@ -1,0 +1,15 @@
+{
+  "name": "ferecord-home",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:scene": "esbuild src/universe-scene.js --bundle --minify --format=esm --target=es2022 --legal-comments=eof --outfile=public/assets/universe-scene.js",
+    "check": "node --check public/home.js && node --check src/universe-scene.js"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

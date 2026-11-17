@@ -1,5 +1,9 @@
 # Tibi 产品页设计约定
 
+## 腾讯云分发（2026-11-16）
+
+所有下载按钮统一使用 `https://dl.ferecord.com/latest/Tibi_aarch64.dmg`（腾讯云 COS），安装说明提供同源 `latest/SHA256SUMS.txt` 校验和，不再引导 GitHub 下载。只修改链接与说明，布局不变。COS 已上传并完成公开下载校验，使用原有已签名、公证的 0.1.0 Apple Silicon 正式产物。配套客户端与发布工具设计见 Tibi 仓库 `docs/dev/tencent-distribution.md`。此决定取代首发时的 GitHub 主下载方式。
+
 ## Mac 首发下载说明（2026-11-05）
 
 下载区与 Tibi 0.1.0 首发同步：仅提供 Apple Silicon（M1 及更新芯片）、macOS 13+ 安装包，移除 Intel 下载链接和未签名包打开说明。页头、首屏、开始学习和下载区按钮统一直接下载 `https://github.com/tumars/tibi/releases/download/v0.1.0/Tibi_0.1.0_aarch64.dmg`，不再滚动到下载区或打开 Release 页面；后续发布同步更新安装包直链。应用已签名、公证，并在 2026-11-05 16:53（新加坡时间）正式发布。国内入口保留 `https://dl.ferecord.com/latest/Tibi_aarch64.dmg`，发布后由应用仓库的 Mirror to CN 工作流同步；同步完成前以 GitHub 下载为准。
