@@ -2,7 +2,7 @@
 
 产品介绍网站仓库：一个 Git 仓库管理多个站点，每个站点使用独立的 EdgeOne Makers 项目和域名。
 
-当前包含主站、博客与产品站 Tibi。主站正式入口为 `https://www.ferecord.com`，博客为 `https://blog.ferecord.com`，Tibi 目标域名为 `https://tibi.ferecord.com`。域名配置与验证状态见部署说明。
+当前包含主站作品墙、博客与产品站 Tibi。主站用 3D 童话插画和悬浮卡片介绍 Tibi 提比、画海 Huahai，正式入口为 `https://www.ferecord.com`，博客为 `https://blog.ferecord.com`，Tibi 目标域名为 `https://tibi.ferecord.com`。域名配置与验证状态见部署说明。
 
 艺术史图谱位于主站二级页面：<https://www.ferecord.com/art-history-atlas/>。源码独立维护，主站托管其构建产物；更新流程见 [部署说明](docs/deployment.md#艺术史图谱二级页面2026-11-02)。
 
@@ -16,7 +16,7 @@ sites/
     edgeone.json
   main/                  # ferecord 主站
     edgeone.json
-    public/index.html
+    public/              # 首页、CSS、交互脚本和本站图片
   tibi/                  # Tibi 缇比产品介绍
     edgeone.json
     public/index.html
@@ -30,15 +30,17 @@ docs/
 
 ## 本地预览
 
-页面采用原生 HTML/CSS，没有 npm 依赖，也不需要编译。可以直接用浏览器打开各站点的 `public/index.html`。
+主站采用原生 HTML/CSS/JavaScript，动态环境由 Three.js 与 Blender GLB 素材组成。仓库保留可直接发布的打包产物，普通预览不需要安装依赖。首页使用站点根路径加载独立资源，请通过本地 HTTP 服务预览。
 
-也可在仓库根目录运行（需要 Python 3）：
+在仓库根目录运行（需要 Python 3）：
 
 ```sh
 python3 -m http.server 4173 --bind 127.0.0.1 --directory sites/main/public
 ```
 
 打开 `http://127.0.0.1:4173`。预览产品示例时，将目录改为 `sites/product-example/public`；并行预览请使用不同端口。
+
+修改主站动态场景源码后，在 `sites/main/` 中运行 `npm ci && npm run build:scene && npm run check`，并提交更新后的 `public/assets/universe-scene.js`。云团的 Blender 重建方法与场景维护说明见 [主站说明](sites/main/README.md)，设计依据见 [动态首页方案](docs/homepage-3d-2026-11-17.md)。
 
 ## 在 Makers 中关联仓库
 

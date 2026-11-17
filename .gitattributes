@@ -1,0 +1,2 @@
+# 构建包中的 Three.js GLSL 模板保留上游空白；源码仍按常规检查。
+sites/main/public/assets/universe-scene.js -whitespace linguist-generated=true

@@ -33,7 +33,12 @@ async function docId(page, title) {
 }
 
 const SHOTS = {
-  async home(page) { await go(page, '/'); await shot(page, 'home'); },
+  async home(page) {
+    await go(page, '/');
+    // 演示模型不是库里的连接，应用启动时会先问一次要不要连模型；点「先不连」回首页
+    if (page.url().includes('/welcome')) { await page.getByRole('button', { name: '先不连' }).click(); await page.waitForTimeout(5000); }   // 等"已跳过"的提示消失
+    await shot(page, 'home');
+  },
   async reader(page) {
     await go(page, `/read/${await docId(page, 'How a Compiler Sees Your Code')}`);
     const panel = page.locator('.rpanel');

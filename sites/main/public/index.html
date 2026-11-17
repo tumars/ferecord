@@ -3,44 +3,144 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ferecord 产品介绍网站。">
+    <meta name="theme-color" content="#f7f7f2">
+    <meta name="description" content="ferecord 的小小作品宇宙。用 Tibi 读感兴趣的英文，在画海探索艺术，让好奇心有处可去。">
     <meta name="robots" content="noindex, nofollow">
-    <title>ferecord · 产品与探索</title>
-    <style>
-      :root { color-scheme: light; font-family: system-ui, -apple-system, "PingFang SC", sans-serif; color: #24352d; background: #f5f4ef; }
-      * { box-sizing: border-box; }
-      body { margin: 0; }
-      .page { max-width: 1100px; min-height: 100svh; margin: auto; padding: 32px clamp(24px, 6vw, 72px); display: flex; flex-direction: column; }
-      header { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid #d7dbd3; padding-bottom: 24px; }
-      .brand { font-size: 24px; font-weight: 700; letter-spacing: -.8px; }
-      .status { font-size: 13px; color: #58695e; }
-      .blog-link { color: #365b45; text-underline-offset: 4px; }
-      main { flex: 1; padding: clamp(72px, 14vh, 150px) 0 80px; }
-      .eyebrow { color: #62725e; font-size: 12px; letter-spacing: 3px; }
-      h1 { font-size: clamp(40px, 8vw, 80px); line-height: 1.15; letter-spacing: -2px; font-weight: 600; margin: 28px 0; }
-      .intro { max-width: 34em; color: #58695e; font-size: 17px; line-height: 1.9; }
-      .note { margin-top: 64px; border-left: 2px solid #9aa98d; padding-left: 20px; max-width: 36em; }
-      .note h2 { font-size: 18px; font-weight: 500; }
-      .note p { color: #58695e; line-height: 1.8; font-size: 14px; }
-      footer { border-top: 1px solid #d7dbd3; padding-top: 24px; font-size: 13px; color: #58695e; }
-    </style>
+    <meta property="og:title" content="ferecord · 好奇心的小小宇宙">
+    <meta property="og:description" content="读一篇文章，遇见一幅画。这里收藏着我认真打磨的小作品。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ferecord.com/">
+    <meta property="og:image" content="https://www.ferecord.com/assets/little-universe.webp">
+    <title>ferecord · 好奇心的小小宇宙</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/little-universe.webp" as="image" type="image/webp">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/home.js" defer></script>
   </head>
   <body>
-    <div class="page">
-      <header><span class="brand">ferecord</span><a class="blog-link" href="https://blog.ferecord.com">博客 ↗</a></header>
-      <main>
-        <p class="eyebrow">PRODUCTS & EXPLORATIONS</p>
-        <h1>每一个想法，<br>都有自己的空间。</h1>
-        <p class="intro">记录想法，做些有趣的东西。从语言学习到艺术探索，让好奇心有处可去。</p>
-        <section class="note" aria-labelledby="products">
-          <h2 id="products">产品</h2>
-          <p><a href="https://tibi.ferecord.com">Tibi 缇比</a> — 读你感兴趣的英文文章，顺便把英语学会。本地优先 · AI 原生 · 开源。</p>
-          <p><a href="/art-history-atlas/">艺术史图谱</a> — 一部可以动手玩的艺术史。沿时间轴探索 18 个艺术时期，在交互展厅里看懂代表作品。</p>
+    <a class="skip-link" href="#works">跳到作品</a>
+    <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <symbol id="spark" viewBox="0 0 24 24"><path d="m12 1 2.8 8.2L23 12l-8.2 2.8L12 23l-2.8-8.2L1 12l8.2-2.8Z" fill="currentColor"/></symbol>
+        <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+        <symbol id="external" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      </defs>
+    </svg>
+
+    <div class="universe" data-theme="day" data-scene-state="poster">
+      <div class="scene-backdrop" aria-hidden="true"></div>
+      <div class="sky" aria-hidden="true">
+        <span class="sky-dot dot-one"></span><span class="sky-dot dot-two"></span><span class="sky-dot dot-three"></span>
+        <svg class="sky-star star-one"><use href="#spark"/></svg>
+        <svg class="sky-star star-two"><use href="#spark"/></svg>
+        <svg class="sky-star star-three"><use href="#spark"/></svg>
+        <svg class="sky-star star-four"><use href="#spark"/></svg>
+        <span class="distant-planet"></span>
+      </div>
+
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="ferecord 前端记录 · 首页">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" fill="none">
+            <path d="m14 9-10 11 10 11m8-22h13M22 20h10M22 31h4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="brand-record" cx="35" cy="31" r="2.5"/>
+          </svg>
+          <span class="brand-type"><span class="brand-name">ferecord<span class="brand-period">.</span></span><span class="brand-meaning">前端记录</span></span>
+        </a>
+        <nav aria-label="主导航">
+          <a class="nav-current" href="#works" aria-current="page">作品</a>
+          <a href="https://blog.ferecord.com">随笔 <svg aria-hidden="true"><use href="#external"/></svg></a>
+        </nav>
+        <span class="header-note">一个人的创造，和一些好奇心 <svg aria-hidden="true"><use href="#spark"/></svg></span>
+      </header>
+
+      <main id="works">
+        <section class="work-universe" aria-labelledby="page-title">
+          <div class="intro">
+            <p class="eyebrow"><span></span> A LITTLE UNIVERSE OF MY OWN <span></span></p>
+            <h1 id="page-title">把好奇心，<br class="mobile-break">做成小世界<span class="title-period">。</span></h1>
+            <p class="intro-copy">读一篇文章，遇见一幅画。<br class="mobile-break">这里是我认真打磨的小小作品集。</p>
+          </div>
+
+          <div class="work-stage">
+            <div class="orbit" aria-hidden="true"></div>
+            <div class="planet-scene" aria-hidden="true">
+              <img class="planet-art" src="/assets/little-universe.webp" width="1200" height="800" alt="" fetchpriority="high">
+              <span class="planet-shadow"></span>
+            </div>
+            <div class="scene-caption" aria-hidden="true"><svg><use href="#spark"/></svg><span class="scene-caption-text">保持好奇，慢慢创造</span></div>
+
+            <article class="work-card tibi-card" aria-labelledby="tibi-title">
+              <a class="card-link" href="https://tibi.ferecord.com" aria-labelledby="tibi-title tibi-tagline">
+                <div class="card-heading">
+                  <img class="app-icon" src="/assets/tibi-icon.webp" alt="" width="36" height="36">
+                  <div><h2 id="tibi-title">Tibi <span>提比</span></h2><p>英语阅读伴侣</p></div>
+                </div>
+                <p class="card-summary" id="tibi-tagline">读你喜欢的，<br>学你用得上的。</p>
+                <div class="product-visual tibi-visual">
+                  <img src="/assets/tibi-reader.webp" alt="Tibi 阅读界面中的语境查词卡片" width="760" height="475">
+                </div>
+                <div class="card-footer">
+                  <span class="product-meta">macOS · 本地优先</span>
+                  <span class="card-action">认识 Tibi<span class="arrow-circle"><svg aria-hidden="true"><use href="#arrow"/></svg></span></span>
+                </div>
+              </a>
+            </article>
+
+            <article class="work-card huahai-card" aria-labelledby="huahai-title">
+              <a class="card-link" href="/art-history-atlas/" aria-labelledby="huahai-title huahai-tagline">
+                <div class="card-heading">
+                  <img class="app-icon" src="/assets/huahai-icon.webp" alt="" width="36" height="36">
+                  <div><h2 id="huahai-title">画海 <span>Huahai</span></h2><p>西方艺术漫游</p></div>
+                </div>
+                <p class="card-summary" id="huahai-tagline">从一幅画，<br>走进一整个时代。</p>
+                <div class="product-visual huahai-visual">
+                  <img src="/assets/huahai-gallery.webp" alt="画海中漂浮的艺术作品" width="760" height="475">
+                </div>
+                <div class="card-footer">
+                  <span class="product-meta">Web · 艺术探索</span>
+                  <span class="card-action">走进画海<span class="arrow-circle"><svg aria-hidden="true"><use href="#arrow"/></svg></span></span>
+                </div>
+              </a>
+            </article>
+          </div>
         </section>
+
+        <aside class="maker-note" aria-label="创作手记">
+          <span class="note-label"><svg aria-hidden="true"><use href="#spark"/></svg> 一点创作手记</span>
+          <p>从自己的需要出发，做一些也许你也会喜欢的东西。</p>
+          <a href="https://blog.ferecord.com">去随笔里坐坐 <svg aria-hidden="true"><use href="#external"/></svg></a>
+        </aside>
       </main>
-      <footer>
-        <span>ferecord</span>
-        <!-- 正式上线前填写真实 ICP 备案号及链接，并移除 head 中的 noindex。 -->
+
+      <button class="curiosity-star" type="button" aria-label="点亮好奇星" hidden></button>
+      <span class="sr-only scene-notice" role="status" aria-live="polite"></span>
+      <footer class="site-footer">
+        <div class="footer-contact">
+          <span class="contact-heading">来打个招呼 <svg aria-hidden="true"><use href="#spark"/></svg></span>
+          <address class="contact-links" aria-label="联系我">
+            <a href="https://x.com/Tumars" target="_blank" rel="noopener noreferrer" aria-label="X：@Tumars（新窗口打开）">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 4 11 16h3L8 4H5Zm14 0L5 20"/></svg>
+              <span>X <span class="contact-detail">@Tumars</span></span>
+            </a>
+            <a href="mailto:menghui9898@hotmail.com" aria-label="邮箱：menghui9898@hotmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+              <span>menghui9898@hotmail.com</span>
+            </a>
+            <a href="https://github.com/tumars" target="_blank" rel="noopener noreferrer" aria-label="GitHub：tumars（新窗口打开）">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.2"/><circle cx="17" cy="6" r="2.2"/><circle cx="6" cy="19" r="2.2"/><path d="M6 7.2v9.6M17 8.2V10c0 3-3 4-7 4H6"/></svg>
+              <span>GitHub <span class="contact-detail">/ tumars</span></span>
+            </a>
+          </address>
+        </div>
+        <!-- 真实 ICP 备案号待提供后填写，并链接至 https://beian.miit.gov.cn/；此前保留 noindex。 -->
+        <div class="footer-bottom">
+          <p>© <span>2026</span> ferecord <span class="footer-divider">/</span> Made with curiosity.</p>
+          <div class="scene-controls">
+            <button class="theme-toggle" type="button" aria-pressed="false" aria-label="切换为星海蓝调" hidden><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M15.5 12.8A6.7 6.7 0 0 1 7.2 4.5a6.8 6.8 0 1 0 8.3 8.3Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="theme-label">星海蓝调</span></button>
+            <button class="motion-toggle" type="button" aria-pressed="false" hidden><span class="motion-indicator" aria-hidden="true"></span><span class="motion-label">暂停漂浮</span></button>
+          </div>
+          <span class="footer-note">小小作品，持续生长 <svg aria-hidden="true"><use href="#spark"/></svg></span>
+        </div>
       </footer>
     </div>
   </body>
