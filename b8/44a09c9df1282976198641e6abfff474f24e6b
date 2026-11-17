@@ -1,0 +1,66 @@
+sites/main/public/assets/ferecord-mark.svg
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-5
+sites/tibi/public/index.html
+  s_827074f199215c::t_2ddca5e7b0d1f4 403,522-523
+docs/deployment.md
+  s_827074f199215c::t_a24b8d2317583e 9
+  s_827074f199215c::t_2ddca5e7b0d1f4 34-37,173
+  s_827074f199215c::t_4af8940f17488a 174
+docs/homepage-3d-2026-11-17.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-133
+.gitattributes
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-2
+docs/design.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 5-7,29,46-72
+  s_827074f199215c::t_a24b8d2317583e 13,84
+docs/logo-2026-11-17.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-61
+sites/main/src/universe-scene.js
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-349
+sites/tibi/design.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 12-13,86
+  s_827074f199215c::t_a24b8d2317583e 16
+docs/homepage-2026-11-17.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-124
+sites/main/public/assets/favicon.svg
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-7
+sites/main/public/assets/THIRD-PARTY-LICENSES.txt
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-24
+sites/main/package.json
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-15
+sites/main/public/styles.css
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-253
+sites/main/README.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-42
+sites/main/scripts/create-cloud.py
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-56
+sites/tibi/scripts/capture-ui.cjs
+  s_827074f199215c::t_2ddca5e7b0d1f4 36-41
+sites/main/public/index.html
+  s_827074f199215c::t_2ddca5e7b0d1f4 6-7,9-18,21-105,107-112,114-143
+README.md
+  s_827074f199215c::t_2ddca5e7b0d1f4 5,19,33,35,43
+  s_827074f199215c::t_d61753960f7275 44
+sites/main/public/home.js
+  s_827074f199215c::t_2ddca5e7b0d1f4 1-97
+sites/main/package-lock.json
+  s_827074f199215c::t_3d5d6075762aed 1-506
+sites/main/public/assets/universe-scene.js
+  s_827074f199215c::t_c93c5358198b58 1-4235
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b844a09c9df1282976198641e6abfff474f24e6b",
+  "prompts": {},
+  "sessions": {
+    "s_827074f199215c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e546-efb6-7961-a46e-ab047c9b7cea",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
