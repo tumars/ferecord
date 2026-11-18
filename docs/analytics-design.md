@@ -47,7 +47,7 @@ SDK 随站点或应用打包，关闭自动点击、页面自动采集、回放�
 
 本轮提交与发布：主站、博客、Tibi 官网为 ferecord `4e28300`，线上 HTML、隐私页与统计 bundle 已逐站验证，bundle 与提交产物一致。主站 Makers 部署 `dpseh2lj411z` 成功。Tibi `3a87ec4` 的 Web 工作流 [44352921670](https://github.com/tumars/tibi/actions/runs/44352921670) 成功，部署 `dpncru8xpdad`；完整 CI 也成功。本地 Node 22 下 60 个测试文件全部通过（342 passed、1 skipped），默认 Node 23 的运行时兼容失败不作为发布结果。
 
-画海网站源码为 `e5225cd`、隐私政策补充 `b0a660c`。GitHub 工作流 [44352919463](https://github.com/tumars/art-history-atlas/actions/runs/44352919463) 因账户付款失败或额度限制未能启动构建，因此采用本地独立工作区的 `npm ci && npm run build` 产物同步到 ferecord，保留 `source-version.txt` 作为验收依据，没有更改支付或额度设置。完整 App 统计另提交在 `codex/huahai-app-analytics-20261118`（`781c71c`，基于本地 App 基线 6ab3945）；其 `npm run build:app` 与 Capacitor 同步通过，未上传或发布新原生 App。
+画海网站源码为 `e5225cd`、隐私政策补充 `b0a660c`，页脚定位修复为 `f3ec367`。GitHub 工作流 [44352919463](https://github.com/tumars/art-history-atlas/actions/runs/44352919463) 因账户付款失败或额度限制未能启动构建，因此采用本地独立工作区的 `npm ci && npm run build` 产物同步到 ferecord，保留 `source-version.txt` 作为验收依据，没有更改支付或额度设置。首次同步的 Makers 部署 `dp55rl0yzfxm` 已成功；验收发现人物引文也使用 footer 标签，现已将统计设置固定到站点 `#footer`，本地实际页面的内容二次渲染、默认零请求、允许后页面事件和撤回均通过。完整 App 统计另提交在 `codex/huahai-app-analytics-20261118`（`781c71c`、`ab701d8`，基于本地 App 基线 6ab3945）；其 `npm run build:app` 与 Capacitor 同步通过，未上传或发布新原生 App。
 
 代码已接入，发布时从各仓库远端 main 创建独立工作区，只带入统计相关改动。画海网站以 6d5c0b5 为基线，不带入本地领先的 12 个提交与其他未提交功能，因此本次网站实际发送页面、作品打开和商店入口点击；完整 App 的细看、购买、恢复事件随原生版本发布。Mixpanel 时区已保存为 `Asia/Singapore`，US 驻留，未添加支付方式或公共分享。
 
