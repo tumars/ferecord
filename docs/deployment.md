@@ -1,5 +1,13 @@
 # EdgeOne Makers 部署说明
 
+## 可选访问统计（2026-11-18）
+
+主站、博客与 Tibi 官网各自包含 `public/assets/analytics.js` 和 `public/privacy.html`。SDK 源码维护在 `sites/main/src/analytics.js`，修改后在 `sites/main` 运行 `npm ci && npm run build:analytics`，为三个站点分别生成独立产物并随对应站点发布。原有 Makers 输出目录与无构建静态发布方式不变；画海仍从其源码仓库构建同步，不能直接修改本仓库内的画海产物。
+
+Mixpanel 项目与基础看板已配置，本次从远端 main 的独立工作区发布统计接入。只有在正式域名且访客主动允许后才发送生产事件；本地显式验收参数 `analytics-test=1` 的数据为 development。公开 Project Token 只用于采集，不能加入服务账号或 API Secret。详细状态见 [分析方案](analytics-design.md)。
+
+博客锁文件的 Markdown 渲染依赖与 MDX peer 关系已做小范围修复，Astro 保持 7.4.4；`npm ci`、Node 24.18.0 下完整构建与搜索索引已通过。博客 `edgeone.json` 用 `npm exec --yes --package=node@24.18.0 -- npm run build` 固定已验证的构建运行时，避免控制台旧版 Node 不满足 Astro 要求；输出仍仅为 `dist/`。
+
 ## 准备
 
 - GitHub 仓库 `ferecord`，生产分支 `main`。

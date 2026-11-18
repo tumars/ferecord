@@ -3,10 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:analytics": "node scripts/build-analytics.mjs",
     "build:scene": "esbuild src/universe-scene.js --bundle --minify --format=esm --target=es2022 --legal-comments=eof --outfile=public/assets/universe-scene.js",
     "check": "node --check public/home.js && node --check src/universe-scene.js"
   },
   "dependencies": {
+    "mixpanel-browser": "2.86.0",
     "three": "0.187.0"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 {
   "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm exec --yes --package=node@24.18.0 -- npm run build",
   "outputDirectory": "dist"
 }
