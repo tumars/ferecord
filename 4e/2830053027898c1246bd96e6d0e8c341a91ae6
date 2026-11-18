@@ -1,0 +1,61 @@
+docs/analytics-design.md
+  s_97aea596cde2b9::t_49c08f2f36d663 1-60
+docs/deployment.md
+  s_97aea596cde2b9::t_49c08f2f36d663 3-10
+sites/main/public/assets/analytics.js
+  s_97aea596cde2b9::t_1052769ee94a00 1-15
+sites/tibi/public/assets/analytics.js
+  s_97aea596cde2b9::t_1052769ee94a00 1-15
+sites/blog/public/assets/analytics.js
+  s_97aea596cde2b9::t_1052769ee94a00 1-15
+sites/blog/edgeone.json
+  s_97aea596cde2b9::t_49c08f2f36d663 3
+docs/analytics-research-2026-11-18.md
+  s_97aea596cde2b9::t_ccf9d4b57b862f 1-135
+docs/design.md
+  s_97aea596cde2b9::t_26067bf35f3eb7 82-85
+sites/blog/package-lock.json
+  s_97aea596cde2b9::t_53fa89f6f56184 376-378,380-381,383-384,386-418,2798-2809
+sites/blog/public/privacy.html
+  s_97aea596cde2b9::t_0d2349566a135a 1-9
+sites/blog/src/layouts/Layout.astro
+  s_97aea596cde2b9::t_568f00555e8234 110
+sites/blog/tsconfig.json
+  s_97aea596cde2b9::t_80119e515f95af 4
+sites/main/package-lock.json
+  s_97aea596cde2b9::t_14e89ea7992a05 9,458-540,583-668
+sites/main/package.json
+  s_97aea596cde2b9::t_7c002bf57fed84 6,11
+sites/main/public/index.html
+  s_97aea596cde2b9::t_064223c8ee340d 19
+sites/main/public/privacy.html
+  s_97aea596cde2b9::t_aa40eb74b20c36 1-9
+sites/main/scripts/build-analytics.mjs
+  s_97aea596cde2b9::t_6e03d4eacdb46f 1-6
+sites/main/scripts/check-analytics.mjs
+  s_97aea596cde2b9::t_c7cd0df9d5a0aa 1-88
+sites/main/scripts/check-product-analytics.mjs
+  s_97aea596cde2b9::t_133dc0e250e225 1-42
+sites/main/src/analytics.js
+  s_97aea596cde2b9::t_63212aaca1aa4a 1-97
+sites/tibi/public/index.html
+  s_97aea596cde2b9::t_54f2db5a67ec6a 642
+sites/tibi/public/privacy.html
+  s_97aea596cde2b9::t_da7d1d9dcb2f0b 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4e2830053027898c1246bd96e6d0e8c341a91ae6",
+  "prompts": {},
+  "sessions": {
+    "s_97aea596cde2b9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ecb1-8ea4-76e0-b80c-8f9d667ef5a3",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
