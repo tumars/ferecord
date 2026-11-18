@@ -1,0 +1,29 @@
+sites/main/public/art-history-atlas/assets/index-BNynRSO3.js
+  s_97aea596cde2b9::t_211d54b65d2824 1-403
+docs/analytics-design.md
+  s_97aea596cde2b9::t_322998af186a3a 50
+sites/main/public/art-history-atlas/assets/app-tk-pgm0Y.js
+  s_97aea596cde2b9::t_211d54b65d2824 1-98
+docs/deployment.md
+  s_97aea596cde2b9::t_322998af186a3a 5
+sites/main/public/art-history-atlas/index.html
+  s_97aea596cde2b9::t_09036dcb041a3b 57
+sites/main/public/art-history-atlas/source-version.txt
+  s_97aea596cde2b9::t_066fe8637f783d 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1688902531c493e945cf532003f5bc218311c03c",
+  "prompts": {},
+  "sessions": {
+    "s_97aea596cde2b9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ecb1-8ea4-76e0-b80c-8f9d667ef5a3",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
