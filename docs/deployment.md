@@ -2,6 +2,8 @@
 
 ## 可选访问统计（2026-11-18）
 
+本轮三个官网的统计发布为 `4e28300`，线上脚本与构建产物一致。画海源码 `b0a660c` 的 GitHub Actions 受账户付款/额度限制未能启动构建，本轮从该源码独立工作区执行 `npm ci && npm run build`，将完整 `dist/` 同步到主站二级目录并更新 `source-version.txt`；没有发布本地其他 App 功能。Tibi Web 的 `3a87ec4` 已由其独立工作流成功部署（`dpncru8xpdad`），统计默认关闭。原生 App 仍需后续构建与商店发布。
+
 主站、博客与 Tibi 官网各自包含 `public/assets/analytics.js` 和 `public/privacy.html`。SDK 源码维护在 `sites/main/src/analytics.js`，修改后在 `sites/main` 运行 `npm ci && npm run build:analytics`，为三个站点分别生成独立产物并随对应站点发布。原有 Makers 输出目录与无构建静态发布方式不变；画海仍从其源码仓库构建同步，不能直接修改本仓库内的画海产物。
 
 Mixpanel 项目与基础看板已配置，本次从远端 main 的独立工作区发布统计接入。只有在正式域名且访客主动允许后才发送生产事件；本地显式验收参数 `analytics-test=1` 的数据为 development。公开 Project Token 只用于采集，不能加入服务账号或 API Secret。详细状态见 [分析方案](analytics-design.md)。
