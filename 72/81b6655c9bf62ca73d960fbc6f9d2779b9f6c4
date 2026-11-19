@@ -1,0 +1,27 @@
+docs/deployment.md
+  s_180c9dc7699253::t_9dd056bb12ddb3 3-4
+sites/main/public/art-history-atlas/privacy-en.html
+  s_180c9dc7699253::t_611e7dbacf769a 22,24
+sites/main/public/art-history-atlas/privacy.html
+  s_180c9dc7699253::t_611e7dbacf769a 22,25,29,44
+sites/main/public/art-history-atlas/privacy-zh-Hant.html
+  s_180c9dc7699253::t_611e7dbacf769a 22,24
+sites/main/public/art-history-atlas/source-version.txt
+  s_180c9dc7699253::t_611e7dbacf769a 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7281b6655c9bf62ca73d960fbc6f9d2779b9f6c4",
+  "prompts": {},
+  "sessions": {
+    "s_180c9dc7699253": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e9b5-063d-70b2-b388-7ee02f9ed4c7",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
