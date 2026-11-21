@@ -1,0 +1,19 @@
+sites/main/public/art-history-atlas/source-version.txt
+  s_c32501fc9644f3::t_f1519a54944851 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "984c77982043952a56a281aa794d96e2c35c511a",
+  "prompts": {},
+  "sessions": {
+    "s_c32501fc9644f3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1fd5b-91e0-7191-b2a6-00215daab0da",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
