@@ -1,0 +1,29 @@
+sites/main/public/art-history-atlas/assets/app-CXaT4Dcz.css
+  s_5b733253114ef0::t_71ad123193abf3 1
+sites/main/public/art-history-atlas/assets/app-DP9VbK0o.js
+  s_5b733253114ef0::t_aaad381eba98c8 1-4,6-15,17-18,20-21,23-27,29-32,35,37-39,41-42,44-46,49-54,57,64-69,71,74-80,83,89-92,94,96,98,100,102,105-107,109-113,118-130,133-134
+sites/main/public/art-history-atlas/assets/app-promotion-DBT3Am9B.js
+  s_5b733253114ef0::t_360926c46b70a4 1
+sites/main/public/art-history-atlas/assets/index-LjikI9UQ.js
+  s_5b733253114ef0::t_f2e3b99293c52a 1,859
+sites/main/public/art-history-atlas/index.html
+  s_5b733253114ef0::t_ab87850459e96d 58
+sites/main/public/art-history-atlas/source-version.txt
+  s_5b733253114ef0::t_ad25eaa747aace 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "de06d14f0e9040107c415ad799c0380937b0db59",
+  "prompts": {},
+  "sessions": {
+    "s_5b733253114ef0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a202cd-da64-71c1-a4b3-35d1b6b504ec",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
