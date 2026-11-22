@@ -1,4 +1,4 @@
-import{b as a,e as p,$ as o}from"./index-B5dtsVAs.js";const t="/art-history-atlas/assets/icon-Dae1WWug.webp",e="/art-history-atlas/assets/app-store-qr-D1KDAKyL.png";function i(){const r=document.querySelector("#ios-app");r.innerHTML=`<div class="app-promo-inner">
+import{b as a,e as p,$ as o}from"./index-C5NtlbJX.js";const t="/art-history-atlas/assets/icon-Dae1WWug.webp",e="/art-history-atlas/assets/app-store-qr-D1KDAKyL.png";function i(){const r=document.querySelector("#ios-app");r.innerHTML=`<div class="app-promo-inner">
     <img class="app-promo-icon" src="${t}" alt="" width="64" height="64" loading="lazy">
     <div class="app-promo-copy">
       <div class="app-promo-brand">${a("画海 iOS App")}</div>
