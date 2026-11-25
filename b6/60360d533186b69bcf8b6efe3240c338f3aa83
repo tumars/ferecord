@@ -1,0 +1,41 @@
+sites/main/public/art-history-atlas/source-version.txt
+  s_f48016c99993c2::t_00bb4a0ba2cb99 1
+sites/main/public/art-history-atlas/assets/app-BSXQkvIt.css
+  s_f48016c99993c2::t_0052df6616806a 1
+sites/main/public/art-history-atlas/assets/app-D1RBquVK.js
+  s_f48016c99993c2::t_2b34ea53b76feb 1-10,12-21,23-29,31,34-36,38-42,47-54,56-134
+sites/main/public/art-history-atlas/assets/app-promotion-Cyo_mT5y.css
+  s_f48016c99993c2::t_62623bb1207c08 1
+sites/main/public/art-history-atlas/assets/app-promotion-DnMPvv6f.js
+  s_f48016c99993c2::t_30e3bb0413e287 1-2,4-6,10-11,13,15
+sites/main/public/art-history-atlas/assets/desktop-CQFrFero.js
+  s_f48016c99993c2::t_5ddae845cb135e 1-229
+sites/main/public/art-history-atlas/assets/desktop-wPeC591j.css
+  s_f48016c99993c2::t_c6b4d4eac3749a 1
+sites/main/public/art-history-atlas/assets/hero-space-CCnlF3MM.css
+  s_f48016c99993c2::t_1af9c285ea79b3 1
+sites/main/public/art-history-atlas/assets/hero-space-qaL62UhT.js
+  s_f48016c99993c2::t_53a7bdc9aea673 1-178
+sites/main/public/art-history-atlas/assets/index-BalK3cr9.css
+  s_f48016c99993c2::t_520e9f2ddbc264 1
+sites/main/public/art-history-atlas/assets/index-CYRP7F8P.js
+  s_f48016c99993c2::t_037e2d156821ea 1-2,16,52,66,102,116,152,166,202,216,252,266,302,316,352,366,402,416,452
+sites/main/public/art-history-atlas/index.html
+  s_f48016c99993c2::t_1c28cc7735c19b 2,6-7,9-86,107,110,112,136-137,170,190,199-201,238-241,246-247,251,254-257,307-328
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b660360d533186b69bcf8b6efe3240c338f3aa83",
+  "prompts": {},
+  "sessions": {
+    "s_f48016c99993c2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a210a9-4326-73a3-8bae-c2605d82dc47",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
