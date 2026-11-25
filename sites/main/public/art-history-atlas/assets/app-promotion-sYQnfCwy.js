@@ -1,4 +1,4 @@
-import{S as r,b as a,e as o}from"./index-BLI6SuhB.js";import{a as i}from"./icon--KcKB9Tc.js";const e="/art-history-atlas/assets/app-store-qr-D1KDAKyL.png";function n(){const p=document.querySelector("#ios-app");if(p){if(!r.appStore){p.hidden=!0;return}p.innerHTML=`<div class="app-promo-inner">
+import{S as r,b as a,e as o}from"./index-DkVICE7L.js";import{a as i}from"./icon--KcKB9Tc.js";const e="/art-history-atlas/assets/app-store-qr-CdcrmmhH.png";function n(){const p=document.querySelector("#ios-app");if(p){if(!r.appStore){p.hidden=!0;return}p.innerHTML=`<div class="app-promo-inner">
     <img class="app-promo-icon" src="${i}" alt="" width="64" height="64" loading="lazy">
     <div class="app-promo-copy">
       <div class="app-promo-brand">iOS App</div>
