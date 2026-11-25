@@ -1,0 +1,35 @@
+sites/main/public/art-history-atlas/assets/app-C5LiQ9v5.js
+  s_6dbd78fa80abcd::t_e4c0737846aba1 1-6,17-18,21,25,27,31,35-36,39,47-48,50-51,53,57-59,62-63,65-66,68-72,74-77,82,86,89,94-95,98,111-113,116,119-124,128,135
+sites/main/public/art-history-atlas/assets/app-GdwhnXRA.css
+  s_6dbd78fa80abcd::t_8ee18f73a48196 1
+sites/main/public/art-history-atlas/assets/app-promotion-BiAajuec.js
+  s_6dbd78fa80abcd::t_00ca959ec75471 1-2,5-6,9-10,12
+sites/main/public/art-history-atlas/assets/app-promotion-DUPMThDz.css
+  s_6dbd78fa80abcd::t_d01ad64580de0b 1
+sites/main/public/art-history-atlas/assets/desktop-ChVkrsxd.js
+  s_6dbd78fa80abcd::t_78732d0bc87f65 1-2,229
+sites/main/public/art-history-atlas/assets/hero-space-Cekvqfdv.js
+  s_6dbd78fa80abcd::t_c9215c40255f3d 1
+sites/main/public/art-history-atlas/assets/index-BLI6SuhB.js
+  s_6dbd78fa80abcd::t_be3096776456d6 1,452
+sites/main/public/art-history-atlas/index.html
+  s_6dbd78fa80abcd::t_99a998699e2d9b 136
+sites/main/public/art-history-atlas/source-version.txt
+  s_6dbd78fa80abcd::t_824ff87f6f8911 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4ef593a31b14964ab0b0cea213ba55c43290f70f",
+  "prompts": {},
+  "sessions": {
+    "s_6dbd78fa80abcd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a211e0-103b-7393-8661-e5d47cd5e8c2",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "tumars <9925509+tumars@users.noreply.github.com>"
+    }
+  }
+}
