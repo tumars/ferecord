@@ -1,4 +1,4 @@
-import{V as a,b as p,e as o}from"./index-DJBoT6fr.js";import{a as i}from"./icon-CHHDhNJj.js";const e="/assets/app-store-qr-CdcrmmhH.png";function n(){const r=document.querySelector("#ios-app");if(r){if(!a.appStore){r.hidden=!0;return}r.innerHTML=`<div class="app-promo-inner">
+import{V as a,b as p,e as o}from"./index-CCu4aE--.js";import{a as i}from"./icon-B2CJkcmJ.js";const e="/assets/app-store-qr-CdcrmmhH.png";function n(){const r=document.querySelector("#ios-app");if(r){if(!a.appStore){r.hidden=!0;return}r.innerHTML=`<div class="app-promo-inner">
     <img class="app-promo-icon" src="${i}" alt="" width="64" height="64" loading="lazy">
     <div class="app-promo-copy">
       <div class="app-promo-brand">iOS App</div>
