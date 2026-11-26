@@ -7,6 +7,16 @@
       "source": "$host",
       "destination": "$wwwhost",
       "statusCode": 301
+    },
+    {
+      "source": "/art-history-atlas",
+      "destination": "https://artclue.ferecord.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/art-history-atlas/:path*",
+      "destination": "https://artclue.ferecord.com/:path*",
+      "statusCode": 301
     }
   ]
 }
